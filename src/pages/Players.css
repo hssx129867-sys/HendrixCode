@@ -1,0 +1,169 @@
+.players-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.players-container h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #4ECDC4;
+  margin-bottom: 40px;
+}
+
+.player-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.player-card {
+  padding: 30px;
+  border: 4px solid;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: white;
+}
+
+.player-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.player-card h3 {
+  font-size: 1.5rem;
+  margin: 15px 0 10px;
+}
+
+.color-indicator {
+  width: 60px;
+  height: 20px;
+  margin: 10px auto 0;
+  border-radius: 10px;
+}
+
+.player-form {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 20px;
+  margin: 40px auto;
+  max-width: 500px;
+}
+
+.player-form h3 {
+  text-align: center;
+  color: #FF6B6B;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.avatar-choices {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.avatar-choice {
+  padding: 10px;
+  border: 3px solid transparent;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.avatar-choice:hover {
+  border-color: #ddd;
+}
+
+.avatar-choice.selected {
+  border-color: #4ECDC4;
+  background: #f0f0f0;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.destination-choice {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.destination-choice h2 {
+  font-size: 2rem;
+  color: #2d3748;
+  margin-bottom: 2rem;
+}
+
+.destination-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.destination-card {
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.destination-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-zone-card {
+  background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+}
+
+.christmas-card {
+  background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+}
+
+.destination-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.destination-card h3 {
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+}
+
+.destination-card p {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin: 0;
+}
