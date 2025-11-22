@@ -1,7 +1,7 @@
 # 🎮 HendrixCode - Hendrix's Coding Journey! 🚀
 
 Welcome to Hendrix's coding adventure! This repository is where the magic happens - learning to code, building awesome projects, and making dreams come true! ✨
-
+🦾
 ## 🌟 About This Repo
 
 This is a space for Hendrix to:
@@ -25,7 +25,7 @@ Complete guide to coding, GitHub, and making games! Everything you need to know!
 Hands-on coding exercises from easy to advanced!
 
 ### 📚 [All Classes](classes/)
-Check out the classes folder for all learning materials!
+Check out the classes folder 🦾for all learning materials!
 
 ## 🎯 Current Goals
 
