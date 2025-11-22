@@ -1,0 +1,193 @@
+.santa-tracker-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.tracker-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+}
+
+.tracker-info h1 {
+  color: white;
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-mini {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0 0;
+  font-weight: 600;
+}
+
+.santa-map {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.santa-map::before {
+  content: '❄️';
+  position: absolute;
+  font-size: 10rem;
+  opacity: 0.05;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.santa-icon-large {
+  font-size: 8rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.santa-location {
+  font-size: 2.5rem;
+  color: #c92a2a;
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+.santa-activity {
+  font-size: 1.5rem;
+  color: #495057;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.btn-refresh {
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(55, 178, 77, 0.3);
+  font-weight: 600;
+}
+
+.btn-refresh:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(55, 178, 77, 0.4);
+}
+
+.btn-refresh:active {
+  transform: translateY(0);
+}
+
+.santa-facts {
+  margin-bottom: 2rem;
+}
+
+.santa-facts h3 {
+  font-size: 2rem;
+  color: #2f9e44;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.fact-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.fact-card:hover {
+  transform: translateY(-5px);
+}
+
+.fact-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.fact-card p {
+  color: #495057;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-back {
+  background: #868e96;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-back:hover {
+  background: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .santa-tracker-container {
+    padding: 1rem;
+  }
+
+  .tracker-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tracker-info h1 {
+    font-size: 1.8rem;
+  }
+
+  .santa-icon-large {
+    font-size: 5rem;
+  }
+
+  .santa-location {
+    font-size: 1.8rem;
+  }
+
+  .santa-activity {
+    font-size: 1.2rem;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+}

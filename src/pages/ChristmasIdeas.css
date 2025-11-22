@@ -1,0 +1,219 @@
+.christmas-ideas-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.ideas-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #94d82d 0%, #82c91e 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(130, 201, 30, 0.3);
+}
+
+.ideas-info h1 {
+  color: white;
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ideas-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0 0;
+  font-weight: 600;
+}
+
+.progress-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.progress-section h3 {
+  color: #2f9e44;
+  font-size: 1.8rem;
+  margin: 0 0 1.5rem 0;
+}
+
+.progress-bar-container {
+  background: #e9ecef;
+  height: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+.progress-text {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.progress-stats {
+  color: #495057;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.idea-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  border: 2px solid transparent;
+}
+
+.idea-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  border-color: #82c91e;
+}
+
+.idea-card.completed {
+  background: linear-gradient(135deg, #d3f9d8 0%, #b2f2bb 100%);
+  border-color: #51cf66;
+}
+
+.idea-checkbox {
+  font-size: 2rem;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.idea-card:hover .idea-checkbox {
+  transform: scale(1.1);
+}
+
+.idea-text {
+  color: #495057;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.idea-card.completed .idea-text {
+  color: #2b8a3e;
+  font-weight: 600;
+}
+
+.completion-message {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 30px rgba(255, 107, 107, 0.2);
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.completion-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.completion-message h2 {
+  color: #c92a2a;
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.completion-message p {
+  color: #e03131;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-back {
+  background: #868e96;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-back:hover {
+  background: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .christmas-ideas-container {
+    padding: 1rem;
+  }
+
+  .ideas-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ideas-info h1 {
+    font-size: 1.8rem;
+  }
+
+  .ideas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-section {
+    padding: 1.5rem;
+  }
+
+  .progress-section h3 {
+    font-size: 1.4rem;
+  }
+}

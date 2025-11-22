@@ -1,0 +1,281 @@
+.christmas-jokes-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.jokes-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(250, 176, 5, 0.3);
+}
+
+.jokes-info h1 {
+  color: white;
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.jokes-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0 0;
+  font-weight: 600;
+}
+
+.joke-display {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.joke-counter {
+  text-align: center;
+  color: #868e96;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.joke-card {
+  background: linear-gradient(135deg, #e7f5ff 0%, #d0ebff 100%);
+  padding: 2.5rem;
+  border-radius: 15px;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.joke-icon {
+  font-size: 4rem;
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.joke-question {
+  font-size: 1.8rem;
+  color: #1971c2;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.btn-reveal {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+  border: none;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.3rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  font-weight: 700;
+}
+
+.btn-reveal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-reveal:active {
+  transform: translateY(0);
+}
+
+.punchline-reveal {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.punchline-divider {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.punchline-text {
+  font-size: 2rem;
+  color: #2f9e44;
+  font-weight: bold;
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+
+.laugh-emoji {
+  font-size: 3rem;
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.joke-navigation {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-nav {
+  background: #4c6ef5;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  font-weight: 600;
+}
+
+.btn-nav:hover {
+  background: #3b5bdb;
+  transform: translateY(-2px);
+}
+
+.btn-nav:active {
+  transform: translateY(0);
+}
+
+.all-jokes-section {
+  margin-bottom: 2rem;
+}
+
+.all-jokes-section h3 {
+  font-size: 2rem;
+  color: #2f9e44;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.jokes-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.joke-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.joke-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.joke-item.active {
+  border: 3px solid #ffd43b;
+  box-shadow: 0 6px 25px rgba(250, 176, 5, 0.3);
+}
+
+.joke-item-number {
+  background: #ffd43b;
+  color: #f76707;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.joke-item-content {
+  flex: 1;
+}
+
+.joke-item-question {
+  color: #495057;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.joke-item-answer {
+  color: #2f9e44;
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-back {
+  background: #868e96;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-back:hover {
+  background: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .christmas-jokes-container {
+    padding: 1rem;
+  }
+
+  .jokes-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .jokes-info h1 {
+    font-size: 1.8rem;
+  }
+
+  .joke-question {
+    font-size: 1.3rem;
+  }
+
+  .punchline-text {
+    font-size: 1.5rem;
+  }
+
+  .joke-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .joke-item-number {
+    margin: 0 auto;
+  }
+}

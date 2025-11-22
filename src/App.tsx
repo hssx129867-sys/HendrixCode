@@ -6,6 +6,10 @@ import { Game } from './pages/Game';
 import { Profile } from './pages/Profile';
 import { ChristmasLab } from './pages/ChristmasLab';
 import { ChristmasList } from './pages/ChristmasList';
+import { SantaTracker } from './pages/SantaTracker';
+import { ChristmasJokes } from './pages/ChristmasJokes';
+import { ChristmasIdeas } from './pages/ChristmasIdeas';
+import { FindElves } from './pages/FindElves';
 import './App.css';
 
 function App() {
@@ -19,6 +23,10 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/christmas-lab" element={<ChristmasLab />} />
         <Route path="/christmas-list" element={<ChristmasList />} />
+        <Route path="/santa-tracker" element={<SantaTracker />} />
+        <Route path="/christmas-jokes" element={<ChristmasJokes />} />
+        <Route path="/christmas-ideas" element={<ChristmasIdeas />} />
+        <Route path="/find-elves" element={<FindElves />} />
       </Routes>
     </Router>
   );

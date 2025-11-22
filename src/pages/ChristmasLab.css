@@ -68,6 +68,43 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
+.christmas-tool-card.highlight {
+  background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
+  border: 3px solid #f76707;
+  animation: glow 2s infinite;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 4px 15px rgba(247, 103, 7, 0.5); }
+  50% { box-shadow: 0 8px 30px rgba(247, 103, 7, 0.8); }
+}
+
+.christmas-tool-card.highlight h3 {
+  color: #c92a2a;
+}
+
+.btn-highlight {
+  background: linear-gradient(135deg, #c92a2a 0%, #e03131 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(201, 42, 42, 0.3);
+  font-weight: 700;
+}
+
+.btn-highlight:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 42, 42, 0.5);
+}
+
+.btn-highlight:active {
+  transform: translateY(0);
+}
+
 .christmas-tool-card.coming-soon {
   opacity: 0.6;
 }

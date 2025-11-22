@@ -13,9 +13,12 @@ A fun, educational web app for kids ages 7-10 featuring logic games and Christma
 - **Progress Tracking**: Earn stars and track levels completed for each game
 
 ### 🎄 Christmas Lab
-- **Christmas List**: Create and manage your Christmas wish list
+- **Christmas List**: Create and manage your Christmas wish list with priorities
+- **Santa Tracker**: See where Santa is right now with real-time updates
+- **Christmas Jokes**: Enjoy 12 kid-friendly Christmas jokes
+- **Break Ideas**: Get 20+ fun Christmas activity ideas with progress tracking
+- **Find the Elves**: Hunt for 12 hidden elves around your house and collect stars for your Christmas tree
 - **Santa Countdown**: Track days until Christmas
-- More Christmas tools coming soon!
 
 ### 💾 Storage
 - All progress and lists are saved automatically in your browser

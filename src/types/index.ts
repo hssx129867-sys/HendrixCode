@@ -32,3 +32,31 @@ export interface ChristmasList {
   items: ChristmasListItem[];
   lastUpdated: number;
 }
+
+export interface ElfLocation {
+  id: string;
+  name: string;
+  location: string;
+  hint: string;
+  found: boolean;
+  foundAt?: number;
+}
+
+export interface ChristmasProgress {
+  playerId: string;
+  elvesFound: ElfLocation[];
+  starsCollected: number;
+  lastUpdated: number;
+}
+
+export interface ChristmasJoke {
+  id: string;
+  joke: string;
+  punchline: string;
+}
+
+export interface SantaLocation {
+  location: string;
+  activity: string;
+  timestamp: number;
+}
