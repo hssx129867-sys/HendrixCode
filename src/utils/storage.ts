@@ -298,18 +298,38 @@ export const getSantaLocation = (): SantaLocation => {
     };
   } else {
     // More than a week before Christmas
-    const activities = [
-      'Reading letters from children',
-      'Making toys with the elves',
-      'Testing new toy prototypes',
-      'Planning the delivery route',
-      'Having cookies and milk in the workshop',
-    ];
-    return {
-      location: 'North Pole',
-      activity: activities[Math.floor(Math.random() * activities.length)] + ' 🎄',
-      timestamp: Date.now(),
-    };
+    const isTravel = Math.random() > 0.5;
+    
+    if (isTravel) {
+      // Santa is traveling and checking on children
+      const locations = [
+        { name: 'San Jacinto', activity: 'Stopping by the Knights Inn at the Forest to rest! 🏨' },
+        { name: 'London', activity: 'Visiting children in England! 🇬🇧' },
+        { name: 'Tokyo', activity: 'Checking wish lists in Japan! 🗾' },
+        { name: 'New York', activity: 'Flying over the city lights! 🗽' },
+        { name: 'Paris', activity: 'Visiting the Eiffel Tower! 🗼' },
+      ];
+      const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+      return {
+        location: randomLocation.name,
+        activity: randomLocation.activity,
+        timestamp: Date.now(),
+      };
+    } else {
+      // Santa is at North Pole
+      const activities = [
+        'Reading letters from children',
+        'Making toys with the elves',
+        'Testing new toy prototypes',
+        'Planning the delivery route',
+        'Having cookies and milk in the workshop',
+      ];
+      return {
+        location: 'North Pole',
+        activity: activities[Math.floor(Math.random() * activities.length)] + ' 🎄',
+        timestamp: Date.now(),
+      };
+    }
   }
 };
 
