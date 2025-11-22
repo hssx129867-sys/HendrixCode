@@ -36,6 +36,8 @@ const initialBuildings: Building[] = [
   { id: 'base3', name: 'Study Room', emoji: '📚', cost: 200, production: 20, owned: 0, unlocked: true },
   { id: 'base4', name: 'Lab Station', emoji: '🔬', cost: 1000, production: 100, owned: 0, unlocked: false },
   { id: 'base5', name: 'Robot Helper', emoji: '🤖', cost: 5000, production: 500, owned: 0, unlocked: false },
+  // Knights Inn: Special building with cost of 99 (per issue requirements)
+  // Provides a smaller production bonus as an Easter egg/special building
   { id: 'base6', name: 'Knights Inn', emoji: '🏰', cost: 99, production: 10, owned: 0, unlocked: false },
 ];
 
