@@ -176,13 +176,13 @@ export const getDefaultElves = (): ElfLocation[] => {
     { id: '3', name: 'Twinkle', location: 'Bedroom', hint: 'Search where you lay your head at night', found: false },
     { id: '4', name: 'Snowball', location: 'Bathroom', hint: 'Find me where you brush your teeth', found: false },
     { id: '5', name: 'Candy', location: 'Dining Room', hint: 'Look where the family eats together', found: false },
-    { id: '6', name: 'Holly', location: 'Garage', hint: 'I\'m hiding with the tools and car!', found: false },
+    { id: '6', name: 'Holly', location: 'Garage', hint: "I'm hiding with the tools and car!", found: false },
     { id: '7', name: 'Ginger', location: 'Backyard', hint: 'Find me outside where you play!', found: false },
     { id: '8', name: 'Peppermint', location: 'Closet', hint: 'Check where clothes are stored', found: false },
     { id: '9', name: 'Sugarplum', location: 'Laundry Room', hint: 'Look where clothes get clean', found: false },
     { id: '10', name: 'Mistletoe', location: 'Stairs', hint: 'Search the steps going up or down', found: false },
     { id: '11', name: 'Nutmeg', location: 'Office/Study', hint: 'Find me where homework is done', found: false },
-    { id: '12', name: 'Cinnamon', location: 'Attic/Basement', hint: 'I\'m in the highest or lowest place!', found: false },
+    { id: '12', name: 'Cinnamon', location: 'Attic/Basement', hint: "I'm in the highest or lowest place!", found: false },
   ];
 };
 
