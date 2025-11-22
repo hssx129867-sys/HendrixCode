@@ -226,6 +226,7 @@ The journey of 1000 games starts with one line of code! 💻✨
 - 📖 [Full Beginner's Guide](BEGINNERS_GUIDE.md) - Read when you have more time
 - 🎮 [Roblox Studio](https://www.roblox.com/create) - Make games here!
 - 💬 [Create an Issue](../../issues) - Ask questions or share ideas!
+yes, can you give me how old my app on a different app
 
 **GO CREATE SOMETHING AWESOME!** 🌟
 
