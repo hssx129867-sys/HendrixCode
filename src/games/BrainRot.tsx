@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getActivePlayerId, getPlayers, savePlayers } from '../utils/storage';
+import { getActivePlayerId, getPlayers, updatePlayerProgress } from '../utils/storage';
 import type { Player } from '../types';
 import './BrainRot.css';
 
@@ -158,24 +158,16 @@ export const BrainRot = () => {
 
       // Award stars to player
       if (player) {
-        const players = getPlayers();
-        const updatedPlayers = players.map((p) => {
-          if (p.id === player.id) {
-            const brainRotProgress = p.progress['brainRot'] || { stars: 0, levelsCompleted: 0 };
-            return {
-              ...p,
-              progress: {
-                ...p.progress,
-                brainRot: {
-                  stars: brainRotProgress.stars + 1,
-                  levelsCompleted: brainRotProgress.levelsCompleted + 1,
-                },
-              },
-            };
-          }
-          return p;
-        });
-        savePlayers(updatedPlayers);
+        const currentProgress = player.progress['brainRot'] || { stars: 0, levelsCompleted: 0 };
+        updatePlayerProgress(
+          player.id,
+          'brainRot',
+          currentProgress.stars + 1,
+          currentProgress.levelsCompleted + 1
+        );
+        
+        // Update local player state
+        const updatedPlayers = getPlayers();
         setPlayer(updatedPlayers.find((p) => p.id === player.id) || player);
       }
 
