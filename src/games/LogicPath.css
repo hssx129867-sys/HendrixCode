@@ -1,0 +1,153 @@
+.logic-path-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.game-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .game-area {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-container {
+  display: grid;
+  gap: 10px;
+  padding: 25px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1;
+  max-width: 400px;
+  justify-self: center;
+}
+
+.grid-cell {
+  background: #f0f0f0;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: all 0.3s;
+}
+
+.grid-cell.start {
+  background: #d4edda;
+  border-color: #28a745;
+}
+
+.grid-cell.goal {
+  background: #fff3cd;
+  border-color: #ffc107;
+}
+
+.grid-cell.current {
+  background: #4ECDC4;
+  border-color: #3ab4a8;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.controls-section {
+  padding: 25px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.controls-section h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.direction-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.horizontal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-direction {
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #4ECDC4;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+}
+
+.btn-direction:hover:not(:disabled) {
+  background: #3ab4a8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-direction:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.moves-display {
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 15px;
+}
+
+.moves-display h4 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.moves-list {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 50px;
+  align-items: center;
+}
+
+.no-moves {
+  color: #999;
+  font-style: italic;
+}
+
+.move-item {
+  font-size: 1.8rem;
+  padding: 5px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
