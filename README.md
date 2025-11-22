@@ -6,10 +6,11 @@ A fun, educational web app for kids ages 7-10 featuring logic games and Christma
 
 ### 🎮 Game Zone
 - **Player Profiles**: Create and manage multiple player profiles with custom avatars and favorite colors
-- **Three Fun Mini-Games**:
+- **Four Fun Mini-Games**:
   - 🎨 **Pattern Builder**: Match color sequences to build pattern recognition skills
   - 🐛 **Bug Squash**: Click bugs that match logical rules (even/odd, greater than/less than)
   - 🧭 **Logic Path**: Navigate a character through a grid using directional commands
+  - 🧠 **Brain Rot**: Build your brain empire! Click to collect brain cells, buy buildings that generate passive income, and unlock exciting areas including the mysterious Basement!
 - **Progress Tracking**: Earn stars and track levels completed for each game
 
 ### 🎄 Christmas Lab

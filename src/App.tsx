@@ -10,6 +10,7 @@ import { SantaTracker } from './pages/SantaTracker';
 import { ChristmasJokes } from './pages/ChristmasJokes';
 import { ChristmasIdeas } from './pages/ChristmasIdeas';
 import { FindElves } from './pages/FindElves';
+import { BrainRot } from './games/BrainRot';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/players" element={<Players />} />
         <Route path="/play" element={<Play />} />
         <Route path="/game/:gameId" element={<Game />} />
+        <Route path="/game/brainRot" element={<BrainRot />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/christmas-lab" element={<ChristmasLab />} />
         <Route path="/christmas-list" element={<ChristmasList />} />
