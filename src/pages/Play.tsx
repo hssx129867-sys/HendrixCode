@@ -21,6 +21,11 @@ const games = [
     title: '🧭 Logic Path',
     description: 'Guide the character to the goal!',
   },
+  {
+    id: 'brainRot',
+    title: '🧠 Brain Rot',
+    description: 'Build your brain empire!',
+  },
 ];
 
 export const Play = () => {

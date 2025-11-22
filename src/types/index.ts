@@ -1,4 +1,4 @@
-export type MiniGameId = 'pattern' | 'bugSquash' | 'logicPath';
+export type MiniGameId = 'pattern' | 'bugSquash' | 'logicPath' | 'brainRot';
 
 export type AvatarType = 'star' | 'robot' | 'lightbulb' | 'rocket';
 
