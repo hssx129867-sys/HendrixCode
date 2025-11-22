@@ -57,21 +57,51 @@ export const ChristmasLab = () => {
           </button>
         </div>
 
-        <div className="christmas-tool-card coming-soon">
+        <div className="christmas-tool-card">
           <div className="tool-icon">🎅</div>
-          <h3>Santa's Workshop</h3>
-          <p>Track what Santa is making!</p>
-          <button className="btn-secondary" disabled>
-            Coming Soon!
+          <h3>Track Santa</h3>
+          <p>See where Santa is right now!</p>
+          <button
+            className="btn-primary"
+            onClick={() => navigate('/santa-tracker')}
+          >
+            Track Santa
           </button>
         </div>
 
-        <div className="christmas-tool-card coming-soon">
-          <div className="tool-icon">❄️</div>
-          <h3>Winter Games</h3>
-          <p>Fun winter-themed activities!</p>
-          <button className="btn-secondary" disabled>
-            Coming Soon!
+        <div className="christmas-tool-card">
+          <div className="tool-icon">😄</div>
+          <h3>Christmas Jokes</h3>
+          <p>Laugh with festive jokes!</p>
+          <button
+            className="btn-primary"
+            onClick={() => navigate('/christmas-jokes')}
+          >
+            Tell Me a Joke
+          </button>
+        </div>
+
+        <div className="christmas-tool-card">
+          <div className="tool-icon">🎄</div>
+          <h3>Break Ideas</h3>
+          <p>Fun things to do this holiday!</p>
+          <button
+            className="btn-primary"
+            onClick={() => navigate('/christmas-ideas')}
+          >
+            Get Ideas
+          </button>
+        </div>
+
+        <div className="christmas-tool-card highlight">
+          <div className="tool-icon">🎅</div>
+          <h3>Find the Elves!</h3>
+          <p>Find all 12 elves hiding in your house!</p>
+          <button
+            className="btn-highlight"
+            onClick={() => navigate('/find-elves')}
+          >
+            🎮 Start Hunt!
           </button>
         </div>
       </div>
