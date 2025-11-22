@@ -33,10 +33,10 @@ interface BrainRotProgress {
 const initialBuildings: Building[] = [
   { id: 'base1', name: 'Thinking Cap', emoji: '🎓', cost: 10, production: 1, owned: 0, unlocked: true },
   { id: 'base2', name: 'Brain Gym', emoji: '🏋️', cost: 50, production: 5, owned: 0, unlocked: true },
-  { id: 'base3', name: 'Knights Inn', emoji: '🏰', cost: 99, production: 10, owned: 0, unlocked: true },
-  { id: 'base4', name: 'Study Room', emoji: '📚', cost: 200, production: 20, owned: 0, unlocked: true },
-  { id: 'base5', name: 'Lab Station', emoji: '🔬', cost: 1000, production: 100, owned: 0, unlocked: false },
-  { id: 'base6', name: 'Robot Helper', emoji: '🤖', cost: 5000, production: 500, owned: 0, unlocked: false },
+  { id: 'base3', name: 'Study Room', emoji: '📚', cost: 200, production: 20, owned: 0, unlocked: true },
+  { id: 'base4', name: 'Lab Station', emoji: '🔬', cost: 1000, production: 100, owned: 0, unlocked: false },
+  { id: 'base5', name: 'Robot Helper', emoji: '🤖', cost: 5000, production: 500, owned: 0, unlocked: false },
+  { id: 'base6', name: 'Knights Inn', emoji: '🏰', cost: 99, production: 10, owned: 0, unlocked: false },
 ];
 
 const initialAreas: Area[] = [
