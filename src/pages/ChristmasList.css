@@ -1,0 +1,264 @@
+.christmas-list-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.list-info h1 {
+  margin: 0 0 0.5rem 0;
+  color: #2d3748;
+  font-size: 1.8rem;
+}
+
+.list-count {
+  margin: 0;
+  color: #718096;
+  font-size: 1.1rem;
+}
+
+.add-item-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.add-item-section h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2d3748;
+}
+
+.add-item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item-input,
+.item-textarea {
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.item-input:focus,
+.item-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.priority-selector label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.priority-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.priority-btn {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.priority-btn:hover {
+  border-color: #cbd5e0;
+  background: #f7fafc;
+}
+
+.priority-btn.active {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+.btn-add {
+  margin-top: 0.5rem;
+}
+
+.items-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.items-section h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2d3748;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #718096;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-text {
+  font-size: 1.1rem;
+}
+
+.items-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.list-item {
+  padding: 1.5rem;
+  border-radius: 10px;
+  background: #f7fafc;
+  border-left: 4px solid #cbd5e0;
+}
+
+.list-item.priority-high {
+  border-left-color: #f56565;
+  background: linear-gradient(135deg, #fff5f5 0%, #fffaf0 100%);
+}
+
+.list-item.priority-medium {
+  border-left-color: #ecc94b;
+  background: linear-gradient(135deg, #fffff0 0%, #fefcbf 100%);
+}
+
+.list-item.priority-low {
+  border-left-color: #48bb78;
+  background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.item-priority {
+  font-size: 1.2rem;
+}
+
+.btn-remove {
+  background: #fc8181;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-remove:hover {
+  background: #f56565;
+  transform: scale(1.1);
+}
+
+.item-name {
+  margin: 0 0 0.5rem 0;
+  color: #2d3748;
+  font-size: 1.3rem;
+}
+
+.item-description {
+  margin: 0 0 1rem 0;
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.priority-select {
+  padding: 0.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: white;
+}
+
+.priority-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media print {
+  .add-item-section,
+  .nav-buttons,
+  .btn-remove,
+  .item-footer {
+    display: none !important;
+  }
+
+  .christmas-list-container {
+    background: white;
+  }
+
+  .list-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+@media (max-width: 768px) {
+  .list-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .list-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .priority-buttons {
+    flex-direction: column;
+  }
+
+  .priority-btn {
+    width: 100%;
+  }
+}
