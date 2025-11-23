@@ -54,7 +54,9 @@ export const ARCamera = ({ onCapture, onClose, elfLocation }: ARCameraProps) => 
       }
     };
 
-    void initCamera();
+    initCamera().catch((err) => {
+      console.error('Camera initialization error:', err);
+    });
 
     return () => {
       mounted = false;
@@ -109,8 +111,8 @@ export const ARCamera = ({ onCapture, onClose, elfLocation }: ARCameraProps) => 
     context.strokeText(locationText, x, y + 60);
     context.fillText(locationText, x, y + 60);
 
-    // Convert canvas to data URL
-    const imageData = canvas.toDataURL('image/jpeg', 0.9);
+    // Convert canvas to data URL with compression
+    const imageData = canvas.toDataURL('image/jpeg', 0.7); // Reduced quality from 0.9 to 0.7 for better compression
 
     // Show capture animation
     setTimeout(() => {

@@ -20,6 +20,7 @@ export const FindElves = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [arMode, setArMode] = useState(false);
   const [activeArElf, setActiveArElf] = useState<ElfLocation | null>(null);
+  const [viewingPhoto, setViewingPhoto] = useState<string | null>(null);
 
   useEffect(() => {
     const playerId = getActivePlayerId();
@@ -190,8 +191,7 @@ export const FindElves = () => {
                       alt={`Found ${elf.name}`}
                       onClick={(e) => {
                         e.stopPropagation();
-                        // Open photo in new window
-                        window.open(elf.capturedPhoto, '_blank');
+                        setViewingPhoto(elf.capturedPhoto || null);
                       }}
                     />
                     <div className="photo-badge">📷 AR Photo</div>
@@ -213,6 +213,17 @@ export const FindElves = () => {
           </button>
         )}
       </div>
+
+      {viewingPhoto && (
+        <div className="photo-modal" onClick={() => setViewingPhoto(null)}>
+          <div className="photo-modal-content">
+            <button className="photo-modal-close" onClick={() => setViewingPhoto(null)}>
+              ✕
+            </button>
+            <img src={viewingPhoto} alt="Captured elf" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
