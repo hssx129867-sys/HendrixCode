@@ -1,10 +1,11 @@
-import type { Player, ChristmasList, ChristmasListItem, ChristmasProgress, ElfLocation, ChristmasJoke, SantaLocation, Pet, PetStats, PetPhoto } from '../types';
+import type { Player, ChristmasList, ChristmasListItem, ChristmasProgress, ElfLocation, ChristmasJoke, SantaLocation, Pet, PetStats, PetPhoto, SecretSantaEvent, SecretSantaParticipant, SecretSantaPairing } from '../types';
 
 const STORAGE_KEY = 'bestBoysData';
 const ACTIVE_PLAYER_KEY = 'bestBoysActivePlayer';
 const CHRISTMAS_LISTS_KEY = 'bestBoysChristmasLists';
 const CHRISTMAS_PROGRESS_KEY = 'bestBoysChristmasProgress';
 const PETS_KEY = 'bestBoysPets';
+const SECRET_SANTA_KEY = 'bestBoysSecretSanta';
 
 export const getPlayers = (): Player[] => {
   try {
@@ -571,4 +572,120 @@ export const updatePetPhoto = (playerId: string, photoId: string, updates: Parti
   }
   
   return pet;
+};
+
+// Secret Santa functions
+export const getSecretSantaEvent = (playerId: string): SecretSantaEvent => {
+  try {
+    const data = localStorage.getItem(SECRET_SANTA_KEY);
+    const events: SecretSantaEvent[] = data ? JSON.parse(data) : [];
+    const event = events.find((e) => e.playerId === playerId);
+    
+    if (event) {
+      return event;
+    }
+    
+    return {
+      id: crypto.randomUUID(),
+      playerId,
+      participants: [],
+      pairings: [],
+      isAssigned: false,
+      createdAt: Date.now(),
+      lastUpdated: Date.now(),
+    };
+  } catch (error) {
+    console.error('Error reading Secret Santa event from localStorage:', error);
+    return {
+      id: crypto.randomUUID(),
+      playerId,
+      participants: [],
+      pairings: [],
+      isAssigned: false,
+      createdAt: Date.now(),
+      lastUpdated: Date.now(),
+    };
+  }
+};
+
+export const saveSecretSantaEvent = (event: SecretSantaEvent): void => {
+  try {
+    const data = localStorage.getItem(SECRET_SANTA_KEY);
+    const events: SecretSantaEvent[] = data ? JSON.parse(data) : [];
+    const index = events.findIndex((e) => e.playerId === event.playerId);
+    
+    event.lastUpdated = Date.now();
+    
+    if (index >= 0) {
+      events[index] = event;
+    } else {
+      events.push(event);
+    }
+    
+    localStorage.setItem(SECRET_SANTA_KEY, JSON.stringify(events));
+  } catch (error) {
+    console.error('Error saving Secret Santa event to localStorage:', error);
+  }
+};
+
+export const addSecretSantaParticipant = (playerId: string, name: string): SecretSantaEvent => {
+  const event = getSecretSantaEvent(playerId);
+  const participant: SecretSantaParticipant = {
+    id: crypto.randomUUID(),
+    name: name.trim(),
+    addedAt: Date.now(),
+  };
+  event.participants.push(participant);
+  saveSecretSantaEvent(event);
+  return event;
+};
+
+export const removeSecretSantaParticipant = (playerId: string, participantId: string): SecretSantaEvent => {
+  const event = getSecretSantaEvent(playerId);
+  event.participants = event.participants.filter((p) => p.id !== participantId);
+  saveSecretSantaEvent(event);
+  return event;
+};
+
+export const assignSecretSanta = (playerId: string): SecretSantaEvent => {
+  const event = getSecretSantaEvent(playerId);
+  
+  if (event.participants.length < 2) {
+    throw new Error('Need at least 2 participants');
+  }
+  
+  // Shuffle participants to create random pairings
+  const shuffled = [...event.participants].sort(() => Math.random() - 0.5);
+  const pairings: SecretSantaPairing[] = [];
+  
+  // Create circular pairings (each person gives to the next)
+  for (let i = 0; i < shuffled.length; i++) {
+    const giver = shuffled[i];
+    const receiver = shuffled[(i + 1) % shuffled.length];
+    pairings.push({
+      giver: giver.name,
+      receiver: receiver.name,
+    });
+  }
+  
+  event.pairings = pairings;
+  event.isAssigned = true;
+  saveSecretSantaEvent(event);
+  return event;
+};
+
+export const resetSecretSanta = (playerId: string): SecretSantaEvent => {
+  const event = getSecretSantaEvent(playerId);
+  event.pairings = [];
+  event.isAssigned = false;
+  saveSecretSantaEvent(event);
+  return event;
+};
+
+export const getSecretSantaAssignment = (playerId: string, participantName: string): string | null => {
+  const event = getSecretSantaEvent(playerId);
+  if (!event.isAssigned) return null;
+  
+  const pairing = event.pairings.find((p) => p.giver === participantName);
+  return pairing ? pairing.receiver : null;
 };

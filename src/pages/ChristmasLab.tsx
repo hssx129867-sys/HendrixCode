@@ -93,6 +93,18 @@ export const ChristmasLab = () => {
           </button>
         </div>
 
+        <div className="christmas-tool-card">
+          <div className="tool-icon">🎁</div>
+          <h3>Secret Santa</h3>
+          <p>Spin the wheel to assign Secret Santas!</p>
+          <button
+            className="btn-primary"
+            onClick={() => navigate('/secret-santa')}
+          >
+            Start Secret Santa
+          </button>
+        </div>
+
         <div className="christmas-tool-card highlight">
           <div className="tool-icon">🎅</div>
           <h3>Find the Elves!</h3>
