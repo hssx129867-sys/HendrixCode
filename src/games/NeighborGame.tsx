@@ -168,15 +168,17 @@ export const NeighborGame = () => {
 
     // Check for key collection
     const keyIndex = keyPositions.findIndex(k => k.x === newPos.x && k.y === newPos.y);
+    let newKeysCollected = keysCollected;
     if (keyIndex !== -1) {
-      setKeysCollected(prev => prev + 1);
+      newKeysCollected = keysCollected + 1;
+      setKeysCollected(newKeysCollected);
       setKeyPositions(prev => prev.filter((_, i) => i !== keyIndex));
-      setMessage(`🔑 Key found! ${keysCollected + 1}/${level.keysNeeded}`);
+      setMessage(`🔑 Key found! ${newKeysCollected}/${level.keysNeeded}`);
       setTimeout(() => setMessage(''), 2000);
     }
 
     // Check for door (level completion)
-    if (newPos.x === doorPos.x && newPos.y === doorPos.y && keysCollected >= level.keysNeeded) {
+    if (newPos.x === doorPos.x && newPos.y === doorPos.y && newKeysCollected >= level.keysNeeded) {
       const earnedStars = moves < level.gridSize * 3 ? 3 : moves < level.gridSize * 5 ? 2 : 1;
       const newStars = stars + earnedStars;
       setStars(newStars);
