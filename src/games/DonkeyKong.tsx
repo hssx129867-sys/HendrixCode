@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getActivePlayerId, updatePlayerProgress } from '../utils/storage';
 import './DonkeyKong.css';
@@ -29,7 +29,7 @@ export const DonkeyKong = () => {
   const [message, setMessage] = useState('');
   const [stars, setStars] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [barrelIdCounter, setBarrelIdCounter] = useState(0);
+  const barrelIdCounter = useRef(0);
   const [gameTime, setGameTime] = useState(0);
 
   const level = levels[currentLevel];
@@ -61,16 +61,17 @@ export const DonkeyKong = () => {
 
     // Generate barrels
     const barrelInterval = setInterval(() => {
-      setBarrelIdCounter((prev) => prev + 1);
       const platform = Math.floor(Math.random() * level.platforms);
-      setBarrels((prev) => [...prev, { id: barrelIdCounter, platform, position: 0 }]);
+      barrelIdCounter.current += 1;
+      const newBarrel = { id: barrelIdCounter.current, platform, position: 0 };
+      setBarrels((prev) => [...prev, newBarrel]);
     }, level.barrelFrequency);
 
     return () => {
       clearInterval(moveInterval);
       clearInterval(barrelInterval);
     };
-  }, [isPlaying, level, barrelIdCounter]);
+  }, [isPlaying, level]);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -114,7 +115,7 @@ export const DonkeyKong = () => {
     setMessage('');
     setIsPlaying(true);
     setGameTime(0);
-    setBarrelIdCounter(0);
+    barrelIdCounter.current = 0;
   };
 
   const moveUp = () => {
@@ -136,7 +137,7 @@ export const DonkeyKong = () => {
       setBarrels([]);
       setMessage('');
       setGameTime(0);
-      setBarrelIdCounter(0);
+      barrelIdCounter.current = 0;
     } else {
       setMessage('🎊 Incredible! You completed all levels!');
     }
