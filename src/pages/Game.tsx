@@ -3,6 +3,7 @@ import { PatternBuilder } from '../games/PatternBuilder';
 import { BugSquash } from '../games/BugSquash';
 import { LogicPath } from '../games/LogicPath';
 import { BrainRot } from '../games/BrainRot';
+import { PetVet } from '../games/PetVet';
 
 export const Game = () => {
   const { gameId } = useParams<{ gameId: string }>();
@@ -16,6 +17,8 @@ export const Game = () => {
       return <LogicPath />;
     case 'brainRot':
       return <BrainRot />;
+    case 'petVet':
+      return <PetVet />;
     default:
       return <Navigate to="/play" replace />;
   }

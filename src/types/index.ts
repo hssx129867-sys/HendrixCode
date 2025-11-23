@@ -1,4 +1,4 @@
-export type MiniGameId = 'pattern' | 'bugSquash' | 'logicPath' | 'brainRot';
+export type MiniGameId = 'pattern' | 'bugSquash' | 'logicPath' | 'brainRot' | 'petVet';
 
 export type AvatarType = 'star' | 'robot' | 'lightbulb' | 'rocket';
 
@@ -59,4 +59,52 @@ export interface SantaLocation {
   location: string;
   activity: string;
   timestamp: number;
+}
+
+// Pet Vet Types
+export type PetMood = 'happy' | 'sad' | 'excited' | 'tired' | 'sick' | 'energetic';
+export type PetColor = 'purple' | 'blue' | 'green' | 'pink' | 'orange' | 'rainbow';
+export type AlienAbility = 'teleport' | 'colorChange' | 'shield' | 'glow';
+
+export interface PetStats {
+  health: number;      // 0-100
+  happiness: number;   // 0-100
+  hunger: number;      // 0-100
+  energy: number;      // 0-100
+}
+
+export interface Pet {
+  id: string;
+  playerId: string;
+  name: string;
+  color: PetColor;
+  mood: PetMood;
+  stats: PetStats;
+  abilities: AlienAbility[];
+  activeAbility?: AlienAbility;
+  level: number;
+  experience: number;
+  createdAt: number;
+  lastFed?: number;
+  lastPlayed?: number;
+  lastHealed?: number;
+  photos: PetPhoto[];
+}
+
+export interface PetPhoto {
+  id: string;
+  dataUrl: string;
+  caption?: string;
+  stickers: PhotoSticker[];
+  createdAt: number;
+}
+
+export interface PhotoSticker {
+  id: string;
+  type: string;
+  emoji: string;
+  x: number;
+  y: number;
+  rotation: number;
+  scale: number;
 }

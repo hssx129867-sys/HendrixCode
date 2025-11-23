@@ -26,6 +26,11 @@ const games = [
     title: '🧠 Brain Rot',
     description: 'Build your brain empire!',
   },
+  {
+    id: 'petVet',
+    title: '🛸 Pet Vet',
+    description: 'Care for your alien pet!',
+  },
 ];
 
 export const Play = () => {

@@ -1,9 +1,10 @@
-import type { Player, ChristmasList, ChristmasListItem, ChristmasProgress, ElfLocation, ChristmasJoke, SantaLocation } from '../types';
+import type { Player, ChristmasList, ChristmasListItem, ChristmasProgress, ElfLocation, ChristmasJoke, SantaLocation, Pet, PetStats, PetPhoto } from '../types';
 
 const STORAGE_KEY = 'bestBoysData';
 const ACTIVE_PLAYER_KEY = 'bestBoysActivePlayer';
 const CHRISTMAS_LISTS_KEY = 'bestBoysChristmasLists';
 const CHRISTMAS_PROGRESS_KEY = 'bestBoysChristmasProgress';
+const PETS_KEY = 'bestBoysPets';
 
 export const getPlayers = (): Player[] => {
   try {
@@ -357,4 +358,211 @@ export const getChristmasBreakIdeas = (): string[] => {
     '🎨 Draw or paint a winter scene',
     '⭐ Stargaze and look for Santa\'s sleigh',
   ];
+};
+
+// Pet Vet Functions
+export const getPet = (playerId: string): Pet | null => {
+  try {
+    const data = localStorage.getItem(PETS_KEY);
+    const pets: Pet[] = data ? JSON.parse(data) : [];
+    return pets.find((p) => p.playerId === playerId) || null;
+  } catch (error) {
+    console.error('Error reading pet from localStorage:', error);
+    return null;
+  }
+};
+
+export const createPet = (playerId: string, name: string): Pet => {
+  const newPet: Pet = {
+    id: Date.now().toString(),
+    playerId,
+    name,
+    color: 'purple',
+    mood: 'happy',
+    stats: {
+      health: 100,
+      happiness: 100,
+      hunger: 50,
+      energy: 100,
+    },
+    abilities: ['teleport', 'colorChange', 'shield'],
+    level: 1,
+    experience: 0,
+    createdAt: Date.now(),
+    photos: [],
+  };
+  
+  savePet(newPet);
+  return newPet;
+};
+
+export const savePet = (pet: Pet): void => {
+  try {
+    const data = localStorage.getItem(PETS_KEY);
+    const pets: Pet[] = data ? JSON.parse(data) : [];
+    const index = pets.findIndex((p) => p.playerId === pet.playerId);
+    
+    if (index >= 0) {
+      pets[index] = pet;
+    } else {
+      pets.push(pet);
+    }
+    
+    localStorage.setItem(PETS_KEY, JSON.stringify(pets));
+  } catch (error) {
+    console.error('Error saving pet to localStorage:', error);
+  }
+};
+
+export const updatePetStats = (playerId: string, updates: Partial<PetStats>): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  pet.stats = { ...pet.stats, ...updates };
+  
+  // Clamp values between 0 and 100
+  pet.stats.health = Math.max(0, Math.min(100, pet.stats.health));
+  pet.stats.happiness = Math.max(0, Math.min(100, pet.stats.happiness));
+  pet.stats.hunger = Math.max(0, Math.min(100, pet.stats.hunger));
+  pet.stats.energy = Math.max(0, Math.min(100, pet.stats.energy));
+  
+  // Update mood based on stats
+  updatePetMood(pet);
+  
+  savePet(pet);
+  return pet;
+};
+
+const updatePetMood = (pet: Pet): void => {
+  const { health, happiness, hunger, energy } = pet.stats;
+  
+  if (health < 30 || hunger > 80) {
+    pet.mood = 'sick';
+  } else if (energy < 20) {
+    pet.mood = 'tired';
+  } else if (happiness < 30) {
+    pet.mood = 'sad';
+  } else if (happiness > 80 && energy > 70) {
+    pet.mood = 'excited';
+  } else if (energy > 80) {
+    pet.mood = 'energetic';
+  } else {
+    pet.mood = 'happy';
+  }
+};
+
+export const feedPet = (playerId: string): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  pet.lastFed = Date.now();
+  
+  return updatePetStats(playerId, {
+    hunger: Math.max(0, pet.stats.hunger - 30),
+    happiness: Math.min(100, pet.stats.happiness + 10),
+    energy: Math.min(100, pet.stats.energy + 5),
+  });
+};
+
+export const playWithPet = (playerId: string): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  pet.lastPlayed = Date.now();
+  pet.experience += 10;
+  
+  // Level up every 100 experience
+  if (pet.experience >= pet.level * 100) {
+    pet.level += 1;
+    pet.experience = 0;
+  }
+  
+  savePet(pet);
+  
+  return updatePetStats(playerId, {
+    happiness: Math.min(100, pet.stats.happiness + 20),
+    energy: Math.max(0, pet.stats.energy - 15),
+    hunger: Math.min(100, pet.stats.hunger + 10),
+  });
+};
+
+export const healPet = (playerId: string): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  pet.lastHealed = Date.now();
+  
+  return updatePetStats(playerId, {
+    health: 100,
+    happiness: Math.min(100, pet.stats.happiness + 15),
+  });
+};
+
+export const restPet = (playerId: string): Pet | null => {
+  return updatePetStats(playerId, {
+    energy: 100,
+    happiness: Math.min(100, getPet(playerId)!.stats.happiness + 10),
+  });
+};
+
+export const changePetColor = (playerId: string, color: Pet['color']): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  pet.color = color;
+  savePet(pet);
+  return pet;
+};
+
+export const activatePetAbility = (playerId: string, ability: Pet['abilities'][0]): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  if (!pet.abilities.includes(ability)) return pet;
+  
+  pet.activeAbility = ability;
+  
+  // Abilities cost energy
+  updatePetStats(playerId, {
+    energy: Math.max(0, pet.stats.energy - 10),
+  });
+  
+  return pet;
+};
+
+export const addPetPhoto = (playerId: string, photo: Omit<PetPhoto, 'id' | 'createdAt'>): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  const newPhoto: PetPhoto = {
+    ...photo,
+    id: Date.now().toString(),
+    createdAt: Date.now(),
+  };
+  
+  pet.photos.push(newPhoto);
+  savePet(pet);
+  return pet;
+};
+
+export const deletePetPhoto = (playerId: string, photoId: string): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  pet.photos = pet.photos.filter((p) => p.id !== photoId);
+  savePet(pet);
+  return pet;
+};
+
+export const updatePetPhoto = (playerId: string, photoId: string, updates: Partial<PetPhoto>): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
+  const photo = pet.photos.find((p) => p.id === photoId);
+  if (photo) {
+    Object.assign(photo, updates);
+    savePet(pet);
+  }
+  
+  return pet;
 };
