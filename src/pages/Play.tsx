@@ -36,6 +36,11 @@ const games = [
     title: '🏠 Neighbor Stealth',
     description: 'Sneak in and find the keys!',
   },
+  {
+    id: 'donkeyKong',
+    title: '🦍 Donkey Kong Climb',
+    description: 'Climb to the top, avoid barrels!',
+  },
 ];
 
 export const Play = () => {
