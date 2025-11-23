@@ -233,13 +233,16 @@ export const saveChristmasProgress = (progress: ChristmasProgress): void => {
   }
 };
 
-export const markElfFound = (playerId: string, elfId: string): void => {
+export const markElfFound = (playerId: string, elfId: string, capturedPhoto?: string): void => {
   const progress = getChristmasProgress(playerId);
   const elf = progress.elvesFound.find((e) => e.id === elfId);
   
   if (elf && !elf.found) {
     elf.found = true;
     elf.foundAt = Date.now();
+    if (capturedPhoto) {
+      elf.capturedPhoto = capturedPhoto;
+    }
     progress.starsCollected += 1;
     saveChristmasProgress(progress);
   }
