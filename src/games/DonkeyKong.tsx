@@ -21,6 +21,11 @@ interface Barrel {
   position: number;
 }
 
+// Game configuration constants
+const COLLISION_MIN_POSITION = 45;
+const COLLISION_MAX_POSITION = 55;
+const GOAL_TIME_MS = 10000; // 10 seconds to win
+
 export const DonkeyKong = () => {
   const navigate = useNavigate();
   const [currentLevel, setCurrentLevel] = useState(0);
@@ -81,8 +86,8 @@ export const DonkeyKong = () => {
       const collision = barrels.some(
         (barrel) =>
           barrel.platform === playerPlatform &&
-          barrel.position >= 45 &&
-          barrel.position <= 55
+          barrel.position >= COLLISION_MIN_POSITION &&
+          barrel.position <= COLLISION_MAX_POSITION
       );
 
       if (collision) {
@@ -96,7 +101,7 @@ export const DonkeyKong = () => {
 
   useEffect(() => {
     // Check for level completion
-    if (isPlaying && playerPlatform === level.platforms - 1 && gameTime >= 10000) {
+    if (isPlaying && playerPlatform === level.platforms - 1 && gameTime >= GOAL_TIME_MS) {
       setIsPlaying(false);
       const newStars = stars + 1;
       setStars(newStars);
