@@ -38,6 +38,7 @@ type CellType = 'empty' | 'player' | 'neighbor' | 'key' | 'door' | 'hiding';
 export const NeighborGame = () => {
   const navigate = useNavigate();
   const [currentLevel, setCurrentLevel] = useState(0);
+  const [resetCounter, setResetCounter] = useState(0);
   const [playerPos, setPlayerPos] = useState<Position>({ x: 0, y: 0 });
   const [neighborPos, setNeighborPos] = useState<Position>({ x: 4, y: 4 });
   const [keysCollected, setKeysCollected] = useState(0);
@@ -105,7 +106,7 @@ export const NeighborGame = () => {
     setMessage('');
     setIsHiding(false);
     setMoves(0);
-  }, [currentLevel, level.gridSize, level.keysNeeded]);
+  }, [currentLevel, resetCounter, level.gridSize, level.keysNeeded]);
 
   // Neighbor AI movement
   useEffect(() => {
@@ -220,7 +221,7 @@ export const NeighborGame = () => {
   };
 
   const resetLevel = () => {
-    setCurrentLevel(currentLevel); // Triggers useEffect
+    setResetCounter(prev => prev + 1);
   };
 
   const nextLevel = () => {
