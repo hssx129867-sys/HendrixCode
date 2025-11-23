@@ -374,7 +374,7 @@ export const getPet = (playerId: string): Pet | null => {
 
 export const createPet = (playerId: string, name: string): Pet => {
   const newPet: Pet = {
-    id: Date.now().toString(),
+    id: crypto.randomUUID(),
     playerId,
     name,
     color: 'purple',
@@ -499,9 +499,12 @@ export const healPet = (playerId: string): Pet | null => {
 };
 
 export const restPet = (playerId: string): Pet | null => {
+  const pet = getPet(playerId);
+  if (!pet) return null;
+  
   return updatePetStats(playerId, {
     energy: 100,
-    happiness: Math.min(100, getPet(playerId)!.stats.happiness + 10),
+    happiness: Math.min(100, pet.stats.happiness + 10),
   });
 };
 
@@ -536,7 +539,7 @@ export const addPetPhoto = (playerId: string, photo: Omit<PetPhoto, 'id' | 'crea
   
   const newPhoto: PetPhoto = {
     ...photo,
-    id: Date.now().toString(),
+    id: crypto.randomUUID(),
     createdAt: Date.now(),
   };
   
