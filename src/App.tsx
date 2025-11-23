@@ -10,6 +10,7 @@ import { SantaTracker } from './pages/SantaTracker';
 import { ChristmasJokes } from './pages/ChristmasJokes';
 import { ChristmasIdeas } from './pages/ChristmasIdeas';
 import { FindElves } from './pages/FindElves';
+import { SecretSanta } from './pages/SecretSanta';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/christmas-jokes" element={<ChristmasJokes />} />
         <Route path="/christmas-ideas" element={<ChristmasIdeas />} />
         <Route path="/find-elves" element={<FindElves />} />
+        <Route path="/secret-santa" element={<SecretSanta />} />
       </Routes>
     </Router>
   );

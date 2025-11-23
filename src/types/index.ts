@@ -109,3 +109,25 @@ export interface PhotoSticker {
   rotation: number;
   scale: number;
 }
+
+// Secret Santa Types
+export interface SecretSantaParticipant {
+  id: string;
+  name: string;
+  addedAt: number;
+}
+
+export interface SecretSantaPairing {
+  giver: string; // participant name
+  receiver: string; // participant name
+}
+
+export interface SecretSantaEvent {
+  id: string;
+  playerId: string;
+  participants: SecretSantaParticipant[];
+  pairings: SecretSantaPairing[];
+  isAssigned: boolean;
+  createdAt: number;
+  lastUpdated: number;
+}
