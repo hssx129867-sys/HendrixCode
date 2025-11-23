@@ -4,6 +4,7 @@ import { BugSquash } from '../games/BugSquash';
 import { LogicPath } from '../games/LogicPath';
 import { BrainRot } from '../games/BrainRot';
 import { PetVet } from '../games/PetVet';
+import { NeighborGame } from '../games/NeighborGame';
 
 export const Game = () => {
   const { gameId } = useParams<{ gameId: string }>();
@@ -19,6 +20,8 @@ export const Game = () => {
       return <BrainRot />;
     case 'petVet':
       return <PetVet />;
+    case 'neighborGame':
+      return <NeighborGame />;
     default:
       return <Navigate to="/play" replace />;
   }

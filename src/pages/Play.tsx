@@ -31,6 +31,11 @@ const games = [
     title: '🛸 Pet Vet',
     description: 'Care for your alien pet!',
   },
+  {
+    id: 'neighborGame',
+    title: '🏠 Neighbor Stealth',
+    description: 'Sneak in and find the keys!',
+  },
 ];
 
 export const Play = () => {
