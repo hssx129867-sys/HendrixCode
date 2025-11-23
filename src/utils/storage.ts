@@ -586,7 +586,7 @@ export const getSecretSantaEvent = (playerId: string): SecretSantaEvent => {
     }
     
     return {
-      id: crypto.randomUUID(),
+      id: Date.now().toString(),
       playerId,
       participants: [],
       pairings: [],
@@ -597,7 +597,7 @@ export const getSecretSantaEvent = (playerId: string): SecretSantaEvent => {
   } catch (error) {
     console.error('Error reading Secret Santa event from localStorage:', error);
     return {
-      id: crypto.randomUUID(),
+      id: Date.now().toString(),
       playerId,
       participants: [],
       pairings: [],
@@ -630,9 +630,21 @@ export const saveSecretSantaEvent = (event: SecretSantaEvent): void => {
 
 export const addSecretSantaParticipant = (playerId: string, name: string): SecretSantaEvent => {
   const event = getSecretSantaEvent(playerId);
+  const trimmedName = name.trim();
+  
+  // Validate name is not empty
+  if (!trimmedName) {
+    throw new Error('Participant name cannot be empty');
+  }
+  
+  // Check for duplicate names
+  if (event.participants.some((p) => p.name.toLowerCase() === trimmedName.toLowerCase())) {
+    throw new Error('A participant with this name already exists');
+  }
+  
   const participant: SecretSantaParticipant = {
-    id: crypto.randomUUID(),
-    name: name.trim(),
+    id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+    name: trimmedName,
     addedAt: Date.now(),
   };
   event.participants.push(participant);
@@ -654,8 +666,13 @@ export const assignSecretSanta = (playerId: string): SecretSantaEvent => {
     throw new Error('Need at least 2 participants');
   }
   
-  // Shuffle participants to create random pairings
-  const shuffled = [...event.participants].sort(() => Math.random() - 0.5);
+  // Fisher-Yates shuffle for unbiased randomization
+  const shuffled = [...event.participants];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  
   const pairings: SecretSantaPairing[] = [];
   
   // Create circular pairings (each person gives to the next)

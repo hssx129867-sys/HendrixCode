@@ -23,6 +23,7 @@ export const SecretSanta = () => {
   const [assignment, setAssignment] = useState<string | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [wheelRotation, setWheelRotation] = useState(0);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const playerId = getActivePlayerId();
@@ -34,6 +35,7 @@ export const SecretSanta = () => {
     const players = getPlayers();
     const foundPlayer = players.find((p) => p.id === playerId);
     if (foundPlayer) {
+      // Loading initial data from localStorage is an acceptable use of setState in useEffect
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPlayer(foundPlayer);
       const santaEvent = getSecretSantaEvent(playerId);
@@ -46,9 +48,14 @@ export const SecretSanta = () => {
   const handleAddParticipant = () => {
     if (!player || !newParticipantName.trim()) return;
 
-    const updatedEvent = addSecretSantaParticipant(player.id, newParticipantName);
-    setEvent(updatedEvent);
-    setNewParticipantName('');
+    try {
+      const updatedEvent = addSecretSantaParticipant(player.id, newParticipantName);
+      setEvent(updatedEvent);
+      setNewParticipantName('');
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to add participant');
+    }
   };
 
   const handleRemoveParticipant = (participantId: string) => {
@@ -113,7 +120,10 @@ export const SecretSanta = () => {
                 type="text"
                 placeholder="Enter participant name..."
                 value={newParticipantName}
-                onChange={(e) => setNewParticipantName(e.target.value)}
+                onChange={(e) => {
+                  setNewParticipantName(e.target.value);
+                  setError(null);
+                }}
                 onKeyPress={(e) => e.key === 'Enter' && handleAddParticipant()}
                 className="participant-input"
                 maxLength={50}
@@ -126,6 +136,7 @@ export const SecretSanta = () => {
                 ➕ Add Participant
               </button>
             </div>
+            {error && <p className="error-message">{error}</p>}
           </div>
 
           <div className="participants-section">
