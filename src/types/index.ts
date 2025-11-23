@@ -40,6 +40,7 @@ export interface ElfLocation {
   hint: string;
   found: boolean;
   foundAt?: number;
+  capturedPhoto?: string; // Base64 encoded image data
 }
 
 export interface ChristmasProgress {

@@ -260,6 +260,35 @@
   font-size: 1rem;
 }
 
+.elf-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-ar-hunt {
+  background: linear-gradient(135deg, #4c6ef5 0%, #364fc7 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: 700;
+  flex: 1;
+  box-shadow: 0 4px 12px rgba(76, 110, 245, 0.3);
+}
+
+.btn-ar-hunt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 110, 245, 0.4);
+}
+
+.btn-ar-hunt:active {
+  transform: translateY(0);
+}
+
 .btn-found {
   background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
   color: white;
@@ -270,7 +299,7 @@
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   font-weight: 700;
-  width: 100%;
+  flex: 1;
   box-shadow: 0 4px 12px rgba(55, 178, 77, 0.3);
 }
 
@@ -291,6 +320,37 @@
   color: #2b8a3e;
   font-weight: bold;
   font-size: 1.1rem;
+}
+
+.captured-photo-thumbnail {
+  margin-top: 1rem;
+  position: relative;
+}
+
+.captured-photo-thumbnail img {
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.captured-photo-thumbnail img:hover {
+  transform: scale(1.02);
+}
+
+.photo-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(76, 110, 245, 0.9);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .nav-buttons {
@@ -329,6 +389,64 @@
 
 .btn-reset:hover {
   background: #ee5a6f;
+}
+
+.photo-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.photo-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-modal-content img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.photo-modal-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.captured-photo-thumbnail img {
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

@@ -9,6 +9,7 @@ import {
 } from '../utils/storage';
 import type { Player, ChristmasProgress, ElfLocation } from '../types';
 import { Avatar } from '../components/Avatar';
+import { ARCamera } from '../components/ARCamera';
 import './FindElves.css';
 
 export const FindElves = () => {
@@ -17,6 +18,9 @@ export const FindElves = () => {
   const [progress, setProgress] = useState<ChristmasProgress | null>(null);
   const [selectedElf, setSelectedElf] = useState<ElfLocation | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [arMode, setArMode] = useState(false);
+  const [activeArElf, setActiveArElf] = useState<ElfLocation | null>(null);
+  const [viewingPhoto, setViewingPhoto] = useState<string | null>(null);
 
   useEffect(() => {
     const playerId = getActivePlayerId();
@@ -37,10 +41,10 @@ export const FindElves = () => {
     }
   }, [navigate]);
 
-  const handleFindElf = (elf: ElfLocation) => {
+  const handleFindElf = (elf: ElfLocation, capturedPhoto?: string) => {
     if (!player || elf.found) return;
 
-    markElfFound(player.id, elf.id);
+    markElfFound(player.id, elf.id, capturedPhoto);
     const updatedProgress = getChristmasProgress(player.id);
     setProgress(updatedProgress);
     setSelectedElf(null);
@@ -63,6 +67,23 @@ export const FindElves = () => {
     }
   };
 
+  const handleOpenAR = (elf: ElfLocation) => {
+    setActiveArElf(elf);
+    setArMode(true);
+  };
+
+  const handleARCapture = (imageData: string) => {
+    if (!activeArElf) return;
+    handleFindElf(activeArElf, imageData);
+    setArMode(false);
+    setActiveArElf(null);
+  };
+
+  const handleCloseAR = () => {
+    setArMode(false);
+    setActiveArElf(null);
+  };
+
   if (!player || !progress) {
     return <div>Loading...</div>;
   }
@@ -73,6 +94,18 @@ export const FindElves = () => {
 
   return (
     <div className="find-elves-container">
+      {arMode && activeArElf && (
+        <ARCamera
+          elfLocation={{
+            id: activeArElf.id,
+            name: activeArElf.name,
+            location: activeArElf.location,
+          }}
+          onCapture={handleARCapture}
+          onClose={handleCloseAR}
+        />
+      )}
+
       <div className="elves-header">
         <Avatar type={player.avatarType} size="medium" />
         <div className="elves-info">
@@ -110,7 +143,7 @@ export const FindElves = () => {
 
       <div className="game-instructions">
         <h3>📱 How to Play</h3>
-        <p>Click on an elf to see their hint, then go find them in your house! When you find them, click "Found It!" to collect a star for your Christmas tree.</p>
+        <p>Click on an elf to see their hint. You can either mark them as found manually or use AR Camera mode to hunt them in real life! When you find them with AR, take a photo to collect a star for your Christmas tree.</p>
       </div>
 
       <div className="elves-grid">
@@ -126,20 +159,44 @@ export const FindElves = () => {
             {selectedElf?.id === elf.id && !elf.found && (
               <div className="elf-details">
                 <p className="elf-hint">💡 {elf.hint}</p>
-                <button
-                  className="btn-found"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleFindElf(elf);
-                  }}
-                >
-                  🎁 Found It!
-                </button>
+                <div className="elf-actions">
+                  <button
+                    className="btn-ar-hunt"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenAR(elf);
+                    }}
+                  >
+                    📷 AR Hunt
+                  </button>
+                  <button
+                    className="btn-found"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleFindElf(elf);
+                    }}
+                  >
+                    🎁 Found It!
+                  </button>
+                </div>
               </div>
             )}
             {elf.found && elf.foundAt && (
               <div className="found-time">
                 Found! ⭐
+                {elf.capturedPhoto && (
+                  <div className="captured-photo-thumbnail">
+                    <img 
+                      src={elf.capturedPhoto} 
+                      alt={`Found ${elf.name}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setViewingPhoto(elf.capturedPhoto || null);
+                      }}
+                    />
+                    <div className="photo-badge">📷 AR Photo</div>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -156,6 +213,17 @@ export const FindElves = () => {
           </button>
         )}
       </div>
+
+      {viewingPhoto && (
+        <div className="photo-modal" onClick={() => setViewingPhoto(null)}>
+          <div className="photo-modal-content">
+            <button className="photo-modal-close" onClick={() => setViewingPhoto(null)}>
+              ✕
+            </button>
+            <img src={viewingPhoto} alt="Captured elf" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

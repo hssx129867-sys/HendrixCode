@@ -18,11 +18,21 @@ A fun, educational web app for kids ages 7-10 featuring logic games and Christma
 - **Santa Tracker**: See where Santa is right now with real-time updates
 - **Christmas Jokes**: Enjoy 12 kid-friendly Christmas jokes
 - **Break Ideas**: Get 20+ fun Christmas activity ideas with progress tracking
-- **Find the Elves**: Hunt for 12 hidden elves around your house and collect stars for your Christmas tree
+- **Find the Elves**: Hunt for 12 hidden elves around your house using AR camera or manual mode, and collect stars for your Christmas tree
 - **Santa Countdown**: Track days until Christmas
 
 ### 💾 Storage
 - All progress and lists are saved automatically in your browser
+- AR photos captured during elf hunting are stored locally with your progress
+
+### 📷 AR Camera Features
+The "Find the Elves" game now includes AR (Augmented Reality) camera functionality:
+- **AR Hunt Mode**: Use your device's camera to hunt for elves in real-world environments
+- **Camera Switching**: Toggle between front and back cameras
+- **Photo Capture**: Take photos when you find elves to save the moment
+- **AR Overlay**: Visual indicators and hints displayed over the camera feed
+- **Permission Handling**: Graceful error handling for camera permissions
+- **Manual Mode**: Still supports the original manual "Found It" mode without camera access
 
 ## 🚀 Getting Started
 
@@ -69,7 +79,12 @@ npm run preview
 ### Christmas Lab
 1. **Create Your List**: Add items to your Christmas wish list
 2. **Track Christmas**: See how many days until Christmas
-3. **Share with Santa**: Print or share your list
+3. **Find the Elves**: Use AR camera to hunt for 12 elves in your house, or mark them manually
+   - Click on an elf to see their location hint
+   - Choose "📷 AR Hunt" to use your camera for an immersive experience
+   - Choose "🎁 Found It!" to mark them as found manually
+   - View captured AR photos in the elf cards after finding them
+4. **Share with Santa**: Print or share your list
 
 ## 🛠 Tech Stack
 
