@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
   getActivePlayerId,
   getPlayers,
@@ -19,6 +19,7 @@ export const ChristmasList = () => {
   const [newItemName, setNewItemName] = useState('');
   const [newItemDescription, setNewItemDescription] = useState('');
   const [newItemPriority, setNewItemPriority] = useState<'high' | 'medium' | 'low'>('medium');
+  const [priorityFilter, setPriorityFilter] = useState<'all' | 'high' | 'medium' | 'low'>('all');
 
   useEffect(() => {
     const playerId = getActivePlayerId();
@@ -68,6 +69,20 @@ export const ChristmasList = () => {
     const updatedList = getChristmasList(player.id);
     setItems(updatedList.items);
   };
+
+  // Memoize counts to avoid recalculating on every render
+  const priorityCounts = useMemo(() => ({
+    high: items.filter(item => item.priority === 'high').length,
+    medium: items.filter(item => item.priority === 'medium').length,
+    low: items.filter(item => item.priority === 'low').length,
+  }), [items]);
+
+  const filteredItems = useMemo(() => 
+    priorityFilter === 'all' 
+      ? items 
+      : items.filter(item => item.priority === priorityFilter),
+    [items, priorityFilter]
+  );
 
   if (!player) {
     return <div>Loading...</div>;
@@ -148,6 +163,36 @@ export const ChristmasList = () => {
         </div>
       </div>
 
+      <div className="filter-section">
+        <h2>Filter Your List</h2>
+        <div className="filter-buttons">
+          <button
+            className={`filter-btn ${priorityFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setPriorityFilter('all')}
+          >
+            🎄 Show All ({items.length})
+          </button>
+          <button
+            className={`filter-btn ${priorityFilter === 'high' ? 'active' : ''}`}
+            onClick={() => setPriorityFilter('high')}
+          >
+            ⭐⭐⭐ Really Want ({priorityCounts.high})
+          </button>
+          <button
+            className={`filter-btn ${priorityFilter === 'medium' ? 'active' : ''}`}
+            onClick={() => setPriorityFilter('medium')}
+          >
+            ⭐⭐ Would Like ({priorityCounts.medium})
+          </button>
+          <button
+            className={`filter-btn ${priorityFilter === 'low' ? 'active' : ''}`}
+            onClick={() => setPriorityFilter('low')}
+          >
+            ⭐ Nice to Have ({priorityCounts.low})
+          </button>
+        </div>
+      </div>
+
       <div className="items-section">
         <h2>Your Wish List</h2>
         {items.length === 0 ? (
@@ -155,9 +200,14 @@ export const ChristmasList = () => {
             <p className="empty-icon">🎄</p>
             <p className="empty-text">Your list is empty! Add something you'd like for Christmas!</p>
           </div>
+        ) : filteredItems.length === 0 ? (
+          <div className="empty-state">
+            <p className="empty-icon">🎁</p>
+            <p className="empty-text">No items match this filter. Try a different priority!</p>
+          </div>
         ) : (
           <div className="items-grid">
-            {items
+            {filteredItems
               .sort((a, b) => {
                 const priorityOrder = { high: 3, medium: 2, low: 1 };
                 return priorityOrder[b.priority] - priorityOrder[a.priority];
