@@ -30,6 +30,43 @@
   font-weight: 600;
 }
 
+.countdown-detailed {
+  display: flex;
+  gap: 1rem;
+  margin: 0.75rem 0;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  min-width: 60px;
+}
+
+.countdown-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-unit {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.countdown-label {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
 .santa-map {
   background: white;
   border-radius: 20px;
@@ -127,6 +164,15 @@
   transform: translateY(-5px);
 }
 
+.fact-card.highlight {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+}
+
+.fact-card.highlight p {
+  color: white;
+}
+
 .fact-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -173,6 +219,25 @@
 
   .tracker-info h1 {
     font-size: 1.8rem;
+  }
+
+  .countdown-detailed {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .countdown-item {
+    min-width: 50px;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .countdown-value {
+    font-size: 1.4rem;
+  }
+
+  .countdown-unit {
+    font-size: 0.7rem;
   }
 
   .santa-icon-large {

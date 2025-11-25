@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getActivePlayerId, getPlayers, getSantaLocation, getDaysUntilChristmas } from '../utils/storage';
+import { getActivePlayerId, getPlayers, getSantaLocation, getChristmasCountdown, getSantaAge, type ChristmasCountdown } from '../utils/storage';
 import type { Player, SantaLocation } from '../types';
 import { Avatar } from '../components/Avatar';
 import './SantaTracker.css';
@@ -9,7 +9,8 @@ export const SantaTracker = () => {
   const navigate = useNavigate();
   const [player, setPlayer] = useState<Player | null>(null);
   const [santaLocation, setSantaLocation] = useState<SantaLocation | null>(null);
-  const daysUntilChristmas = getDaysUntilChristmas();
+  const [countdown, setCountdown] = useState<ChristmasCountdown>(getChristmasCountdown());
+  const santaAge = getSantaAge();
 
   useEffect(() => {
     const playerId = getActivePlayerId();
@@ -31,11 +32,19 @@ export const SantaTracker = () => {
     setSantaLocation(getSantaLocation());
 
     // Update Santa's location every 30 seconds
-    const interval = setInterval(() => {
+    const locationInterval = setInterval(() => {
       setSantaLocation(getSantaLocation());
     }, 30000);
 
-    return () => clearInterval(interval);
+    // Update countdown every second
+    const countdownInterval = setInterval(() => {
+      setCountdown(getChristmasCountdown());
+    }, 1000);
+
+    return () => {
+      clearInterval(locationInterval);
+      clearInterval(countdownInterval);
+    };
   }, [navigate]);
 
   const handleRefresh = () => {
@@ -52,7 +61,25 @@ export const SantaTracker = () => {
         <Avatar type={player.avatarType} size="medium" />
         <div className="tracker-info">
           <h1>🎅 Track Santa!</h1>
-          <p className="countdown-mini">{daysUntilChristmas} days until Christmas</p>
+          <div className="countdown-detailed">
+            <div className="countdown-item">
+              <span className="countdown-value">{countdown.days}</span>
+              <span className="countdown-unit">days</span>
+            </div>
+            <div className="countdown-item">
+              <span className="countdown-value">{countdown.hours}</span>
+              <span className="countdown-unit">hours</span>
+            </div>
+            <div className="countdown-item">
+              <span className="countdown-value">{countdown.minutes}</span>
+              <span className="countdown-unit">mins</span>
+            </div>
+            <div className="countdown-item">
+              <span className="countdown-value">{countdown.seconds}</span>
+              <span className="countdown-unit">secs</span>
+            </div>
+          </div>
+          <p className="countdown-label">until Christmas!</p>
         </div>
       </div>
 
@@ -69,6 +96,10 @@ export const SantaTracker = () => {
       <div className="santa-facts">
         <h3>🎄 Did You Know?</h3>
         <div className="facts-grid">
+          <div className="fact-card highlight">
+            <div className="fact-icon">🎂</div>
+            <p>Santa is about {santaAge} years old! He was born as St. Nicholas around 270 AD and still loves delivering presents!</p>
+          </div>
           <div className="fact-card">
             <div className="fact-icon">🦌</div>
             <p>Santa has 9 reindeer: Dasher, Dancer, Prancer, Vixen, Comet, Cupid, Donner, Blitzen, and Rudolph!</p>
