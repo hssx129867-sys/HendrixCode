@@ -154,7 +154,8 @@ export const updateChristmasItem = (playerId: string, itemId: string, updates: P
   }
 };
 
-export const getDaysUntilChristmas = (): number => {
+// Helper function to get the time difference until Christmas
+const getTimeUntilChristmas = (): number => {
   const today = new Date();
   const currentYear = today.getFullYear();
   const christmas = new Date(currentYear, 11, 25); // December 25
@@ -164,10 +165,12 @@ export const getDaysUntilChristmas = (): number => {
     christmas.setFullYear(currentYear + 1);
   }
   
-  const diffTime = christmas.getTime() - today.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
-  return diffDays;
+  return christmas.getTime() - today.getTime();
+};
+
+export const getDaysUntilChristmas = (): number => {
+  const diffTime = getTimeUntilChristmas();
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 };
 
 // Full countdown with days, hours, minutes, and seconds
@@ -179,16 +182,7 @@ export interface ChristmasCountdown {
 }
 
 export const getChristmasCountdown = (): ChristmasCountdown => {
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const christmas = new Date(currentYear, 11, 25); // December 25
-  
-  // If Christmas has passed this year, use next year
-  if (today > christmas) {
-    christmas.setFullYear(currentYear + 1);
-  }
-  
-  const diffTime = christmas.getTime() - today.getTime();
+  const diffTime = getTimeUntilChristmas();
   
   const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
