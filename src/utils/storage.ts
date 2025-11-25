@@ -170,6 +170,41 @@ export const getDaysUntilChristmas = (): number => {
   return diffDays;
 };
 
+// Full countdown with days, hours, minutes, and seconds
+export interface ChristmasCountdown {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+export const getChristmasCountdown = (): ChristmasCountdown => {
+  const today = new Date();
+  const currentYear = today.getFullYear();
+  const christmas = new Date(currentYear, 11, 25); // December 25
+  
+  // If Christmas has passed this year, use next year
+  if (today > christmas) {
+    christmas.setFullYear(currentYear + 1);
+  }
+  
+  const diffTime = christmas.getTime() - today.getTime();
+  
+  const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+  
+  return { days, hours, minutes, seconds };
+};
+
+// Santa's age - he's been around since 270 AD (St. Nicholas)
+export const getSantaAge = (): number => {
+  const currentYear = new Date().getFullYear();
+  const santaBirthYear = 270; // St. Nicholas was born around 270 AD
+  return currentYear - santaBirthYear;
+};
+
 // Christmas Progress functions
 export const getDefaultElves = (): ElfLocation[] => {
   return [
