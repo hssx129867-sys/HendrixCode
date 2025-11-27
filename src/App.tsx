@@ -12,7 +12,9 @@ import { ChristmasIdeas } from './pages/ChristmasIdeas';
 import { FindElves } from './pages/FindElves';
 import { SecretSanta } from './pages/SecretSanta';
 import { ARGame } from './pages/ARGame';
+import { ARGamePlay } from './pages/ARGamePlay';
 import { ARDemo } from './pages/ARDemo';
+import { ARDemoPlay } from './pages/ARDemoPlay';
 import './App.css';
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
         <Route path="/game/:gameId" element={<Game />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/ar-game" element={<ARGame />} />
+        <Route path="/ar-game/play" element={<ARGamePlay />} />
         <Route path="/ar-demo" element={<ARDemo />} />
+        <Route path="/ar-demo/play" element={<ARDemoPlay />} />
         <Route path="/christmas-lab" element={<ChristmasLab />} />
         <Route path="/christmas-list" element={<ChristmasList />} />
         <Route path="/santa-tracker" element={<SantaTracker />} />

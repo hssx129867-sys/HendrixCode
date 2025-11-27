@@ -1,6 +1,6 @@
 # 🎮 Best Boys Lab - Kid-Friendly Games & Christmas Tools
 
-A fun, educational web app for kids ages 7-10 featuring logic games and Christmas tools!
+A fun, educational web app for kids ages 7-10 featuring logic games, AR experiences, and Christmas tools!
 
 ## 🌟 Features
 
@@ -12,6 +12,18 @@ A fun, educational web app for kids ages 7-10 featuring logic games and Christma
   - 🧭 **Logic Path**: Navigate a character through a grid using directional commands
   - 🧠 **Brain Rot**: Build your brain empire! Click to collect brain cells, buy buildings that generate passive income, and unlock exciting areas including the mysterious Basement!
 - **Progress Tracking**: Earn stars and track levels completed for each game
+
+### 🎯 AR Games (NEW!)
+Experience augmented reality gaming on your iPad or AR-capable device:
+- **AR Target Drop**: A full AR game featuring plane detection, target spawning, and score tracking
+  - Detect flat surfaces in your environment
+  - Place a spawn pad on any horizontal plane
+  - Tap targets to score points in real-time
+  - Touch-optimized controls for iPad
+- **AR Demo**: Simple demonstration of AR capabilities
+  - Place colorful cubes in your environment
+  - Learn about plane detection and spatial anchors
+  - Perfect for first-time AR users
 
 ### 🎄 Christmas Lab
 - **Christmas List**: Create and manage your Christmas wish list with priorities
