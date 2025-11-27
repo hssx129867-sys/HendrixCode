@@ -62,8 +62,6 @@ export const ARGame = () => {
   ];
 
   const handleLaunchGame = () => {
-    // Navigate to the actual AR game session
-    // This will be implemented when we create the AR game wrapper component
     navigate('/ar-game/play');
   };
 
@@ -79,20 +77,22 @@ export const ARGame = () => {
               AR Target Drop
             </h1>
             <p className="ar-game-hero__subtitle">
-              Experience augmented reality gaming on your iPad or AR-capable device
+              Step into the cockpit. Experience augmented reality gaming with frontier technology.
             </p>
             <div className="ar-game-hero__actions">
               <Button
                 variant="primary"
                 size="large"
                 onClick={handleLaunchGame}
+                className="ar-launch-button"
               >
-                🚀 Launch AR Game
+                🚀 Launch AR Cockpit
               </Button>
               <Button
                 variant="ghost"
                 size="large"
                 onClick={() => navigate('/ar-demo')}
+                className="ar-demo-button"
               >
                 Try AR Demo
               </Button>
@@ -103,10 +103,10 @@ export const ARGame = () => {
 
       <Container size="lg">
         <section className="ar-game-section">
-          <h2 className="ar-game-section__title">Game Features</h2>
+          <h2 className="ar-game-section__title">Cockpit Features</h2>
           <div className="ar-game-features">
             {features.map((feature, index) => (
-              <Card key={index} variant="elevated">
+              <Card key={index} variant="elevated" className="ar-feature-card">
                 <CardBody>
                   <div className="ar-game-feature">
                     <div className="ar-game-feature__icon">{feature.icon}</div>
@@ -122,7 +122,7 @@ export const ARGame = () => {
         </section>
 
         <section className="ar-game-section">
-          <h2 className="ar-game-section__title">How to Play</h2>
+          <h2 className="ar-game-section__title">Mission Briefing</h2>
           <div className="ar-game-steps">
             {howToPlay.map((item) => (
               <div key={item.step} className="ar-game-step">
@@ -137,11 +137,11 @@ export const ARGame = () => {
         </section>
 
         <section className="ar-game-section">
-          <Card variant="outlined">
+          <Card variant="outlined" className="ar-requirements-card">
             <CardBody>
               <div className="ar-game-requirements">
                 <h3 className="ar-game-requirements__title">
-                  <span>📋</span> Requirements
+                  <span>📋</span> System Requirements
                   <Button
                     variant="ghost"
                     size="small"
@@ -169,14 +169,15 @@ export const ARGame = () => {
 
         <section className="ar-game-section">
           <div className="ar-game-cta">
-            <h2>Ready to Play?</h2>
-            <p>Experience augmented reality gaming like never before</p>
+            <h2>Ready for Launch?</h2>
+            <p>Enter the frontier of augmented reality gaming</p>
             <Button
               variant="primary"
               size="large"
               onClick={handleLaunchGame}
+              className="ar-launch-button"
             >
-              🚀 Launch AR Game Now
+              🚀 Launch AR Cockpit Now
             </Button>
           </div>
         </section>
