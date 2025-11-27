@@ -1,0 +1,268 @@
+.ar-game-play {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+/* AR Viewport */
+.ar-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+/* Loading State */
+.ar-game-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+/* Error State */
+.ar-game-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  max-width: 500px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* HUD Overlay */
+.ar-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.ar-hud > * {
+  pointer-events: auto;
+}
+
+/* HUD Top Bar */
+.ar-hud-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.ar-exit-button {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px);
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.ar-exit-button:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.ar-score {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  color: white;
+  font-size: var(--text-xl);
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.ar-score-label {
+  font-size: var(--text-base);
+  opacity: 0.9;
+}
+
+.ar-score-value {
+  font-size: var(--text-2xl);
+  color: var(--accent);
+}
+
+/* HUD Center - Status Messages */
+.ar-hud-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ar-status-message {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: var(--text-lg);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  max-width: 80vw;
+}
+
+/* HUD Bottom */
+.ar-hud-bottom {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+}
+
+.ar-hud-bottom button {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Pause Menu */
+.ar-pause-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  min-width: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.ar-pause-menu h2 {
+  color: white;
+  font-size: var(--text-3xl);
+  margin-bottom: 2rem;
+}
+
+.ar-pause-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Game Over */
+.ar-game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  min-width: 320px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.ar-game-over h2 {
+  color: white;
+  font-size: var(--text-3xl);
+  margin-bottom: 1.5rem;
+}
+
+.ar-final-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.ar-final-score span:first-child {
+  font-size: var(--text-lg);
+  opacity: 0.8;
+}
+
+.score-large {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: 0 2px 8px rgba(255, 230, 109, 0.5);
+}
+
+.ar-game-over-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .ar-hud-top {
+    padding: 0.75rem;
+  }
+
+  .ar-score {
+    padding: 0.5rem 1rem;
+    font-size: var(--text-base);
+  }
+
+  .ar-score-value {
+    font-size: var(--text-xl);
+  }
+
+  .ar-status-message {
+    font-size: var(--text-base);
+    padding: 0.75rem 1.5rem;
+  }
+
+  .ar-pause-menu,
+  .ar-game-over {
+    padding: 2rem;
+    min-width: 280px;
+  }
+
+  .ar-pause-menu h2,
+  .ar-game-over h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .score-large {
+    font-size: 3rem;
+  }
+}
+
+/* iPad Landscape Optimization */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .ar-hud-top {
+    padding: 1.5rem 2rem;
+  }
+
+  .ar-status-message {
+    max-width: 600px;
+  }
+}

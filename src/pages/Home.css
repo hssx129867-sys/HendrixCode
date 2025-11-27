@@ -23,7 +23,7 @@
 
 .sections-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin: 3rem 0;
 }
@@ -85,8 +85,12 @@
   background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
 }
 
+.ar-zone {
+  background: linear-gradient(135deg, #a8e6cf 0%, #4ecdc4 100%);
+}
+
 .christmas-zone {
-  background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+  background: linear-gradient(135deg, #ffd5cd 0%, #ffa69e 100%);
 }
 
 .christmas-countdown {
