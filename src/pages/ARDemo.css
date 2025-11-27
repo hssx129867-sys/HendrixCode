@@ -1,0 +1,232 @@
+.ar-demo-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+}
+
+/* Hero Section */
+.ar-demo-hero {
+  padding: 3rem 0;
+  text-align: center;
+  color: white;
+}
+
+.ar-demo-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.ar-demo-hero__title {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ar-demo-hero__icon {
+  font-size: 3.5rem;
+  animation: rotate 4s linear infinite;
+}
+
+.ar-demo-hero__subtitle {
+  font-size: var(--text-lg);
+  margin: 0;
+  opacity: 0.95;
+  max-width: 500px;
+}
+
+.ar-demo-hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Sections */
+.ar-demo-section {
+  padding: 2rem 0;
+}
+
+/* Info */
+.ar-demo-info {
+  padding: 1rem;
+}
+
+.ar-demo-info__title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.ar-demo-info__list {
+  list-style: none;
+  counter-reset: demo-counter;
+  padding: 0;
+  margin: 0;
+}
+
+.ar-demo-info__list li {
+  counter-increment: demo-counter;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 1.5rem;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.ar-demo-info__list li::before {
+  content: counter(demo-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+/* Features */
+.ar-demo-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.ar-demo-feature {
+  background: var(--surface);
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.ar-demo-feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ar-demo-feature__icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ar-demo-feature h3 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.ar-demo-feature p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* CTA */
+.ar-demo-cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ar-demo-cta h2 {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.ar-demo-cta p {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Tips */
+.ar-demo-tips {
+  padding: 1rem;
+}
+
+.ar-demo-tips h3 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.ar-demo-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ar-demo-tips li {
+  padding: 0.75rem 0 0.75rem 2rem;
+  position: relative;
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.ar-demo-tips li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+  font-size: var(--text-lg);
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .ar-demo-hero {
+    padding: 2rem 0;
+  }
+
+  .ar-demo-hero__title {
+    font-size: var(--text-2xl);
+  }
+
+  .ar-demo-hero__icon {
+    font-size: 2rem;
+  }
+
+  .ar-demo-hero__subtitle {
+    font-size: var(--text-base);
+  }
+
+  .ar-demo-features {
+    grid-template-columns: 1fr;
+  }
+}

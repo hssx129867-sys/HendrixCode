@@ -11,6 +11,8 @@ import { ChristmasJokes } from './pages/ChristmasJokes';
 import { ChristmasIdeas } from './pages/ChristmasIdeas';
 import { FindElves } from './pages/FindElves';
 import { SecretSanta } from './pages/SecretSanta';
+import { ARGame } from './pages/ARGame';
+import { ARDemo } from './pages/ARDemo';
 import './App.css';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path="/play" element={<Play />} />
         <Route path="/game/:gameId" element={<Game />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/ar-game" element={<ARGame />} />
+        <Route path="/ar-demo" element={<ARDemo />} />
         <Route path="/christmas-lab" element={<ChristmasLab />} />
         <Route path="/christmas-list" element={<ChristmasList />} />
         <Route path="/santa-tracker" element={<SantaTracker />} />

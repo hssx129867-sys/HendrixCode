@@ -1,0 +1,60 @@
+.ui-card {
+  background: var(--surface);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+/* Variants */
+.ui-card--default {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ui-card--elevated {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.ui-card--outlined {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+}
+
+/* Clickable state */
+.ui-card--clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.ui-card--clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ui-card--clickable:active {
+  transform: translateY(0);
+}
+
+/* Card sections */
+.ui-card__header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ui-card__body {
+  padding: 1.5rem;
+}
+
+.ui-card__footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ui-card__header,
+  .ui-card__body,
+  .ui-card__footer {
+    padding: 1rem;
+  }
+}

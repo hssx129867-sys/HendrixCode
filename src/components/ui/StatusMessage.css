@@ -1,0 +1,72 @@
+.ui-status-message {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-size: var(--text-base);
+  animation: slideIn 0.3s ease;
+}
+
+.ui-status-message__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.ui-status-message__content {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.ui-status-message__close {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin: -0.25rem;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.ui-status-message__close:hover {
+  opacity: 1;
+}
+
+/* Type variants */
+.ui-status-message--info {
+  background-color: rgba(66, 153, 225, 0.1);
+  border: 1px solid rgba(66, 153, 225, 0.3);
+  color: #2c5282;
+}
+
+.ui-status-message--success {
+  background-color: rgba(72, 187, 120, 0.1);
+  border: 1px solid rgba(72, 187, 120, 0.3);
+  color: #22543d;
+}
+
+.ui-status-message--warning {
+  background-color: rgba(237, 137, 54, 0.1);
+  border: 1px solid rgba(237, 137, 54, 0.3);
+  color: #7c2d12;
+}
+
+.ui-status-message--error {
+  background-color: rgba(245, 101, 101, 0.1);
+  border: 1px solid rgba(245, 101, 101, 0.3);
+  color: #742a2a;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

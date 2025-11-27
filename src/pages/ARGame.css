@@ -1,0 +1,262 @@
+.ar-game-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Hero Section */
+.ar-game-hero {
+  padding: 3rem 0;
+  text-align: center;
+  color: white;
+}
+
+.ar-game-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.ar-game-hero__title {
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ar-game-hero__icon {
+  font-size: 4rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.ar-game-hero__subtitle {
+  font-size: var(--text-xl);
+  margin: 0;
+  opacity: 0.95;
+  max-width: 600px;
+}
+
+.ar-game-hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Sections */
+.ar-game-section {
+  padding: 3rem 0;
+}
+
+.ar-game-section__title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+/* Features Grid */
+.ar-game-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.ar-game-feature {
+  text-align: center;
+  padding: 1rem;
+}
+
+.ar-game-feature__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.ar-game-feature__title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.ar-game-feature__description {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* How to Play Steps */
+.ar-game-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ar-game-step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ar-game-step__number {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+  font-weight: 700;
+}
+
+.ar-game-step__content {
+  flex: 1;
+}
+
+.ar-game-step__title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.ar-game-step__description {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Requirements */
+.ar-game-requirements {
+  text-align: center;
+}
+
+.ar-game-requirements__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.ar-game-requirements__list {
+  list-style: none;
+  text-align: left;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  padding: 0;
+}
+
+.ar-game-requirement {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  font-size: var(--text-base);
+  color: var(--text-primary);
+}
+
+.ar-game-requirement__icon {
+  font-size: 1.25rem;
+}
+
+/* CTA Section */
+.ar-game-cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ar-game-cta h2 {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.ar-game-cta p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .ar-game-hero {
+    padding: 2rem 0;
+  }
+
+  .ar-game-hero__title {
+    font-size: var(--text-3xl);
+  }
+
+  .ar-game-hero__icon {
+    font-size: 2.5rem;
+  }
+
+  .ar-game-hero__subtitle {
+    font-size: var(--text-base);
+  }
+
+  .ar-game-section {
+    padding: 2rem 0;
+  }
+
+  .ar-game-section__title {
+    font-size: var(--text-2xl);
+  }
+
+  .ar-game-features {
+    grid-template-columns: 1fr;
+  }
+
+  .ar-game-step {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ar-game-step__number {
+    margin: 0 auto;
+  }
+}
+
+/* iPad Landscape Optimization */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .ar-game-hero__title {
+    font-size: var(--text-4xl);
+  }
+
+  .ar-game-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
