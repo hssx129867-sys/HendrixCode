@@ -1,13 +1,57 @@
 .ar-game-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0a1f35 0%, #1a0f2e 50%, #0f1419 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Add subtle animated background pattern */
+.ar-game-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 255, 136, 0.03) 0px,
+      transparent 2px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 136, 0.03) 0px,
+      transparent 2px,
+      transparent 40px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ar-game-page > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Hero Section */
 .ar-game-hero {
   padding: 3rem 0;
   text-align: center;
-  color: white;
+  color: #00ff88;
+  position: relative;
+}
+
+.ar-game-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #00ff88 50%, transparent 100%);
+  opacity: 0.3;
 }
 
 .ar-game-hero__content {
@@ -26,18 +70,24 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
 }
 
 .ar-game-hero__icon {
   font-size: 4rem;
   animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.6));
 }
 
 .ar-game-hero__subtitle {
   font-size: var(--text-xl);
   margin: 0;
-  opacity: 0.95;
+  opacity: 0.9;
   max-width: 600px;
+  line-height: 1.6;
+  color: #a0ffd0;
 }
 
 .ar-game-hero__actions {
@@ -45,6 +95,39 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+/* Cockpit-themed buttons */
+.ar-launch-button {
+  background: rgba(0, 255, 136, 0.2) !important;
+  border: 2px solid #00ff88 !important;
+  color: #00ff88 !important;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 136, 0.3),
+    inset 0 0 15px rgba(0, 255, 136, 0.1) !important;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.ar-launch-button:hover {
+  background: rgba(0, 255, 136, 0.3) !important;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 136, 0.5),
+    inset 0 0 20px rgba(0, 255, 136, 0.2) !important;
+  transform: translateY(-2px);
+}
+
+.ar-demo-button {
+  border-color: rgba(0, 255, 136, 0.5) !important;
+  color: #00ff88 !important;
+  background: rgba(0, 20, 40, 0.3) !important;
+}
+
+.ar-demo-button:hover {
+  border-color: #00ff88 !important;
+  background: rgba(0, 255, 136, 0.1) !important;
 }
 
 /* Sections */
@@ -57,7 +140,11 @@
   font-weight: 700;
   text-align: center;
   margin-bottom: 2rem;
-  color: white;
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  text-transform: uppercase;
 }
 
 /* Features Grid */
@@ -65,6 +152,24 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
+}
+
+.ar-feature-card {
+  background: rgba(0, 20, 40, 0.6) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(0, 255, 136, 0.05) !important;
+  transition: all 0.3s ease !important;
+}
+
+.ar-feature-card:hover {
+  border-color: rgba(0, 255, 136, 0.6) !important;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 255, 136, 0.2),
+    inset 0 0 25px rgba(0, 255, 136, 0.1) !important;
+  transform: translateY(-4px);
 }
 
 .ar-game-feature {
@@ -75,22 +180,24 @@
 .ar-game-feature__icon {
   font-size: 3rem;
   margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.4));
 }
 
 .ar-game-feature__title {
   font-size: var(--text-xl);
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
 }
 
 .ar-game-feature__description {
   font-size: var(--text-base);
-  color: var(--text-secondary);
+  color: #a0ffd0;
   line-height: 1.6;
 }
 
-/* How to Play Steps */
+/* Mission Briefing Steps */
 .ar-game-steps {
   display: flex;
   flex-direction: column;
@@ -104,9 +211,21 @@
   gap: 1.5rem;
   align-items: flex-start;
   padding: 1.5rem;
-  background: var(--surface);
+  background: rgba(0, 20, 40, 0.5);
+  border: 1px solid rgba(0, 255, 136, 0.3);
   border-radius: var(--radius-lg);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 0 15px rgba(0, 255, 136, 0.05);
+  transition: all 0.3s ease;
+}
+
+.ar-game-step:hover {
+  border-color: rgba(0, 255, 136, 0.5);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 255, 136, 0.2),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
 }
 
 .ar-game-step__number {
@@ -114,13 +233,18 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  background: rgba(0, 255, 136, 0.2);
+  border: 2px solid #00ff88;
+  color: #00ff88;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--text-xl);
   font-weight: 700;
+  font-family: 'Courier New', monospace;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 136, 0.3),
+    inset 0 0 10px rgba(0, 255, 136, 0.2);
 }
 
 .ar-game-step__content {
@@ -131,17 +255,26 @@
   font-size: var(--text-xl);
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
 }
 
 .ar-game-step__description {
   font-size: var(--text-base);
-  color: var(--text-secondary);
+  color: #a0ffd0;
   line-height: 1.6;
   margin: 0;
 }
 
-/* Requirements */
+/* Requirements Card */
+.ar-requirements-card {
+  background: rgba(0, 20, 40, 0.5) !important;
+  border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 0 15px rgba(0, 255, 136, 0.05) !important;
+}
+
 .ar-game-requirements {
   text-align: center;
 }
@@ -154,7 +287,8 @@
   font-size: var(--text-xl);
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
 }
 
 .ar-game-requirements__list {
@@ -171,7 +305,7 @@
   gap: 0.75rem;
   padding: 0.75rem;
   font-size: var(--text-base);
-  color: var(--text-primary);
+  color: #a0ffd0;
 }
 
 .ar-game-requirement__icon {
@@ -182,21 +316,27 @@
 .ar-game-cta {
   text-align: center;
   padding: 3rem 2rem;
-  background: var(--surface);
+  background: rgba(0, 20, 40, 0.6);
+  border: 2px solid rgba(0, 255, 136, 0.3);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 255, 136, 0.2),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
 }
 
 .ar-game-cta h2 {
   font-size: var(--text-3xl);
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
 }
 
 .ar-game-cta p {
   font-size: var(--text-lg);
-  color: var(--text-secondary);
+  color: #a0ffd0;
   margin-bottom: 2rem;
 }
 
