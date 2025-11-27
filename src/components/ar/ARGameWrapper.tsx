@@ -141,6 +141,8 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
   // Handle exit with confirmation
   const handleExit = () => {
     if (gameState === 'playing' || gameState === 'paused') {
+      // TODO: Replace with custom cockpit-themed modal dialog
+      // For now, using browser confirm for minimal implementation
       if (window.confirm('Are you sure you want to exit? Your progress will be lost.')) {
         onExit();
       }

@@ -56,7 +56,9 @@ export class MockARGame implements MockARGameSession {
     // Check if WebXR is available
     if ('xr' in navigator) {
       try {
-        const supported = await (navigator as any).xr?.isSessionSupported('immersive-ar');
+        // Type assertion for WebXR navigator extension
+        const xr = (navigator as Navigator & { xr?: { isSessionSupported: (mode: string) => Promise<boolean> } }).xr;
+        const supported = await xr?.isSessionSupported('immersive-ar');
         if (supported) {
           console.log('[MockARGame] WebXR AR is supported!');
         } else {

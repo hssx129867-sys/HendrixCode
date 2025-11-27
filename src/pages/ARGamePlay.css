@@ -82,7 +82,7 @@
   z-index: 100;
 }
 
-/* Error State (non-AR-supported) */
+/* Error State - for non-AR-supported devices */
 .ar-game-error {
   position: absolute;
   top: 50%;
