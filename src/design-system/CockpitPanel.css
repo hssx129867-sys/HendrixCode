@@ -1,0 +1,111 @@
+/* Cockpit Panel - HUD Style */
+
+.cockpit-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--cockpit-dark);
+  border: 2px solid var(--cockpit-green);
+  border-radius: var(--radius-lg);
+  color: var(--cockpit-green);
+  font-family: var(--cockpit-font);
+  overflow: hidden;
+  box-shadow: 
+    var(--cockpit-glow-md),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+  backdrop-filter: blur(15px);
+}
+
+/* Variants */
+.cockpit-panel--elevated {
+  background: var(--cockpit-darker);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    var(--cockpit-glow-md),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.cockpit-panel--outlined {
+  background: rgba(0, 20, 40, 0.6);
+  border: 1px solid var(--cockpit-green-dim);
+  box-shadow: 
+    0 0 15px rgba(0, 255, 136, 0.2),
+    inset 0 0 10px rgba(0, 255, 136, 0.05);
+}
+
+/* Glow modifier */
+.cockpit-panel--glow {
+  box-shadow: 
+    var(--cockpit-glow-lg),
+    inset 0 0 25px rgba(0, 255, 136, 0.15);
+}
+
+/* Pulse animation */
+.cockpit-panel--pulse {
+  animation: panel-pulse 2s ease-in-out infinite;
+}
+
+@keyframes panel-pulse {
+  0%, 100% {
+    box-shadow: 
+      var(--cockpit-glow-md),
+      inset 0 0 20px rgba(0, 255, 136, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(0, 255, 136, 0.6),
+      inset 0 0 25px rgba(0, 255, 136, 0.15);
+  }
+}
+
+/* Panel sections */
+.cockpit-panel__header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--cockpit-green-dim);
+  font-size: var(--text-lg);
+  font-weight: bold;
+  letter-spacing: var(--cockpit-letter-spacing);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.cockpit-panel__body {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.cockpit-panel__footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--cockpit-green-dim);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .cockpit-panel__header {
+    padding: 0.75rem 1rem;
+    font-size: var(--text-base);
+  }
+
+  .cockpit-panel__body {
+    padding: 1rem;
+  }
+
+  .cockpit-panel__footer {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cockpit-panel--pulse {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .cockpit-panel {
+    border-width: 3px;
+  }
+}

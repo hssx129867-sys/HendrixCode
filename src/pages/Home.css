@@ -1,44 +1,144 @@
-.home-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  text-align: center;
+/* Home Page - Cockpit Theme */
+
+.home-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0a1f35 0%, #1a0f2e 50%, #0f1419 100%);
+  position: relative;
+  overflow-x: hidden;
+  color: var(--cockpit-green);
+  font-family: var(--cockpit-font);
 }
 
-.home-title {
-  font-size: 3.5rem;
-  margin-bottom: 10px;
-  color: white;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+/* Animated grid background */
+.home-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 255, 136, 0.03) 0px,
+      transparent 2px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 136, 0.03) 0px,
+      transparent 2px,
+      transparent 40px
+    );
+  pointer-events: none;
+  z-index: 0;
 }
 
-.home-tagline {
-  font-size: 1.5rem;
-  color: white;
-  margin-bottom: 40px;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+.home-page > * {
+  position: relative;
+  z-index: 1;
 }
 
-.sections-container {
+/* Hero Section */
+.home-hero {
+  padding: 4rem 0 3rem;
+  text-align: center;
+  position: relative;
+}
+
+.home-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--cockpit-green) 50%, transparent 100%);
+  opacity: 0.3;
+}
+
+.home-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.home-hero__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+  letter-spacing: var(--cockpit-letter-spacing);
+}
+
+.home-hero__icon {
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.6));
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.home-hero__subtitle {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  margin: 0;
+  opacity: 0.9;
+  max-width: 700px;
+  line-height: 1.6;
+  color: var(--cockpit-green-light);
+  letter-spacing: 1px;
+}
+
+/* Sections Grid */
+.home-sections {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: 2rem;
-  margin: 3rem 0;
+  padding: 3rem 0;
 }
 
-.section-card {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+@media (min-width: 768px) {
+  .home-sections {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.section-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+@media (min-width: 1024px) {
+  .home-sections {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Section Styling */
+.home-section {
+  transition: transform 0.3s ease;
+}
+
+.home-section:hover {
+  transform: translateY(-4px);
+}
+
+.home-section--primary {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .home-section--primary {
+    grid-column: span 3;
+  }
 }
 
 .section-header {
@@ -47,23 +147,38 @@
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .section-icon {
-  font-size: 3rem;
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.6));
 }
 
-.section-card h2 {
-  font-size: 2rem;
-  color: #2d3748;
+.section-title {
+  font-size: var(--text-2xl);
+  font-weight: bold;
   margin: 0;
+  letter-spacing: var(--cockpit-letter-spacing);
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.section-badge {
+  font-size: var(--text-xs);
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 255, 136, 0.2);
+  border: 1px solid var(--cockpit-green);
+  border-radius: 4px;
+  letter-spacing: 1px;
 }
 
 .section-description {
-  font-size: 1.2rem;
-  color: #4a5568;
-  margin: 1rem 0 1.5rem;
+  font-size: var(--text-base);
   line-height: 1.6;
+  margin: 1rem 0;
+  text-align: center;
+  color: var(--cockpit-green-light);
+  opacity: 0.9;
 }
 
 .section-features {
@@ -75,114 +190,135 @@
 
 .feature {
   padding: 0.5rem 1rem;
-  background: #f7fafc;
-  border-radius: 10px;
-  color: #2d3748;
-  font-size: 1.1rem;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--cockpit-green-dim);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  text-align: center;
+  letter-spacing: 1px;
 }
 
-.game-zone {
-  background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+.section-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.ar-zone {
-  background: linear-gradient(135deg, #a8e6cf 0%, #4ecdc4 100%);
-}
-
-.christmas-zone {
-  background: linear-gradient(135deg, #ffd5cd 0%, #ffa69e 100%);
-}
-
+/* Christmas Countdown */
 .christmas-countdown {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  padding: 1rem 1.5rem;
-  border-radius: 15px;
-  color: white;
+  gap: 0.5rem;
+  background: rgba(0, 255, 136, 0.15);
+  border: 2px solid var(--cockpit-green);
+  padding: 1rem;
+  border-radius: var(--radius-md);
   margin: 1rem 0;
+  box-shadow: var(--cockpit-glow-sm);
 }
 
 .countdown-days {
   font-size: 2.5rem;
   font-weight: bold;
   line-height: 1;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
 }
 
 .countdown-label {
-  font-size: 1.1rem;
+  font-size: var(--text-sm);
   font-weight: bold;
+  letter-spacing: 2px;
+  opacity: 0.9;
 }
 
-.featured-players {
-  margin: 40px 0;
-  padding: 2rem;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+/* Pilots Section */
+.home-pilots {
+  padding: 3rem 0;
+  text-align: center;
 }
 
-.featured-players h2 {
-  font-size: 2rem;
-  color: #2d3748;
-  margin-bottom: 30px;
+.pilots-title {
+  font-size: var(--text-2xl);
+  font-weight: bold;
+  margin-bottom: 2rem;
+  letter-spacing: var(--cockpit-letter-spacing);
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
 }
 
-.player-cards {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+.pilots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.featured-card {
-  padding: 20px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  min-width: 150px;
+.pilot-card {
+  text-align: center;
   transition: transform 0.3s ease;
 }
 
-.featured-card:hover {
+.pilot-card:hover {
   transform: scale(1.05);
 }
 
-.player-name {
-  font-size: 1.3rem;
+.pilot-name {
+  font-size: var(--text-base);
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 1rem;
+  letter-spacing: 1px;
 }
 
-@media (max-width: 768px) {
-  .home-title {
-    font-size: 2.5rem;
-  }
+/* Footer */
+.home-footer {
+  padding: 3rem 0 2rem;
+  text-align: center;
+  border-top: 1px solid var(--cockpit-green-dim);
+  margin-top: 3rem;
+}
 
-  .home-tagline {
-    font-size: 1.2rem;
-  }
+.home-footer__text {
+  font-size: var(--text-sm);
+  opacity: 0.7;
+  letter-spacing: 2px;
+  margin: 0;
+}
 
-  .sections-container {
-    grid-template-columns: 1fr;
+/* Responsive */
+@media (max-width: 640px) {
+  .home-hero {
+    padding: 2rem 0 1.5rem;
   }
 
   .section-icon {
     font-size: 2rem;
   }
 
-  .section-card h2 {
-    font-size: 1.5rem;
+  .section-title {
+    font-size: var(--text-xl);
   }
 
   .countdown-days {
     font-size: 2rem;
   }
 
-  .countdown-label {
-    font-size: 0.9rem;
+  .pilots-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 }
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__icon {
+    animation: none;
+  }
+
+  .home-section {
+    transition: none;
+  }
+}
+

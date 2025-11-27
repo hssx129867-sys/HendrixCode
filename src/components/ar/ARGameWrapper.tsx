@@ -18,6 +18,46 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
   const [statusMessage, setStatusMessage] = useState('Initializing AR session...');
   const [showControls, setShowControls] = useState(true);
 
+  // Game render loop
+  const startRenderLoop = useCallback(() => {
+    const loop = (time: number) => {
+      if (!gameRef.current) return;
+
+      const deltaTime = lastTimeRef.current === 0 ? 0 : (time - lastTimeRef.current) / 1000;
+      lastTimeRef.current = time;
+
+      // Update game
+      gameRef.current.update(deltaTime);
+
+      // Update UI from game state
+      const state = gameRef.current.getGameState();
+      const currentScore = gameRef.current.getScore();
+
+      setGameState(state.currentState as ARGameState);
+      setScore(currentScore);
+
+      // Update status messages based on state
+      switch (state.currentState) {
+        case 'placing':
+          setStatusMessage('Tap on a detected surface to place your spawn pad');
+          break;
+        case 'playing':
+          setStatusMessage('Tap targets to score points!');
+          break;
+        case 'paused':
+          setStatusMessage('Game Paused');
+          break;
+        case 'game_over':
+          setStatusMessage(`Game Over! Final Score: ${currentScore}`);
+          break;
+      }
+
+      animationFrameRef.current = requestAnimationFrame(loop);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(loop);
+  }, []);
+
   // Initialize the AR game
   useEffect(() => {
     let mounted = true;
@@ -69,47 +109,7 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
         gameRef.current.stop();
       }
     };
-  }, [onError]);
-
-  // Game render loop
-  const startRenderLoop = useCallback(() => {
-    const loop = (time: number) => {
-      if (!gameRef.current) return;
-
-      const deltaTime = lastTimeRef.current === 0 ? 0 : (time - lastTimeRef.current) / 1000;
-      lastTimeRef.current = time;
-
-      // Update game
-      gameRef.current.update(deltaTime);
-
-      // Update UI from game state
-      const state = gameRef.current.getGameState();
-      const currentScore = gameRef.current.getScore();
-
-      setGameState(state.currentState as ARGameState);
-      setScore(currentScore);
-
-      // Update status messages based on state
-      switch (state.currentState) {
-        case 'placing':
-          setStatusMessage('Tap on a detected surface to place your spawn pad');
-          break;
-        case 'playing':
-          setStatusMessage('Tap targets to score points!');
-          break;
-        case 'paused':
-          setStatusMessage('Game Paused');
-          break;
-        case 'game_over':
-          setStatusMessage(`Game Over! Final Score: ${currentScore}`);
-          break;
-      }
-
-      animationFrameRef.current = requestAnimationFrame(loop);
-    };
-
-    animationFrameRef.current = requestAnimationFrame(loop);
-  }, []);
+  }, [onError, startRenderLoop]);
 
   // Handle pause/resume
   const handlePause = () => {

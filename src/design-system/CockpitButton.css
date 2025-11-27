@@ -1,0 +1,139 @@
+/* Cockpit Button - Frontier Theme */
+
+.cockpit-button {
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--cockpit-font);
+  font-weight: bold;
+  color: var(--cockpit-green);
+  background: var(--cockpit-dark);
+  border: 2px solid var(--cockpit-green);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  box-shadow: 
+    var(--cockpit-glow-sm),
+    inset 0 0 10px rgba(0, 255, 136, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.cockpit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.cockpit-button:focus-visible {
+  outline: 2px solid var(--cockpit-green);
+  outline-offset: 2px;
+}
+
+.cockpit-button:hover:not(:disabled) {
+  background: rgba(0, 255, 136, 0.2);
+  border-color: var(--cockpit-green-light);
+  box-shadow: 
+    0 0 25px rgba(0, 255, 136, 0.4),
+    inset 0 0 15px rgba(0, 255, 136, 0.2);
+  transform: translateY(-2px);
+}
+
+.cockpit-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 
+    var(--cockpit-glow-sm),
+    inset 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+/* Variants */
+.cockpit-button--primary {
+  background: rgba(0, 255, 136, 0.2);
+  border-color: var(--cockpit-green-light);
+  box-shadow: 
+    var(--cockpit-glow-md),
+    inset 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.cockpit-button--primary:hover:not(:disabled) {
+  background: rgba(0, 255, 136, 0.3);
+  box-shadow: 
+    var(--cockpit-glow-lg),
+    inset 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.cockpit-button--danger {
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+  box-shadow: 
+    0 0 15px rgba(255, 107, 107, 0.2),
+    inset 0 0 10px rgba(255, 107, 107, 0.1);
+}
+
+.cockpit-button--danger:hover:not(:disabled) {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: #ff8a8a;
+  box-shadow: 
+    0 0 25px rgba(255, 107, 107, 0.4),
+    inset 0 0 15px rgba(255, 107, 107, 0.2);
+}
+
+/* Sizes */
+.cockpit-button--small {
+  padding: 0.5rem 1rem;
+  font-size: var(--text-sm);
+  min-height: 36px;
+}
+
+.cockpit-button--medium {
+  padding: 0.75rem 1.5rem;
+  font-size: var(--text-base);
+  min-height: 44px;
+}
+
+.cockpit-button--large {
+  padding: 1rem 2rem;
+  font-size: var(--text-lg);
+  min-height: 56px;
+}
+
+/* Full width */
+.cockpit-button--full {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .cockpit-button--small {
+    min-height: 40px;
+  }
+  
+  .cockpit-button--medium {
+    min-height: 48px;
+  }
+  
+  .cockpit-button--large {
+    min-height: 60px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cockpit-button {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .cockpit-button {
+    border-width: 3px;
+  }
+}
