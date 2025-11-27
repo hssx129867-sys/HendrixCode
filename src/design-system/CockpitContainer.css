@@ -1,0 +1,48 @@
+/* Cockpit Container */
+
+.cockpit-container {
+  width: 100%;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+.cockpit-container--centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Size variants */
+.cockpit-container--sm {
+  max-width: 640px;
+}
+
+.cockpit-container--md {
+  max-width: 768px;
+}
+
+.cockpit-container--lg {
+  max-width: 1024px;
+}
+
+.cockpit-container--xl {
+  max-width: 1280px;
+}
+
+.cockpit-container--full {
+  max-width: 100%;
+}
+
+/* Responsive padding */
+@media (min-width: 640px) {
+  .cockpit-container {
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cockpit-container {
+    padding-left: var(--spacing-xl);
+    padding-right: var(--spacing-xl);
+  }
+}

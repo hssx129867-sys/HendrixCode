@@ -349,6 +349,126 @@ See `tests/` directory for test implementations.
 - `tsconfig.ar.json`: AR engine and game code
 - Note: Full AR engine integration requires resolving module resolution between configs
 
+## AR Game Routes and Entry Points
+
+### Route Structure
+
+The AR game experience is implemented across multiple routes in the React application:
+
+**Primary Routes:**
+- `/ar-game` - AR Target Drop landing page (info and launch)
+- `/ar-game/play` - AR game session (active gameplay)
+- `/ar-demo` - Simple AR demo (cube placement)
+- `/ar-demo/play` - AR demo session
+
+### AR Game Flow
+
+```
+User Journey:
+1. Home Page (/) → Navigate to AR Games section
+2. AR Game Landing (/ar-game) → View features, requirements, how-to-play
+3. Click "Launch AR Cockpit" → Navigate to /ar-game/play
+4. AR Session Initialization:
+   - Check WebXR/AR support
+   - Request camera permissions
+   - Initialize AR session (MockARGame or full ARTargetDrop)
+5. Gameplay States:
+   - INITIALIZING → Loading AR subsystems
+   - PLACING → Tap to place spawn pad on detected surface
+   - PLAYING → Tap targets to score points
+   - PAUSED → Game paused by user
+   - GAME_OVER → Session complete, show final score
+6. Exit → Returns to /ar-game landing page
+```
+
+### Implementation Details
+
+**AR Game Landing Page** (`src/pages/ARGame.tsx`):
+- Entry point explaining the game and requirements
+- Uses cockpit-themed components from the design system
+- Shows features, mission briefing, and system requirements
+- Primary CTA: "Launch AR Cockpit" button
+- No AR initialization happens here (lazy loading)
+
+**AR Game Session** (`src/pages/ARGamePlay.tsx`):
+- Initializes AR session via `ARGameWrapper` component
+- Handles errors and shows fallback UI for unsupported devices
+- Provides exit route back to landing page
+- Manages game state and error boundaries
+
+**AR Game Wrapper** (`src/components/ar/ARGameWrapper.tsx`):
+- Core game UI component with cockpit HUD
+- Creates and manages `MockARGame` instance
+- Implements render loop with requestAnimationFrame
+- Updates UI based on game state
+- Provides pause/resume/restart controls
+- Handles cleanup on unmount
+
+**Mock AR Game** (`src/components/ar/MockARGame.ts`):
+- Simplified AR game implementation for demonstration
+- Simulates AR session lifecycle (initialize → start → play)
+- Auto-places spawn pad after 3 seconds
+- Auto-scores points every 2 seconds
+- Game over after 20 targets
+- Full implementation at `src/samples/ar-mini-game/ARTargetDrop.ts` (requires WebXR types)
+
+### Known AR Failure Modes and Fixes
+
+**Current Implementation Status:**
+- ✅ Mock AR game works in all browsers
+- ✅ Cockpit HUD theme fully implemented
+- ✅ Game state management working
+- ⚠️ WebXR integration pending (requires type resolution)
+
+**Potential Production Issues:**
+1. **WebXR Not Supported**
+   - Detection: Check `navigator.xr.isSessionSupported('immersive-ar')`
+   - Fallback: Show clear error message with device requirements
+   - Fixed: Implemented in `ARGamePlay.tsx` error handling
+
+2. **Camera Permission Denied**
+   - Detection: Catch error during AR session start
+   - Fallback: Show instructions to enable camera in browser settings
+   - Fixed: Error boundary in `ARGameWrapper`
+
+3. **AR Session Failed to Initialize**
+   - Detection: Try/catch around `arSession.start()`
+   - Fallback: "Retry" button and error diagnostics
+   - Fixed: Retry mechanism in error UI
+
+4. **Re-render Issues**
+   - Problem: Multiple AR sessions or leaked resources
+   - Solution: Cleanup in useEffect return, single game instance
+   - Fixed: Proper cleanup in `ARGameWrapper.tsx`
+
+5. **Route Changes During Session**
+   - Problem: AR session not properly stopped
+   - Solution: Stop session in component unmount
+   - Fixed: Cleanup in useEffect
+
+### AR Game Architecture Integration
+
+The AR game is built on the foundation architecture but uses a simplified approach for the web:
+
+**Full AR Engine** (Future):
+- Uses full ECS from `src/core/ecs/`
+- Platform adapters via `src/platform/ARSessionFactory.ts`
+- Complete physics and spawn systems
+- Located at `src/samples/ar-mini-game/ARTargetDrop.ts`
+
+**Current Mock Implementation**:
+- Simplified state management (no full ECS)
+- Simulated AR session (no WebXR calls)
+- Auto-gameplay for demonstration
+- Focus on UI/UX and cockpit theme
+
+**Migration Path**:
+1. Resolve TypeScript module resolution issues
+2. Add WebXR type definitions
+3. Integrate full ARTargetDrop class
+4. Enable real plane detection and hit testing
+5. Switch from MockARGame to full implementation
+
 ## Conclusion
 
 This architecture provides a solid foundation for AR game development with:
@@ -359,3 +479,5 @@ This architecture provides a solid foundation for AR game development with:
 - Extensibility
 
 The modular design allows teams to work independently on different layers while maintaining system coherence.
+
+The AR game routes provide a clear user journey from landing page through gameplay, with proper error handling and fallbacks for devices that don't support WebXR.

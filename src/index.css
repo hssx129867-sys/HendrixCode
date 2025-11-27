@@ -57,6 +57,19 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
 
+  /* Cockpit Theme Tokens */
+  --cockpit-green: #00ff88;
+  --cockpit-green-light: #a0ffd0;
+  --cockpit-green-dim: rgba(0, 255, 136, 0.3);
+  --cockpit-dark: rgba(0, 20, 40, 0.85);
+  --cockpit-darker: rgba(0, 10, 20, 0.95);
+  --cockpit-black: #0a0a0a;
+  --cockpit-glow-sm: 0 0 10px rgba(0, 255, 136, 0.3);
+  --cockpit-glow-md: 0 0 20px rgba(0, 255, 136, 0.4);
+  --cockpit-glow-lg: 0 0 30px rgba(0, 255, 136, 0.5);
+  --cockpit-font: 'Courier New', monospace;
+  --cockpit-letter-spacing: 2px;
+
   font-family: var(--font-family);
   line-height: 1.6;
   font-weight: 400;
