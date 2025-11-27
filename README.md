@@ -113,13 +113,48 @@ More players can be added with custom names, colors, and avatars!
 
 ## 🚀 Deployment
 
-This app is designed to deploy seamlessly to Vercel:
+This app is designed to deploy seamlessly to **Vercel**.
 
-1. Import the repository in Vercel
-2. Vercel will auto-detect the Vite configuration
-3. Deploy with default settings
+### Quick Deploy to Vercel
 
-The app uses a `vercel.json` configuration for proper SPA routing.
+1. **Import Repository**: Go to [Vercel](https://vercel.com) and import your GitHub repository
+2. **Auto-Detection**: Vercel will automatically detect the Vite framework configuration
+3. **Configure Build Settings** (optional, already configured in `vercel.json`):
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+4. **Deploy**: Click "Deploy" and your app will be live in minutes!
+
+### Manual Configuration
+
+If needed, the repository includes a `vercel.json` configuration file with:
+- Build command: `npm run build`
+- Output directory: `dist`
+- SPA routing support (all routes redirect to `index.html`)
+
+### Local Preview
+
+To preview the production build locally:
+
+```bash
+npm run build
+npm run preview
+```
+
+This will serve the built app at http://localhost:4173
+
+### Browser Requirements
+
+The app works on all modern browsers:
+- Chrome, Edge, Firefox, Safari (latest versions)
+- Mobile browsers (iOS Safari, Chrome for Android)
+- Tablets and desktops
+
+### Environment Requirements
+
+- **HTTPS**: Automatically provided by Vercel (required for camera features in "Find the Elves" game)
+- **Camera Access**: Some features (AR elf hunting) require camera permissions
+- **localStorage**: Required for saving progress and user data
 
 ## 📝 License
 
