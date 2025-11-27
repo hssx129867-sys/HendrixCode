@@ -13,17 +13,33 @@ A fun, educational web app for kids ages 7-10 featuring logic games, AR experien
   - 🧠 **Brain Rot**: Build your brain empire! Click to collect brain cells, buy buildings that generate passive income, and unlock exciting areas including the mysterious Basement!
 - **Progress Tracking**: Earn stars and track levels completed for each game
 
-### 🎯 AR Games (NEW!)
-Experience augmented reality gaming on your iPad or AR-capable device:
-- **AR Target Drop**: A full AR game featuring plane detection, target spawning, and score tracking
-  - Detect flat surfaces in your environment
-  - Place a spawn pad on any horizontal plane
-  - Tap targets to score points in real-time
-  - Touch-optimized controls for iPad
-- **AR Demo**: Simple demonstration of AR capabilities
-  - Place colorful cubes in your environment
-  - Learn about plane detection and spatial anchors
-  - Perfect for first-time AR users
+### 🎯 AR Games - Frontier Cockpit Experience (NEW!)
+Experience cutting-edge augmented reality gaming with a futuristic space-tech interface:
+
+#### AR Target Drop
+A full-featured AR game with an immersive cockpit-themed HUD:
+- **Frontier Cockpit HUD**: Futuristic interface with neon green accents and glowing effects
+- **AR Plane Detection**: Automatically detects flat surfaces in your environment
+- **Interactive Gameplay**: Place a spawn pad and tap targets to score points in real-time
+- **Game Controls**: Pause, resume, and restart with cockpit-style buttons
+- **Score Tracking**: Real-time score display with glowing visual effects
+- **iPad Optimized**: Touch-friendly controls designed for tablet gaming
+- **Responsive Design**: Works on mobile, tablet, and desktop devices
+- **Graceful Fallbacks**: Clear messaging and guidance for unsupported devices
+
+#### AR Demo
+Simple demonstration of AR capabilities:
+- Place colorful cubes in your environment
+- Learn about plane detection and spatial anchors
+- Perfect for first-time AR users
+
+**Design Features:**
+- Monospace "Courier New" font for tech aesthetic
+- Neon green (#00ff88) color scheme
+- Glowing borders and backdrop blur effects
+- Pulsing animations for status messages
+- Grid background patterns
+- Safe area insets for notched devices
 
 ### 🎄 Christmas Lab
 - **Christmas List**: Create and manage your Christmas wish list with priorities

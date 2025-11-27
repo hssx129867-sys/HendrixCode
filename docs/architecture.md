@@ -239,6 +239,16 @@ GameLoop
 - `src/samples/ar-mini-game/systems/`: Game-specific systems
 - `src/samples/ar-mini-game/components/`: Game-specific components
 
+### Current Integration Status
+
+The AR Target Drop game engine exists and is functional, but requires TypeScript configuration updates to integrate with the React app build system. A `MockARGame` implementation provides a working demonstration of the game flow and cockpit UI while the full engine integration is completed.
+
+**React App Integration:**
+- `src/components/ar/ARGameWrapper.tsx`: React component wrapping AR game
+- `src/components/ar/MockARGame.ts`: Simplified AR game for demonstration
+- `src/pages/ARGamePlay.tsx`: Page route for launching AR experience
+- `src/pages/ARGame.tsx`: Information and launcher page
+
 ## Demo Applications
 
 ### AR Demo
@@ -253,6 +263,37 @@ Simple demonstrations of core AR capabilities:
 - `src/samples/ar-demo/PlaceCubeDemo.ts`
 - `src/samples/ar-demo/RotateGestureDemo.ts`
 - `src/samples/ar-demo/HitTestMoveDemo.ts`
+
+## User Journey: AR Target Drop
+
+### Navigation Flow
+
+```
+Home Page (/)
+  ↓
+AR Game Info (/ar-game)
+  ↓ [Launch AR Cockpit]
+AR Game Session (/ar-game/play)
+  ↓ [Exit]
+AR Game Info (/ar-game)
+```
+
+### Game States
+
+1. **Initializing**: Loading AR session and game systems
+2. **Placing**: User scans environment and places spawn pad
+3. **Playing**: Targets spawn, user taps to destroy and score points
+4. **Paused**: Game temporarily paused, can resume or restart
+5. **Game Over**: Final score displayed, can play again
+
+### UI Components
+
+**Cockpit HUD Elements:**
+- Exit button (top-left): Returns to AR game info page
+- Score display (top-right): Shows current score with glowing effect
+- Status message (center): Contextual instructions based on game state
+- Control buttons (bottom): Pause/Resume/Restart based on state
+- Minimize toggle: Collapse HUD for immersive gameplay
 
 ## Data Flow
 
@@ -302,6 +343,11 @@ See `tests/` directory for test implementations.
 - **Production**: `npm run build` - TypeScript compilation + Vite build
 - **Testing**: `npm test` - Run test suite
 - **Linting**: `npm run lint` - ESLint checks
+
+**TypeScript Configuration:**
+- `tsconfig.app.json`: Main React app (excludes AR engine for now)
+- `tsconfig.ar.json`: AR engine and game code
+- Note: Full AR engine integration requires resolving module resolution between configs
 
 ## Conclusion
 
