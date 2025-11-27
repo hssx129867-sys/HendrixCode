@@ -151,6 +151,7 @@ export const ARCamera = ({ onCapture, onClose, elfLocation }: ARCameraProps) => 
         playsInline
         muted
         className="ar-video"
+        onClick={captureImage}
       />
       <canvas ref={canvasRef} style={{ display: 'none' }} />
       
