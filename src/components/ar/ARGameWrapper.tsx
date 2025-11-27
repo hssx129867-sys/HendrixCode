@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { ARTargetDrop } from '../../samples/ar-mini-game/ARTargetDrop';
+import { MockARGame } from './MockARGame';
 import './ARGameWrapper.css';
 
 export type ARGameState = 'initializing' | 'placing' | 'playing' | 'paused' | 'game_over';
@@ -10,7 +10,7 @@ interface ARGameWrapperProps {
 }
 
 export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
-  const gameRef = useRef<ARTargetDrop | null>(null);
+  const gameRef = useRef<MockARGame | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(0);
   const [gameState, setGameState] = useState<ARGameState>('initializing');
@@ -24,8 +24,9 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
 
     const initGame = async () => {
       try {
-        console.log('Creating AR Target Drop instance...');
-        const game = new ARTargetDrop();
+        console.log('Creating Mock AR Game instance...');
+        
+        const game = new MockARGame();
         gameRef.current = game;
 
         console.log('Initializing AR session...');
@@ -82,32 +83,26 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
       gameRef.current.update(deltaTime);
 
       // Update UI from game state
-      const gameStateComponent = gameRef.current.getGameState();
-      const scoreComponent = gameRef.current.getScore();
+      const state = gameRef.current.getGameState();
+      const currentScore = gameRef.current.getScore();
 
-      if (gameStateComponent) {
-        const state = gameStateComponent.currentState;
-        setGameState(state as ARGameState);
+      setGameState(state.currentState as ARGameState);
+      setScore(currentScore);
 
-        // Update status messages based on state
-        switch (state) {
-          case 'placing':
-            setStatusMessage('Tap on a detected surface to place your spawn pad');
-            break;
-          case 'playing':
-            setStatusMessage('Tap targets to score points!');
-            break;
-          case 'paused':
-            setStatusMessage('Game Paused');
-            break;
-          case 'game_over':
-            setStatusMessage('Game Over!');
-            break;
-        }
-      }
-
-      if (scoreComponent) {
-        setScore(scoreComponent.score);
+      // Update status messages based on state
+      switch (state.currentState) {
+        case 'placing':
+          setStatusMessage('Tap on a detected surface to place your spawn pad');
+          break;
+        case 'playing':
+          setStatusMessage('Tap targets to score points!');
+          break;
+        case 'paused':
+          setStatusMessage('Game Paused');
+          break;
+        case 'game_over':
+          setStatusMessage(`Game Over! Final Score: ${currentScore}`);
+          break;
       }
 
       animationFrameRef.current = requestAnimationFrame(loop);
@@ -164,6 +159,16 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
       {/* AR Viewport - This is where the AR rendering happens */}
       <div className="ar-viewport" id="ar-viewport">
         {/* AR session renders here via WebGL canvas */}
+        <div className="ar-mock-scene">
+          <div className="ar-mock-message">
+            <h3>🎮 AR Target Drop Demo</h3>
+            <p>This is a demonstration of the cockpit UI and game flow.</p>
+            <p className="ar-mock-note">
+              Full WebXR integration coming soon!<br/>
+              The game will automatically place a spawn pad and begin scoring.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* HUD Overlay */}
