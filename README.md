@@ -41,7 +41,13 @@ Both AR experiences intelligently detect device capabilities and automatically c
 - ✅ "AR Hardware Detected" when real AR is available
 - ✅ "AR Simulator Mode" fallback for non-AR devices
 - ✅ Seamless experience regardless of device capabilities
-- ✅ Full AR engine ready at `src/samples/` for future integration
+- 🚧 Real AR engine at `src/samples/` ready for integration (see [AR Integration Roadmap](./docs/ar-integration-roadmap.md))
+
+**AR Integration Status:**
+- Mock implementations fully functional and demonstrate complete AR game flow
+- Real AR engine (ARTargetDrop, PlaceCubeDemo) exists and is functional
+- TypeScript configuration update needed to integrate real AR into React app
+- See `docs/ar-integration-roadmap.md` for detailed integration steps
 
 **Cockpit Design System:**
 - Unified navigation across all pages (`CockpitNav` component)
@@ -256,9 +262,89 @@ The app works on all modern browsers:
 
 ### Environment Requirements
 
-- **HTTPS**: Automatically provided by Vercel (required for camera features in "Find the Elves" game)
-- **Camera Access**: Some features (AR elf hunting) require camera permissions
+- **HTTPS**: Automatically provided by Vercel (required for camera features and WebXR)
+- **Camera Access**: AR features require camera permissions
 - **localStorage**: Required for saving progress and user data
+
+## 🧪 Testing AR Features
+
+### Manual QA Instructions
+
+#### Testing on WebXR-Capable Devices
+
+**Recommended Devices:**
+- iPad Pro or iPad Air (iOS 13+) with Safari
+- iPhone 6S or newer (iOS 13+) with Safari
+- Android phones with ARCore support using Chrome
+
+**Test Steps:**
+1. **Deploy to HTTPS Environment**
+   - Deploy to Vercel or use local HTTPS (AR requires secure context)
+   - Access the deployment URL on your test device
+
+2. **Test AR Game (/ar-game/play)**
+   ```
+   1. Navigate to /ar-game/play
+   2. Grant camera permissions when prompted
+   3. Observe AR capability detection message
+   4. On WebXR devices: Verify "AR Hardware Detected" message
+   5. On non-AR devices: Verify "AR Simulator Mode" message
+   6. Check that game initializes without errors
+   7. Verify HUD controls are visible and functional
+   8. Test pause, resume, restart, and exit controls
+   9. Verify score tracking works correctly
+   10. Check cleanup when exiting (no console errors)
+   ```
+
+3. **Test AR Demo (/ar-demo/play)**
+   ```
+   1. Navigate to /ar-demo/play
+   2. Grant camera permissions when prompted
+   3. Verify capability detection works
+   4. Test tap-to-place cube functionality
+   5. Place multiple cubes (verify FIFO limit of 20)
+   6. Test clear button
+   7. Verify smooth animation and rendering
+   8. Check cleanup when exiting
+   ```
+
+4. **Test Fallback Behavior**
+   ```
+   1. Test on desktop browser (should show simulator mode)
+   2. Deny camera permissions (should show clear error)
+   3. Test on non-WebXR browser (should fall back gracefully)
+   4. Verify retry button works after errors
+   ```
+
+#### Testing on Desktop (Simulator Mode)
+
+1. Open the app in Chrome/Firefox/Safari on desktop
+2. Navigate to AR routes - should automatically use simulator mode
+3. Verify all game mechanics work without camera
+4. Check that error messages are appropriate for desktop testing
+
+### Current Test Coverage
+
+```bash
+npm run test        # Run all tests
+npm run test:ui     # Open test UI
+npm run test:coverage  # Generate coverage report
+```
+
+**Test Suite Includes:**
+- ✅ AR capability detection (13 tests)
+- ✅ Math utilities and Vector3 operations (20 tests)
+- ✅ ECS system architecture (14 tests)
+- 🚧 AR wrapper lifecycle tests (planned)
+- 🚧 Real AR integration tests (planned)
+
+**Total:** 47 passing tests
+
+### Known Test Gaps
+- AR wrapper mount/unmount lifecycle
+- Error handling in AR initialization
+- Mode switching (real vs mock)
+- Cleanup verification (animation frames, listeners)
 
 ## 📝 License
 

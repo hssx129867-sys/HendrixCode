@@ -11,47 +11,75 @@
 
 /* Error State */
 .ar-game-play--error {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.ar-game-play--error .ar-game-error {
-  position: relative;
-  transform: none;
-  top: auto;
-  left: auto;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2rem;
+  background: linear-gradient(135deg, #0a1f35 0%, #0f1419 100%);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  padding: 2rem;
+}
+
+.ar-game-error,
+.ar-demo-error {
+  width: 100%;
+  max-width: 700px;
+}
+
+.ar-error-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ar-error-title {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  color: #00ff88;
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.ar-error-message {
+  font-family: 'Courier New', monospace;
+  color: #a0ffd0;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0;
 }
 
 .ar-error-suggestions {
-  margin-top: 1.5rem;
-  text-align: left;
-  width: 100%;
+  margin-top: 1rem;
 }
 
-.ar-error-suggestions h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 1rem 0 0.5rem 0;
-  color: var(--text-primary);
+.ar-error-suggestions h3 {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  color: #00ff88;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem 0;
+  text-transform: uppercase;
 }
 
 .ar-error-suggestions ul {
   margin: 0.5rem 0;
-  padding-left: 1.5rem;
+  padding-left: 0;
   list-style: none;
 }
 
 .ar-error-suggestions li {
+  font-family: 'Courier New', monospace;
+  color: #a0ffd0;
   margin: 0.5rem 0;
-  padding-left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 255, 136, 0.05);
+  border-left: 2px solid #00ff88;
+  border-radius: 4px;
   line-height: 1.6;
+  font-size: 0.875rem;
 }
 
 .ar-error-actions {
@@ -59,8 +87,27 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 1rem;
-  width: 100%;
+  margin-top: 1.5rem;
+}
+
+/* Responsive for error state */
+@media (max-width: 640px) {
+  .ar-error-title {
+    font-size: 1.25rem;
+  }
+  
+  .ar-error-message {
+    font-size: 0.875rem;
+  }
+  
+  .ar-error-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .ar-error-actions button {
+    width: 100%;
+  }
 }
 
 /* AR Viewport */
