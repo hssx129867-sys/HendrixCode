@@ -96,7 +96,7 @@ export function isWebXRAvailable(): boolean {
   if (typeof window === 'undefined' || typeof navigator === 'undefined') {
     return false;
   }
-  return 'xr' in navigator && navigator.xr !== null && navigator.xr !== undefined;
+  return 'xr' in navigator && navigator.xr != null;
 }
 
 /**

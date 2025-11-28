@@ -128,10 +128,9 @@ export class RealARGameAdapter implements MockARGameSession {
     }
   }
 
-  update(deltaTime: number): void {
+  update(_deltaTime: number): void {
     // Update game state based on deltaTime
     // This is called from the render loop
-    void deltaTime; // Suppress unused warning
   }
 
   pause(): void {

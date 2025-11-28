@@ -64,10 +64,20 @@ export class RealARDemoAdapter implements MockARDemoSession {
       // Get reference space
       this.xrRefSpace = await this.xrSession.requestReferenceSpace('local-floor');
 
-      // Request hit test source
+      // Request hit test source (optional feature)
       const viewerSpace = await this.xrSession.requestReferenceSpace('viewer');
-      const hitTestSource = await this.xrSession.requestHitTestSource?.({ space: viewerSpace });
-      this.xrHitTestSource = hitTestSource || null;
+      if (this.xrSession.requestHitTestSource) {
+        try {
+          const hitTestSource = await this.xrSession.requestHitTestSource({ space: viewerSpace });
+          this.xrHitTestSource = hitTestSource || null;
+        } catch (error) {
+          console.warn('[RealARDemoAdapter] Hit test not available:', error);
+          this.xrHitTestSource = null;
+        }
+      } else {
+        console.warn('[RealARDemoAdapter] Hit test API not available');
+        this.xrHitTestSource = null;
+      }
 
       // Set up session end handler
       this.xrSession.addEventListener('end', () => {
@@ -114,10 +124,9 @@ export class RealARDemoAdapter implements MockARDemoSession {
     this.animationFrameHandle = this.xrSession.requestAnimationFrame(renderLoop);
   }
 
-  update(deltaTime: number): void {
+  update(_deltaTime: number): void {
     // Update demo state based on deltaTime
     // This is called from the render loop
-    void deltaTime; // Suppress unused warning
   }
 
   placeCube(screenX: number, screenY: number): void {
