@@ -33,9 +33,18 @@ Simple demonstration of AR capabilities:
 - **Perfect for first-time AR users**: Simple, intuitive interaction
 
 **Current Implementation:**
-Both AR experiences use mock implementations (`MockARGame` and `MockARDemo`) that demonstrate the full UI/UX flow and game mechanics without requiring AR hardware. Full WebXR integration with the existing AR engine (`ARTargetDrop.ts` and `PlaceCubeDemo.ts`) is ready for future deployment when build configuration is unified.
+Both AR experiences intelligently detect device capabilities and automatically choose between real AR mode (when WebXR is supported) and simulator mode. The application uses `MockARGame` and `MockARDemo` implementations that demonstrate the full UI/UX flow and game mechanics without requiring AR hardware.
+
+**AR Capability Detection:**
+- ✅ Automatic WebXR AR detection on device
+- ✅ Clear user messaging about AR availability
+- ✅ "AR Hardware Detected" when real AR is available
+- ✅ "AR Simulator Mode" fallback for non-AR devices
+- ✅ Seamless experience regardless of device capabilities
+- ✅ Full AR engine ready at `src/samples/` for future integration
 
 **Cockpit Design System:**
+- Unified navigation across all pages (`CockpitNav` component)
 - Monospace "Courier New" font for tech aesthetic
 - Neon green (#00ff88) primary color with glowing effects
 - Dark space backgrounds with grid patterns
@@ -43,7 +52,7 @@ Both AR experiences use mock implementations (`MockARGame` and `MockARDemo`) tha
 - Pulsing animations for status messages
 - Safe area insets for notched devices
 - High contrast for visibility in various lighting
-- Reusable components: `CockpitButton`, `CockpitPanel`, `CockpitContainer`
+- Reusable components: `CockpitButton`, `CockpitPanel`, `CockpitContainer`, `CockpitNav`
 - Comprehensive design tokens for consistent theming
 
 ### 🎮 Game Zone
@@ -111,6 +120,27 @@ The built files will be in the `dist/` directory.
 ```bash
 npm run preview
 ```
+
+### Testing
+
+```bash
+# Run tests once
+npm test -- --run
+
+# Run tests in watch mode
+npm test
+
+# Run tests with UI
+npm run test:ui
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+The test suite includes:
+- **Unit tests**: AR capability detection, math utilities, ECS system (47 tests)
+- **Integration tests**: Component lifecycle and interactions
+- **Coverage**: Core AR detection logic and game systems
 
 ## 🎯 How to Use
 

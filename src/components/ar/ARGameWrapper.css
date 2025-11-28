@@ -46,6 +46,18 @@
   text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
 }
 
+.ar-capability-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  font-size: 0.875rem !important;
+  background: rgba(0, 20, 40, 0.7);
+  border: 1px solid #00ff88;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  backdrop-filter: blur(5px);
+}
+
 .ar-mock-message p {
   font-size: 1.125rem;
   line-height: 1.6;

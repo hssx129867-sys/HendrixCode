@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { MockARGame } from './MockARGame';
+import { getARMode, getARAvailabilityMessage, type ARCapabilityResult } from '../../utils/arCapability';
 import './ARGameWrapper.css';
 
 export type ARGameState = 'initializing' | 'placing' | 'playing' | 'paused' | 'game_over';
@@ -17,6 +18,15 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
   const [score, setScore] = useState(0);
   const [statusMessage, setStatusMessage] = useState('Initializing AR session...');
   const [showControls, setShowControls] = useState(true);
+  const [arCapability, setArCapability] = useState<ARCapabilityResult | null>(null);
+
+  // Check AR capability on mount
+  useEffect(() => {
+    getARMode().then(capability => {
+      setArCapability(capability);
+      console.log('[ARGameWrapper] AR Capability:', capability);
+    });
+  }, []);
 
   // Game render loop
   const startRenderLoop = useCallback(() => {
@@ -164,10 +174,24 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
         <div className="ar-mock-scene">
           <div className="ar-mock-message">
             <h3>🎮 AR Target Drop Demo</h3>
+            {arCapability && (
+              <p className="ar-capability-badge">
+                {getARAvailabilityMessage(arCapability)}
+              </p>
+            )}
             <p>This is a demonstration of the cockpit UI and game flow.</p>
             <p className="ar-mock-note">
-              Full WebXR integration coming soon!<br/>
-              The game will automatically place a spawn pad and begin scoring.
+              {arCapability?.mode === 'mock' ? (
+                <>
+                  Running in simulator mode. The game will automatically<br/>
+                  place a spawn pad and begin scoring to demonstrate the flow.
+                </>
+              ) : (
+                <>
+                  Full WebXR integration coming soon!<br/>
+                  The game will automatically place a spawn pad and begin scoring.
+                </>
+              )}
             </p>
           </div>
         </div>

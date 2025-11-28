@@ -15,11 +15,13 @@ import { ARGame } from './pages/ARGame';
 import { ARGamePlay } from './pages/ARGamePlay';
 import { ARDemo } from './pages/ARDemo';
 import { ARDemoPlay } from './pages/ARDemoPlay';
+import { CockpitNav } from './components/CockpitNav';
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <CockpitNav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/players" element={<Players />} />
