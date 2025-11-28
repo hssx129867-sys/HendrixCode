@@ -5,8 +5,6 @@
  * fall back to mock/simulator mode.
  */
 
-import type { NavigatorWithXR } from '../types/webxr';
-
 export type ARMode = 'real' | 'mock';
 
 export interface ARCapabilityResult {
@@ -53,7 +51,7 @@ export async function getARMode(forceMode?: ARMode): Promise<ARCapabilityResult>
   }
 
   // Check if navigator.xr exists
-  if (!('xr' in navigator)) {
+  if (!('xr' in navigator) || !navigator.xr) {
     return {
       mode: 'mock',
       reason: 'WebXR not available in this browser',
@@ -62,18 +60,8 @@ export async function getARMode(forceMode?: ARMode): Promise<ARCapabilityResult>
   }
 
   try {
-    const xr = (navigator as NavigatorWithXR).xr;
-    
-    if (!xr) {
-      return {
-        mode: 'mock',
-        reason: 'navigator.xr is null',
-        supported: false,
-      };
-    }
-
     // Check if immersive-ar session is supported
-    const isARSupported = await xr.isSessionSupported('immersive-ar');
+    const isARSupported = await navigator.xr.isSessionSupported('immersive-ar');
     
     if (isARSupported) {
       return {
@@ -108,7 +96,7 @@ export function isWebXRAvailable(): boolean {
   if (typeof window === 'undefined' || typeof navigator === 'undefined') {
     return false;
   }
-  return 'xr' in navigator && (navigator as NavigatorWithXR).xr !== null;
+  return 'xr' in navigator && navigator.xr !== null && navigator.xr !== undefined;
 }
 
 /**

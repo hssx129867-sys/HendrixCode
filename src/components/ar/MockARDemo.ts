@@ -1,5 +1,3 @@
-import type { NavigatorWithXR } from '../../types/webxr';
-
 /**
  * Mock AR Demo Session
  * 
@@ -59,10 +57,9 @@ export class MockARDemo implements MockARDemoSession {
     console.log('[MockARDemo] Checking AR support...');
     
     // Check if WebXR is available
-    if ('xr' in navigator) {
+    if ('xr' in navigator && navigator.xr) {
       try {
-        const xr = (navigator as NavigatorWithXR).xr;
-        const supported = await xr?.isSessionSupported('immersive-ar');
+        const supported = await navigator.xr.isSessionSupported('immersive-ar');
         if (supported) {
           console.log('[MockARDemo] WebXR AR is supported!');
         } else {

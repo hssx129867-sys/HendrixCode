@@ -1,5 +1,3 @@
-import type { NavigatorWithXR } from '../../types/webxr';
-
 export interface GameState {
   currentState: 'initializing' | 'placing' | 'playing' | 'paused' | 'game_over';
   startTime: number;
@@ -41,10 +39,9 @@ export class MockARGame implements MockARGameSession {
     console.log('[MockARGame] Checking AR support...');
     
     // Check if WebXR is available
-    if ('xr' in navigator) {
+    if ('xr' in navigator && navigator.xr) {
       try {
-        const xr = (navigator as NavigatorWithXR).xr;
-        const supported = await xr?.isSessionSupported('immersive-ar');
+        const supported = await navigator.xr.isSessionSupported('immersive-ar');
         if (supported) {
           console.log('[MockARGame] WebXR AR is supported!');
         } else {
