@@ -29,92 +29,176 @@ This document describes the user interface and user experience architecture for 
    - **Component**: `src/pages/ARGame.tsx`
    - **Purpose**: Marketing/info page with game features and instructions
    - **AR Engine**: None (no AR initialization)
-   - **Status**: ✅ Fully functional
-   - **Theme**: Uses base UI components (Button, Card, Container) - needs cockpit theme enhancement
+   - **Status**: ✅ Fully functional with cockpit theme
+   - **Theme**: CockpitButton, CockpitPanel, CockpitContainer throughout
 
 2. **AR Game Play** (`/ar-game/play`)
    - **Component**: `src/pages/ARGamePlay.tsx`
    - **AR Wrapper**: `src/components/ar/ARGameWrapper.tsx`
-   - **AR Engine**: `src/components/ar/MockARGame.ts` (current) OR `src/samples/ar-mini-game/ARTargetDrop.ts` (target)
+   - **AR Engine**: `src/components/ar/MockARGame.ts` (current) OR `src/samples/ar-mini-game/ARTargetDrop.ts` (future)
    - **Purpose**: Active AR game session with HUD and controls
-   - **Status**: ⚠️ Works with mock/simulation, full WebXR not integrated
-   - **Theme**: Cockpit theme applied to HUD
+   - **Status**: ✅ Fully functional with mock/simulator, real AR pending TypeScript config
+   - **Theme**: Cockpit theme applied to HUD and error states
    - **Key Features**:
+     - AR capability detection on mount
      - Mock game auto-places spawn pad after 3 seconds
      - Auto-scores points every 2 seconds (simulates hitting targets)
      - Game states: initializing → placing → playing → paused → game_over
      - Pause/Resume/Restart controls
      - Exit with confirmation
+     - Cockpit-styled error page with retry functionality
 
 3. **AR Demo Landing** (`/ar-demo`)
    - **Component**: `src/pages/ARDemo.tsx`
    - **Purpose**: Info page for simple cube placement demo
    - **AR Engine**: None (no AR initialization)
-   - **Status**: ⚠️ Needs implementation
-   - **Theme**: Needs cockpit theme
+   - **Status**: ✅ Fully functional with cockpit theme
+   - **Theme**: CockpitButton, CockpitPanel, CockpitContainer throughout
 
 4. **AR Demo Play** (`/ar-demo/play`)
    - **Component**: `src/pages/ARDemoPlay.tsx`
-   - **AR Engine**: `src/samples/ar-demo/PlaceCubeDemo.ts` (target)
-   - **Purpose**: Simple AR demo - tap to place cubes
-   - **Status**: ❌ Shows "coming soon" message, not functional
-   - **Theme**: Needs cockpit theme and full implementation
+   - **AR Wrapper**: `src/components/ar/ARDemoWrapper.tsx`
+   - **AR Engine**: `src/components/ar/MockARDemo.ts` (current) OR `src/samples/ar-demo/PlaceCubeDemo.ts` (future)
+   - **Purpose**: Simple AR demo - tap to place cubes (20 cube FIFO limit)
+   - **Status**: ✅ Fully functional with mock/simulator, real AR pending TypeScript config
+   - **Theme**: Cockpit theme applied to HUD and error states
+   - **Key Features**:
+     - Tap-to-place colorful cubes
+     - FIFO removal when exceeding 20 cubes
+     - Clear all cubes button
+     - Cockpit-styled error page with retry functionality
 
 ### AR Integration Status
 
-#### Current Implementation (Enhanced Mock with Real AR Detection)
-- ✅ AR capability detection implemented (`src/utils/arCapability.ts`)
-- ✅ Automatic detection of WebXR AR support
-- ✅ Graceful fallback to simulator mode when AR not available
-- ✅ Clear user messaging about AR availability status
-- ✅ Mock implementations provide functional demos
-- ✅ Works in all browsers without AR hardware
-- ✅ Demonstrates UI/UX patterns
-- ✅ Cockpit HUD and controls fully functional
-- ⏳ Real AR engine integration pending (requires unified build system)
+#### Current Implementation (December 2024)
+
+**✅ Fully Implemented:**
+- AR capability detection (`src/utils/arCapability.ts`)
+- Automatic detection of WebXR AR support
+- Graceful fallback to simulator mode when AR not available
+- Clear user messaging about AR availability status
+- Mock implementations provide functional demos
+- Works in all browsers without AR hardware
+- Demonstrates UI/UX patterns
+- Cockpit HUD and controls fully functional
+- Cockpit-themed error handling with retry functionality
+- Comprehensive lifecycle management and cleanup
+
+**🚧 In Progress:**
+- Real AR engine integration (requires TypeScript config alignment)
+- See `docs/ar-integration-roadmap.md` for detailed integration plan
 
 #### AR Mode Switching Logic
 
 The application uses automatic capability detection to determine whether to use real AR or simulator mode:
 
-1. **Capability Detection** (`getARMode()`):
-   - Checks if `navigator.xr` exists
-   - Tests `navigator.xr.isSessionSupported('immersive-ar')`
-   - Returns `{ mode: 'real' | 'mock', reason: string, supported: boolean }`
-   - Can be overridden via `VITE_FORCE_MOCK_AR` environment variable
+**1. Capability Detection** (`getARMode()`):
+```typescript
+// Checks performed:
+- navigator.xr exists
+- navigator.xr.isSessionSupported('immersive-ar')
+- Returns: { mode: 'real' | 'mock', reason: string, supported: boolean }
+- Override via VITE_FORCE_MOCK_AR environment variable
+```
 
-2. **User Experience**:
-   - **Real AR Mode**: Shows "✅ AR Hardware Detected - Running in AR Mode"
-   - **Simulator Mode**: Shows "📱 AR Simulator Mode - AR hardware not detected"
-   - Badge displayed prominently in AR session UI
-   - Automatic fallback with no user interaction required
+**2. User Experience Flow:**
 
-3. **Implementation Files**:
-   - Detection utility: `src/utils/arCapability.ts`
-   - Game wrapper: `src/components/ar/ARGameWrapper.tsx`
-   - Demo wrapper: `src/components/ar/ARDemoWrapper.tsx`
-   - Unit tests: `tests/unit/utils/arCapability.test.ts` (13 tests)
+```
+User Navigation Flow:
+/ar-game → /ar-game/play
+             ↓
+         ARGamePlay Component
+             ↓
+         Capability Detection
+           ↙     ↘
+    Real AR    Mock AR
+    (future)   (current)
+       ↓          ↓
+    ARGameWrapper loads appropriate implementation
+       ↓
+    Session starts
+       ↓
+    Game plays with HUD controls
+```
 
-#### Target Implementation (ARTargetDrop + PlaceCubeDemo)
-- ✅ Full AR engine exists in `src/samples/`
-- ✅ WebXR/ARKit/ARCore abstractions implemented
-- ✅ Capability detection ready for real AR integration
-- ⏳ Awaiting unified build system for full integration
-- ⏳ TypeScript configuration unification in progress
+**Mode Indicators:**
+- **Real AR Mode**: "✅ AR Hardware Detected - Running in AR Mode"
+- **Simulator Mode**: "📱 AR Simulator Mode - AR hardware not detected"
+- Badge displayed in AR session UI
+- Automatic fallback with no user interaction required
 
-#### Integration Strategy
+**Error States:**
+- Permission denied: Cockpit-themed error panel with retry button
+- AR not supported: Clear requirements list with recommended devices
+- Session initialization failed: Retry button available
+- All errors use CockpitPanel with consistent styling
 
-1. **Current Approach**:
-   - Use mock implementations with real capability detection
-   - Show users whether AR is available on their device
-   - Provide consistent UX regardless of AR availability
-   - Maintain code structure ready for real AR integration
+**3. Implementation Architecture:**
 
-2. **Future Integration**:
-   - Unified TypeScript configuration
-   - Single build that includes both web app and AR engine
-   - Real AR engine seamlessly replaces mock when available
-   - No changes required to user-facing components
+```
+Detection Layer:
+├── src/utils/arCapability.ts (AR mode detection)
+│   ├── getARMode() - async capability check
+│   ├── isWebXRAvailable() - sync quick check
+│   └── getARAvailabilityMessage() - user-friendly messaging
+
+Wrapper Layer:
+├── src/components/ar/ARGameWrapper.tsx (Game orchestration)
+├── src/components/ar/ARDemoWrapper.tsx (Demo orchestration)
+│   ├── Lifecycle management (mount/unmount)
+│   ├── Animation frame cleanup
+│   ├── Error handling and recovery
+│   └── HUD rendering and state management
+
+Implementation Layer:
+├── src/components/ar/MockARGame.ts (Current: Simulator)
+├── src/components/ar/MockARDemo.ts (Current: Simulator)
+└── src/samples/ (Future: Real AR engines)
+    ├── ar-mini-game/ARTargetDrop.ts (Ready for integration)
+    └── ar-demo/PlaceCubeDemo.ts (Ready for integration)
+
+Page Layer:
+├── src/pages/ARGamePlay.tsx (Error handling, routing)
+└── src/pages/ARDemoPlay.tsx (Error handling, routing)
+```
+
+**4. Real vs Mock Behavior Comparison:**
+
+| Feature | Mock Mode (Current) | Real AR Mode (Future) |
+|---------|-------------------|---------------------|
+| Camera Feed | Simulated viewport | Live camera feed via WebXR |
+| Plane Detection | Auto after 3 seconds | Real surface detection |
+| Object Placement | Simulated coordinates | Hit test against detected planes |
+| Tracking | N/A | 6DOF camera tracking |
+| Lighting | Static | Environment lighting estimation |
+| Interaction | Click/tap simulation | Real-world spatial tap |
+| Performance | Lightweight | Device/browser dependent |
+| Availability | All devices | WebXR-capable devices only |
+| User Experience | Identical UI/UX | Identical UI/UX |
+
+**5. Integration Testing:**
+- Unit tests: `tests/unit/utils/arCapability.test.ts` (13 tests)
+- Mock game tests: Covered by existing test suite
+- Real AR tests: Pending integration
+
+#### Real AR Integration Path
+
+**Option 1: TypeScript Configuration Alignment** (Recommended - 2-4 hours)
+1. Update `tsconfig.app.json` to include AR samples
+2. Fix type imports in AR sample files
+3. Create adapter classes: `RealARGameAdapter`, `RealARDemoAdapter`
+4. Update wrappers to instantiate real AR when `mode === 'real'`
+5. Test on WebXR-capable device
+
+**Option 2: Dynamic Import** (Alternative - 4-6 hours)
+- Build AR samples separately
+- Load dynamically at runtime with code splitting
+
+**Option 3: WebXR Polyfill** (Complex - 6-8 hours)
+- Single unified implementation
+- Requires significant refactoring
+
+See `docs/ar-integration-roadmap.md` for complete details.
 
 ### New AR Portal Routes (Detailed)
 
@@ -354,10 +438,47 @@ Located in `src/components/ui/`:
 4. If granted: Start AR session
 5. If denied: Show friendly error with instructions
 
-**Error States**:
-- No camera: "Camera required for AR experience"
-- AR not supported: "AR not supported on this device"
-- Permission denied: "Please enable camera access in settings"
+**Error States (Cockpit-Themed)**:
+
+All error states now use the cockpit design system:
+- CockpitPanel with outlined variant for error container
+- Neon green (#00ff88) titles with glow effect
+- Monospace "Courier New" typography
+- Clear system requirements lists
+- Prominent "RETRY AR SESSION" button
+- "BACK TO BRIEFING" / "BACK TO LAB" navigation
+
+**Error Scenarios:**
+- **No camera**: "Camera required for AR experience"
+- **AR not supported**: Clear device requirements + recommended hardware list
+- **Permission denied**: "Please enable camera access" + retry option
+- **Session initialization failed**: Generic error with retry capability
+- **WebXR check failed**: Technical details logged, user-friendly message shown
+
+**Error Page Layout:**
+```
+┌─────────────────────────────────────┐
+│  CockpitPanel (outlined)            │
+│  ┌───────────────────────────────┐  │
+│  │ ⚠️ AR SESSION ERROR          │  │
+│  │ [Error message here]          │  │
+│  │                               │  │
+│  │ SYSTEM REQUIREMENTS:          │  │
+│  │ • AR-capable device          │  │
+│  │ • WebXR browser              │  │
+│  │ • HTTPS connection           │  │
+│  │ • Camera permissions         │  │
+│  │                               │  │
+│  │ RECOMMENDED HARDWARE:         │  │
+│  │ • iPad Pro/Air (iOS 13+)     │  │
+│  │ • iPhone 6S+ (iOS 13+)       │  │
+│  │ • Android with ARCore        │  │
+│  │                               │  │
+│  │ [🔄 RETRY AR SESSION]         │  │
+│  │ [← BACK TO BRIEFING]          │  │
+│  └───────────────────────────────┘  │
+└─────────────────────────────────────┘
+```
 
 ### Performance
 
