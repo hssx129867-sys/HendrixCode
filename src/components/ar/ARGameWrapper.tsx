@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { MockARGame } from './MockARGame';
+import { MockARGame, type MockARGameSession } from './MockARGame';
+import { RealARGameAdapter } from './RealARGameAdapter';
 import { getARMode, getARAvailabilityMessage, type ARCapabilityResult } from '../../utils/arCapability';
 import './ARGameWrapper.css';
 
@@ -11,7 +12,7 @@ interface ARGameWrapperProps {
 }
 
 export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
-  const gameRef = useRef<MockARGame | null>(null);
+  const gameRef = useRef<MockARGameSession | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(0);
   const [gameState, setGameState] = useState<ARGameState>('initializing');
@@ -19,14 +20,6 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
   const [statusMessage, setStatusMessage] = useState('Initializing AR session...');
   const [showControls, setShowControls] = useState(true);
   const [arCapability, setArCapability] = useState<ARCapabilityResult | null>(null);
-
-  // Check AR capability on mount
-  useEffect(() => {
-    getARMode().then(capability => {
-      setArCapability(capability);
-      console.log('[ARGameWrapper] AR Capability:', capability);
-    });
-  }, []);
 
   // Game render loop
   const startRenderLoop = useCallback(() => {
@@ -74,9 +67,20 @@ export const ARGameWrapper = ({ onExit, onError }: ARGameWrapperProps) => {
 
     const initGame = async () => {
       try {
-        console.log('Creating Mock AR Game instance...');
+        // Check AR capability first
+        const capability = await getARMode();
+        if (mounted) {
+          setArCapability(capability);
+        }
+
+        console.log(`Creating ${capability.mode === 'real' ? 'Real' : 'Mock'} AR Game instance...`);
         
-        const game = new MockARGame();
+        let game: MockARGameSession;
+        if (capability.mode === 'real') {
+          game = new RealARGameAdapter();
+        } else {
+          game = new MockARGame();
+        }
         gameRef.current = game;
 
         console.log('Initializing AR session...');
