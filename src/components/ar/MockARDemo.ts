@@ -31,6 +31,9 @@ export interface MockARDemoSession {
   clearCubes(): void;
 }
 
+// Maximum number of cubes that can be placed (FIFO removal)
+const MAX_CUBES = 20;
+
 export class MockARDemo implements MockARDemoSession {
   private isRunning: boolean = false;
   private cubes: CubeData[] = [];
@@ -115,8 +118,8 @@ export class MockARDemo implements MockARDemoSession {
     this.cubes.push(cube);
     console.log(`[MockARDemo] Placed cube #${cube.id} at (${normalizedX.toFixed(2)}, ${normalizedY.toFixed(2)})`);
     
-    // Limit to 20 cubes
-    if (this.cubes.length > 20) {
+    // Limit to MAX_CUBES with FIFO removal
+    if (this.cubes.length > MAX_CUBES) {
       const removed = this.cubes.shift();
       console.log(`[MockARDemo] Removed oldest cube #${removed?.id}`);
     }

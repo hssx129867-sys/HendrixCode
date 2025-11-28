@@ -222,7 +222,7 @@ export const ARDemoWrapper = ({ onExit, onError }: ARDemoWrapperProps) => {
             <div className="ar-demo-status__message">{statusMessage}</div>
             {cubes.length > 0 && (
               <div className="ar-demo-status__count">
-                Cubes placed: {cubes.length} / 20
+                Cubes placed: {cubes.length} / {20 /* MAX_CUBES from MockARDemo */}
               </div>
             )}
           </div>

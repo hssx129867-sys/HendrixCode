@@ -55,7 +55,7 @@ export const CockpitNav = () => {
           
           <CockpitButton
             size="small"
-            variant={isActive('/christmas') ? 'primary' : 'default'}
+            variant={isActive('/christmas-lab') ? 'primary' : 'default'}
             onClick={() => navigate('/christmas-lab')}
           >
             🎄 CHRISTMAS
