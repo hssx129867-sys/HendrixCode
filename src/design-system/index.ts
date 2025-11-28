@@ -10,6 +10,10 @@
  * Effects: Glowing borders, backdrop blur, pulsing animations
  */
 
+// Design Tokens
+export { designTokens, colors, typography, spacing, borderRadius, effects, transitions, zIndex, breakpoints, touchTargets, containers, gridPattern, getToken } from './tokens';
+export type { DesignTokens } from './tokens';
+
 // Buttons
 export { CockpitButton } from './CockpitButton';
 export type { CockpitButtonVariant, CockpitButtonSize } from './CockpitButton';
