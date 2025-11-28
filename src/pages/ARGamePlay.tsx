@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StatusMessage, Button, Container } from '../components/ui';
+import { CockpitContainer, CockpitPanel, CockpitPanelBody, CockpitButton } from '../design-system';
 import { ARGameWrapper } from '../components/ar/ARGameWrapper';
 import './ARGamePlay.css';
 
@@ -23,48 +23,52 @@ export const ARGamePlay = () => {
     }
   };
 
+  const handleRetry = () => {
+    setError(null);
+    setIsSupported(null);
+    window.location.reload();
+  };
+
   // Show error/fallback UI
   if (error || isSupported === false) {
     return (
       <div className="ar-game-play ar-game-play--error">
-        <Container size="sm">
-          <div className="ar-game-error">
-            <StatusMessage type="warning">
-              <h3>⚠️ AR Not Available</h3>
-              <p>{error || 'AR is not supported on this device or browser.'}</p>
-              
-              <div className="ar-error-suggestions">
-                <h4>To use AR Target Drop, you need:</h4>
-                <ul>
-                  <li>📱 An AR-capable device (iPad, iPhone, or Android with ARCore)</li>
-                  <li>🌐 A WebXR-compatible browser (Chrome, Edge, or Safari)</li>
-                  <li>🔒 HTTPS connection (automatically provided on Vercel)</li>
-                  <li>📷 Camera permissions granted</li>
-                </ul>
+        <CockpitContainer size="md">
+          <CockpitPanel variant="outlined" className="ar-game-error">
+            <CockpitPanelBody>
+              <div className="ar-error-content">
+                <h2 className="ar-error-title">⚠️ AR SESSION ERROR</h2>
+                <p className="ar-error-message">{error || 'AR is not supported on this device or browser.'}</p>
                 
-                <h4>Recommended devices:</h4>
-                <ul>
-                  <li>iPad Pro or iPad Air (iOS 13+)</li>
-                  <li>iPhone 6S or newer (iOS 13+)</li>
-                  <li>Android phones with ARCore support</li>
-                </ul>
+                <div className="ar-error-suggestions">
+                  <h3>SYSTEM REQUIREMENTS</h3>
+                  <ul>
+                    <li>📱 AR-capable device (iPad, iPhone, or Android with ARCore)</li>
+                    <li>🌐 WebXR-compatible browser (Chrome, Edge, or Safari)</li>
+                    <li>🔒 HTTPS connection (automatic on Vercel deployment)</li>
+                    <li>📷 Camera permissions granted</li>
+                  </ul>
+                  
+                  <h3>RECOMMENDED HARDWARE</h3>
+                  <ul>
+                    <li>iPad Pro or iPad Air (iOS 13+)</li>
+                    <li>iPhone 6S or newer (iOS 13+)</li>
+                    <li>Android phones with ARCore support</li>
+                  </ul>
+                </div>
+                
+                <div className="ar-error-actions">
+                  <CockpitButton variant="primary" size="large" onClick={handleRetry}>
+                    🔄 RETRY AR SESSION
+                  </CockpitButton>
+                  <CockpitButton size="large" onClick={handleExit}>
+                    ← BACK TO BRIEFING
+                  </CockpitButton>
+                </div>
               </div>
-            </StatusMessage>
-            
-            <div className="ar-error-actions">
-              <Button variant="primary" size="large" onClick={handleExit}>
-                ← Back to AR Game Info
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="large" 
-                onClick={() => window.location.reload()}
-              >
-                🔄 Try Again
-              </Button>
-            </div>
-          </div>
-        </Container>
+            </CockpitPanelBody>
+          </CockpitPanel>
+        </CockpitContainer>
       </div>
     );
   }
