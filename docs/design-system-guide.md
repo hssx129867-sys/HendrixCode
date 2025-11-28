@@ -390,13 +390,13 @@ export const MyPage = () => {
 ## Future Enhancements
 
 Planned additions to the design system:
-1. **Form Components**: Text inputs, selects, checkboxes with cockpit styling
-2. **Modal/Dialog**: Cockpit-themed modal dialogs
-3. **Toast Notifications**: HUD-style notifications
-4. **Loading States**: Scanline loading animations
-5. **Data Visualization**: Charts and graphs with cockpit aesthetic
-6. **Navigation**: Shared nav/header component
-7. **Icons**: Custom icon set matching cockpit theme
+1. **Form Components**: Text inputs, selects, checkboxes with cockpit styling.
+2. **Modal/Dialog**: Cockpit-themed modal dialogs.
+3. **Toast Notifications**: HUD-style notifications.
+4. **Loading States**: Scanline loading animations.
+5. **Data Visualization**: Charts and graphs with cockpit aesthetic.
+6. **Navigation**: Shared nav/header component.
+7. **Icons**: Custom icon set matching cockpit theme.
 
 ## Resources
 

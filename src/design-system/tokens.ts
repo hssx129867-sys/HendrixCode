@@ -254,16 +254,23 @@ export const designTokens = {
  * Type-safe design token access
  */
 export type DesignTokens = typeof designTokens;
+export type TokenCategory = keyof DesignTokens;
 
 /**
- * Helper function to get nested token values
+ * Helper function to get nested token values with type safety
+ * @param category - The token category (colors, typography, etc.)
+ * @param key - The specific key within that category
+ * @returns The token value as a string, or empty string if not found
  */
-export function getToken<K extends keyof DesignTokens>(
-  category: K,
-  key: string
+export function getToken<
+  C extends TokenCategory,
+  K extends keyof DesignTokens[C]
+>(
+  category: C,
+  key: K
 ): string {
-  const tokens = designTokens[category] as Record<string, any>;
-  return tokens[key] || '';
+  const value = designTokens[category][key];
+  return typeof value === 'string' ? value : String(value);
 }
 
 /**

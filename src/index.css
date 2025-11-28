@@ -38,6 +38,15 @@
   --error: #f56565;
   --info: #4299e1;
 
+  /* Cockpit Theme - Frontier Aesthetic */
+  --cockpit-green: #00ff88;
+  --cockpit-green-light: #a0ffd0;
+  --cockpit-green-dark: #00cc6a;
+  --cockpit-font: 'Courier New', monospace;
+  --cockpit-letter-spacing: 2px;
+  --cockpit-dark-space: #0a0a0a;
+  --cockpit-deep-ocean: rgba(0, 20, 40, 0.85);
+
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;

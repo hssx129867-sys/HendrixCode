@@ -1,17 +1,4 @@
-/**
- * Mock AR Game Session
- * 
- * This is a simplified demonstration of the AR Target Drop game that works
- * within the React app build constraints. The full AR engine integration
- * at src/samples/ar-mini-game/ARTargetDrop.ts requires resolving TypeScript
- * configuration issues with WebXR types and module resolution.
- * 
- * This mock provides:
- * - AR session simulation
- * - Game state management
- * - Score tracking
- * - Basic gameplay flow
- */
+import type { NavigatorWithXR } from '../../types/webxr';
 
 export interface GameState {
   currentState: 'initializing' | 'placing' | 'playing' | 'paused' | 'game_over';
@@ -56,8 +43,7 @@ export class MockARGame implements MockARGameSession {
     // Check if WebXR is available
     if ('xr' in navigator) {
       try {
-        // Type assertion for WebXR navigator extension
-        const xr = (navigator as Navigator & { xr?: { isSessionSupported: (mode: string) => Promise<boolean> } }).xr;
+        const xr = (navigator as NavigatorWithXR).xr;
         const supported = await xr?.isSessionSupported('immersive-ar');
         if (supported) {
           console.log('[MockARGame] WebXR AR is supported!');
