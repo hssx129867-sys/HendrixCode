@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Container, Card, CardBody, Button } from '../components/ui';
-import { Header } from '../components/ui/Header';
+import { CockpitContainer, CockpitPanel, CockpitPanelBody, CockpitButton } from '../design-system';
 import './ARDemo.css';
 
 export const ARDemo = () => {
@@ -13,113 +12,125 @@ export const ARDemo = () => {
 
   return (
     <div className="ar-demo-page">
-      <Header />
-      
       <div className="ar-demo-hero">
-        <Container size="md">
+        <CockpitContainer size="lg">
           <div className="ar-demo-hero__content">
             <h1 className="ar-demo-hero__title">
               <span className="ar-demo-hero__icon">🎲</span>
-              AR Demo: Place Cubes
+              AR DEMO LAB
             </h1>
             <p className="ar-demo-hero__subtitle">
-              A simple demonstration of AR plane detection and object placement
+              BASIC AR OBJECT PLACEMENT • CUBE SPAWNING • SPATIAL ANCHORS
             </p>
             <div className="ar-demo-hero__actions">
-              <Button
+              <CockpitButton
                 variant="primary"
                 size="large"
                 onClick={handleLaunchDemo}
               >
-                🚀 Start AR Demo
-              </Button>
-              <Button
-                variant="ghost"
+                🚀 START AR DEMO
+              </CockpitButton>
+              <CockpitButton
                 size="large"
                 onClick={() => navigate('/ar-game')}
               >
-                Try Full AR Game
-              </Button>
+                FULL AR GAME →
+              </CockpitButton>
             </div>
           </div>
-        </Container>
+        </CockpitContainer>
       </div>
 
-      <Container size="md">
+      <CockpitContainer size="lg">
         <section className="ar-demo-section">
-          <Card variant="elevated">
-            <CardBody>
+          <CockpitPanel variant="elevated">
+            <CockpitPanelBody>
               <div className="ar-demo-info">
-                <h2 className="ar-demo-info__title">What You'll Do</h2>
+                <h2 className="ar-demo-info__title">MISSION BRIEFING</h2>
                 <ol className="ar-demo-info__list">
                   <li>
-                    <strong>Allow camera access</strong> when your browser prompts you
+                    <strong>GRANT CAMERA ACCESS</strong> when prompted by browser
                   </li>
                   <li>
-                    <strong>Move your device slowly</strong> to help it detect flat surfaces
+                    <strong>SCAN ENVIRONMENT</strong> by moving device slowly to detect surfaces
                   </li>
                   <li>
-                    <strong>Tap anywhere</strong> on a detected surface to place a colorful cube
+                    <strong>TAP TO DEPLOY</strong> colorful cubes on detected surfaces
                   </li>
                   <li>
-                    <strong>Place multiple cubes</strong> to see how AR anchors work in your space
+                    <strong>PLACE MULTIPLE OBJECTS</strong> to test spatial anchors
                   </li>
                 </ol>
               </div>
-            </CardBody>
-          </Card>
+            </CockpitPanelBody>
+          </CockpitPanel>
         </section>
 
         <section className="ar-demo-section">
+          <h2 className="section-title">DEMO CAPABILITIES</h2>
           <div className="ar-demo-features">
-            <div className="ar-demo-feature">
-              <div className="ar-demo-feature__icon">📐</div>
-              <h3>Plane Detection</h3>
-              <p>Experience how AR detects horizontal surfaces in your environment</p>
-            </div>
-            <div className="ar-demo-feature">
-              <div className="ar-demo-feature__icon">🎯</div>
-              <h3>Hit Testing</h3>
-              <p>Learn how AR maps screen taps to 3D positions in real space</p>
-            </div>
-            <div className="ar-demo-feature">
-              <div className="ar-demo-feature__icon">⚓</div>
-              <h3>Spatial Anchors</h3>
-              <p>See how virtual objects stay locked to real-world positions</p>
-            </div>
+            <CockpitPanel variant="outlined" className="ar-demo-feature">
+              <CockpitPanelBody>
+                <div className="ar-demo-feature__icon">📐</div>
+                <h3>PLANE DETECTION</h3>
+                <p>Experience real-time surface detection in your environment</p>
+              </CockpitPanelBody>
+            </CockpitPanel>
+            <CockpitPanel variant="outlined" className="ar-demo-feature">
+              <CockpitPanelBody>
+                <div className="ar-demo-feature__icon">🎯</div>
+                <h3>HIT TESTING</h3>
+                <p>Learn how AR maps screen taps to 3D positions</p>
+              </CockpitPanelBody>
+            </CockpitPanel>
+            <CockpitPanel variant="outlined" className="ar-demo-feature">
+              <CockpitPanelBody>
+                <div className="ar-demo-feature__icon">⚓</div>
+                <h3>SPATIAL ANCHORS</h3>
+                <p>See virtual objects locked to real-world positions</p>
+              </CockpitPanelBody>
+            </CockpitPanel>
           </div>
         </section>
 
         <section className="ar-demo-section">
-          <div className="ar-demo-cta">
-            <h2>Ready to Try?</h2>
-            <p>Start placing cubes in augmented reality</p>
-            <Button
-              variant="primary"
-              size="large"
-              onClick={handleLaunchDemo}
-            >
-              🚀 Launch AR Demo
-            </Button>
-          </div>
+          <CockpitPanel variant="elevated" glow className="ar-demo-cta">
+            <CockpitPanelBody>
+              <h2>READY FOR DEPLOYMENT?</h2>
+              <p>Launch the AR demo and start placing cubes in your space</p>
+              <CockpitButton
+                variant="primary"
+                size="large"
+                onClick={handleLaunchDemo}
+              >
+                🚀 INITIATE AR DEMO
+              </CockpitButton>
+            </CockpitPanelBody>
+          </CockpitPanel>
         </section>
 
         <section className="ar-demo-section">
-          <Card variant="outlined">
-            <CardBody>
+          <CockpitPanel variant="outlined">
+            <CockpitPanelBody>
               <div className="ar-demo-tips">
-                <h3>💡 Tips for Best Results</h3>
+                <h3>💡 OPTIMAL CONDITIONS</h3>
                 <ul>
-                  <li>Use the demo in a well-lit room</li>
-                  <li>Look for surfaces with visible texture (not plain white)</li>
-                  <li>Move slowly when scanning for surfaces</li>
-                  <li>Try landscape orientation on iPad for a wider view</li>
+                  <li>Well-lit environment recommended</li>
+                  <li>Surfaces with visible texture preferred</li>
+                  <li>Slow scanning motion for best detection</li>
+                  <li>Landscape orientation optimal for iPad</li>
                 </ul>
               </div>
-            </CardBody>
-          </Card>
+            </CockpitPanelBody>
+          </CockpitPanel>
         </section>
-      </Container>
+
+        <div className="ar-demo-footer">
+          <CockpitButton onClick={() => navigate('/')}>
+            ← BACK TO MAIN
+          </CockpitButton>
+        </div>
+      </CockpitContainer>
     </div>
   );
 };
