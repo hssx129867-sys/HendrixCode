@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Container, Card, CardBody, Button } from '../components/ui';
-import { Header } from '../components/ui/Header';
+import { CockpitContainer, CockpitPanel, CockpitPanelBody, CockpitButton } from '../design-system';
 import './ARGame.css';
 
 export const ARGame = () => {
@@ -11,22 +10,22 @@ export const ARGame = () => {
   const features = [
     {
       icon: '🎯',
-      title: 'AR Plane Detection',
+      title: 'AR PLANE DETECTION',
       description: 'Automatically detects flat surfaces in your environment',
     },
     {
       icon: '📊',
-      title: 'Score Tracking',
+      title: 'SCORE TRACKING',
       description: 'Earn points by tapping targets quickly and accurately',
     },
     {
       icon: '👆',
-      title: 'Tap to Hit',
+      title: 'TAP TO HIT',
       description: 'Simple tap controls optimized for touch screens',
     },
     {
       icon: '🎮',
-      title: 'Real-time Gameplay',
+      title: 'REAL-TIME GAMEPLAY',
       description: 'Targets spawn and move in your real-world space',
     },
   ];
@@ -67,47 +66,42 @@ export const ARGame = () => {
 
   return (
     <div className="ar-game-page">
-      <Header />
-      
       <div className="ar-game-hero">
-        <Container size="lg">
+        <CockpitContainer size="lg">
           <div className="ar-game-hero__content">
             <h1 className="ar-game-hero__title">
               <span className="ar-game-hero__icon">🎯</span>
-              AR Target Drop
+              AR TARGET DROP
             </h1>
             <p className="ar-game-hero__subtitle">
-              Step into the cockpit. Experience augmented reality gaming with frontier technology.
+              FRONTIER TECH • COCKPIT HUD • AUGMENTED REALITY COMBAT
             </p>
             <div className="ar-game-hero__actions">
-              <Button
+              <CockpitButton
                 variant="primary"
                 size="large"
                 onClick={handleLaunchGame}
-                className="ar-launch-button"
               >
-                🚀 Launch AR Cockpit
-              </Button>
-              <Button
-                variant="ghost"
+                🚀 LAUNCH AR COCKPIT
+              </CockpitButton>
+              <CockpitButton
                 size="large"
                 onClick={() => navigate('/ar-demo')}
-                className="ar-demo-button"
               >
-                Try AR Demo
-              </Button>
+                🎲 TRY AR DEMO
+              </CockpitButton>
             </div>
           </div>
-        </Container>
+        </CockpitContainer>
       </div>
 
-      <Container size="lg">
+      <CockpitContainer size="lg">
         <section className="ar-game-section">
-          <h2 className="ar-game-section__title">Cockpit Features</h2>
+          <h2 className="ar-game-section__title">COCKPIT FEATURES</h2>
           <div className="ar-game-features">
             {features.map((feature, index) => (
-              <Card key={index} variant="elevated" className="ar-feature-card">
-                <CardBody>
+              <CockpitPanel key={index} variant="outlined" className="ar-feature-card">
+                <CockpitPanelBody>
                   <div className="ar-game-feature">
                     <div className="ar-game-feature__icon">{feature.icon}</div>
                     <h3 className="ar-game-feature__title">{feature.title}</h3>
@@ -115,14 +109,14 @@ export const ARGame = () => {
                       {feature.description}
                     </p>
                   </div>
-                </CardBody>
-              </Card>
+                </CockpitPanelBody>
+              </CockpitPanel>
             ))}
           </div>
         </section>
 
         <section className="ar-game-section">
-          <h2 className="ar-game-section__title">Mission Briefing</h2>
+          <h2 className="ar-game-section__title">MISSION BRIEFING</h2>
           <div className="ar-game-steps">
             {howToPlay.map((item) => (
               <div key={item.step} className="ar-game-step">
@@ -137,18 +131,17 @@ export const ARGame = () => {
         </section>
 
         <section className="ar-game-section">
-          <Card variant="outlined" className="ar-requirements-card">
-            <CardBody>
+          <CockpitPanel variant="outlined" className="ar-requirements-card">
+            <CockpitPanelBody>
               <div className="ar-game-requirements">
                 <h3 className="ar-game-requirements__title">
-                  <span>📋</span> System Requirements
-                  <Button
-                    variant="ghost"
+                  <span>📋</span> SYSTEM REQUIREMENTS
+                  <CockpitButton
                     size="small"
                     onClick={() => setShowRequirements(!showRequirements)}
                   >
                     {showRequirements ? '▲' : '▼'}
-                  </Button>
+                  </CockpitButton>
                 </h3>
                 {showRequirements && (
                   <ul className="ar-game-requirements__list">
@@ -163,25 +156,32 @@ export const ARGame = () => {
                   </ul>
                 )}
               </div>
-            </CardBody>
-          </Card>
+            </CockpitPanelBody>
+          </CockpitPanel>
         </section>
 
         <section className="ar-game-section">
-          <div className="ar-game-cta">
-            <h2>Ready for Launch?</h2>
-            <p>Enter the frontier of augmented reality gaming</p>
-            <Button
-              variant="primary"
-              size="large"
-              onClick={handleLaunchGame}
-              className="ar-launch-button"
-            >
-              🚀 Launch AR Cockpit Now
-            </Button>
-          </div>
+          <CockpitPanel variant="elevated" glow pulse className="ar-game-cta">
+            <CockpitPanelBody>
+              <h2>READY FOR LAUNCH?</h2>
+              <p>Enter the frontier of augmented reality gaming</p>
+              <CockpitButton
+                variant="primary"
+                size="large"
+                onClick={handleLaunchGame}
+              >
+                🚀 LAUNCH AR COCKPIT NOW
+              </CockpitButton>
+            </CockpitPanelBody>
+          </CockpitPanel>
         </section>
-      </Container>
+
+        <div className="ar-game-footer">
+          <CockpitButton onClick={() => navigate('/')}>
+            ← BACK TO MAIN
+          </CockpitButton>
+        </div>
+      </CockpitContainer>
     </div>
   );
 };

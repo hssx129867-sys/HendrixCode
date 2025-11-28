@@ -1,3 +1,4 @@
+/* AR Demo Play Page */
 .ar-demo-play {
   position: fixed;
   top: 0;
@@ -6,6 +7,60 @@
   height: 100vh;
   background: #000;
   overflow: hidden;
+}
+
+/* Error State */
+.ar-demo-play--error {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.ar-demo-play--error .ar-demo-error {
+  position: relative;
+  transform: none;
+  top: auto;
+  left: auto;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.ar-error-suggestions {
+  margin-top: 1.5rem;
+  text-align: left;
+  width: 100%;
+}
+
+.ar-error-suggestions h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.ar-error-suggestions ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.ar-error-suggestions li {
+  margin: 0.5rem 0;
+  padding-left: 0.5rem;
+  line-height: 1.6;
+}
+
+.ar-error-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
 }
 
 /* AR Viewport */
@@ -27,7 +82,7 @@
   z-index: 100;
 }
 
-/* Error State */
+/* Error State - for non-AR-supported devices */
 .ar-demo-error {
   position: absolute;
   top: 50%;
@@ -146,6 +201,18 @@
 
 /* Responsive */
 @media (max-width: 640px) {
+  .ar-demo-play--error .ar-demo-error {
+    padding: 1rem;
+  }
+
+  .ar-error-actions {
+    flex-direction: column;
+  }
+
+  .ar-error-actions button {
+    width: 100%;
+  }
+
   .ar-demo-hud-top {
     padding: 0.75rem;
   }

@@ -7,22 +7,33 @@ A cutting-edge web application featuring logic games, AR experiences, and Christ
 ### 🎯 AR Cockpit - Primary Mission
 Experience the future of augmented reality gaming with our **Frontier Cockpit** interface:
 
-#### AR Target Drop
+#### Routes
+- **`/ar-game`**: AR Target Drop landing page with game information
+- **`/ar-game/play`**: Active AR Target Drop game session
+- **`/ar-demo`**: AR Demo landing page with demonstration info
+- **`/ar-demo/play`**: Active AR cube placement demo session
+
+#### AR Target Drop (`/ar-game/play`)
 A fully functional AR game with an immersive sci-fi HUD:
 - **🎮 Cockpit HUD**: Futuristic interface with neon green (#00ff88) accents and glowing effects
-- **🎯 AR Plane Detection**: Automatically detects flat surfaces in your environment
-- **⚡ Real-time Gameplay**: Place spawn pad and tap targets to score points
-- **🎛️ Game Controls**: Pause, resume, and restart with cockpit-style buttons
+- **🎯 Mock AR Simulation**: Demonstrates full game flow (WebXR integration in progress)
+- **⚡ Real-time Gameplay**: Auto-placement of spawn pad, target spawning, and scoring
+- **🎛️ Game Controls**: Pause, resume, restart, and exit with cockpit-style buttons
 - **📊 Live Score Tracking**: Real-time display with glowing visual effects
 - **📱 iPad Optimized**: Touch-friendly controls designed for tablet gaming
 - **🌐 Responsive**: Works on mobile, tablet, and desktop devices
 - **🛡️ Graceful Fallbacks**: Clear error messaging for unsupported devices
 
-#### AR Demo
+#### AR Demo (`/ar-demo/play`)
 Simple demonstration of AR capabilities:
-- Place colorful cubes in your environment
-- Learn about plane detection and spatial anchors
-- Perfect for first-time AR users
+- **🎲 Interactive Cube Placement**: Tap anywhere to place colorful cubes
+- **📐 Plane Detection Simulation**: Learn about AR surface detection concepts
+- **⚓ Spatial Anchors**: See how virtual objects lock to positions
+- **🗑️ Clear Function**: Remove all placed cubes with one tap
+- **Perfect for first-time AR users**: Simple, intuitive interaction
+
+**Current Implementation:**
+Both AR experiences use mock implementations (`MockARGame` and `MockARDemo`) that demonstrate the full UI/UX flow and game mechanics without requiring AR hardware. Full WebXR integration with the existing AR engine (`ARTargetDrop.ts` and `PlaceCubeDemo.ts`) is ready for future deployment when build configuration is unified.
 
 **Cockpit Design System:**
 - Monospace "Courier New" font for tech aesthetic
@@ -32,6 +43,8 @@ Simple demonstration of AR capabilities:
 - Pulsing animations for status messages
 - Safe area insets for notched devices
 - High contrast for visibility in various lighting
+- Reusable components: `CockpitButton`, `CockpitPanel`, `CockpitContainer`
+- Comprehensive design tokens for consistent theming
 
 ### 🎮 Game Zone
 Classic logic games and challenges:

@@ -1,13 +1,60 @@
+/* AR Demo Page - Cockpit Theme */
+
 .ar-demo-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+  background: linear-gradient(135deg, #0a1f35 0%, #1a0f2e 50%, #0f1419 100%);
+  position: relative;
+  overflow-x: hidden;
+  color: var(--cockpit-green);
+  font-family: var(--cockpit-font);
+}
+
+/* Animated grid background */
+.ar-demo-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 255, 136, 0.03) 0px,
+      transparent 2px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 136, 0.03) 0px,
+      transparent 2px,
+      transparent 40px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ar-demo-page > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Hero Section */
 .ar-demo-hero {
-  padding: 3rem 0;
+  padding: 4rem 0 3rem;
   text-align: center;
-  color: white;
+  position: relative;
+}
+
+.ar-demo-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--cockpit-green) 50%, transparent 100%);
+  opacity: 0.3;
 }
 
 .ar-demo-hero__content {
@@ -18,7 +65,7 @@
 }
 
 .ar-demo-hero__title {
-  font-size: var(--text-4xl);
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
   margin: 0;
   display: flex;
@@ -26,18 +73,32 @@
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  text-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+  letter-spacing: var(--cockpit-letter-spacing);
 }
 
 .ar-demo-hero__icon {
-  font-size: 3.5rem;
-  animation: rotate 4s linear infinite;
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  animation: rotate 6s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.6));
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .ar-demo-hero__subtitle {
-  font-size: var(--text-lg);
+  font-size: clamp(0.875rem, 2vw, 1rem);
   margin: 0;
-  opacity: 0.95;
-  max-width: 500px;
+  opacity: 0.9;
+  max-width: 700px;
+  line-height: 1.6;
+  letter-spacing: 1px;
 }
 
 .ar-demo-hero__actions {
@@ -49,7 +110,16 @@
 
 /* Sections */
 .ar-demo-section {
-  padding: 2rem 0;
+  padding: 2.5rem 0;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  letter-spacing: 2px;
 }
 
 /* Info */
@@ -58,11 +128,12 @@
 }
 
 .ar-demo-info__title {
-  font-size: var(--text-2xl);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
+  margin-bottom: 2rem;
   text-align: center;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  letter-spacing: 2px;
 }
 
 .ar-demo-info__list {
@@ -75,11 +146,11 @@
 .ar-demo-info__list li {
   counter-increment: demo-counter;
   position: relative;
-  padding-left: 3rem;
+  padding-left: 3.5rem;
   margin-bottom: 1.5rem;
   font-size: var(--text-base);
   line-height: 1.6;
-  color: var(--text-primary);
+  color: rgba(0, 255, 136, 0.9);
 }
 
 .ar-demo-info__list li::before {
@@ -87,79 +158,76 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 2rem;
-  height: 2rem;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(0, 255, 136, 0.2);
+  color: var(--cockpit-green);
+  border: 2px solid var(--cockpit-green);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
 }
 
 /* Features */
 .ar-demo-features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
-  padding: 1rem 0;
+  padding: 0;
 }
 
 .ar-demo-feature {
-  background: var(--surface);
-  padding: 2rem 1.5rem;
-  border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  transition: transform 0.3s ease;
 }
 
 .ar-demo-feature:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
 .ar-demo-feature__icon {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
+  filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.5));
 }
 
 .ar-demo-feature h3 {
   font-size: var(--text-lg);
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: 2px;
 }
 
 .ar-demo-feature p {
   font-size: var(--text-sm);
-  color: var(--text-secondary);
+  color: rgba(0, 255, 136, 0.8);
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* CTA */
 .ar-demo-cta {
   text-align: center;
-  padding: 3rem 2rem;
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
 }
 
 .ar-demo-cta h2 {
-  font-size: var(--text-2xl);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+  letter-spacing: 2px;
 }
 
 .ar-demo-cta p {
   font-size: var(--text-base);
-  color: var(--text-secondary);
+  color: rgba(0, 255, 136, 0.8);
   margin-bottom: 2rem;
+  line-height: 1.6;
 }
 
 /* Tips */
@@ -170,9 +238,9 @@
 .ar-demo-tips h3 {
   font-size: var(--text-xl);
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
+  margin-bottom: 1.5rem;
   text-align: center;
+  letter-spacing: 2px;
 }
 
 .ar-demo-tips ul {
@@ -185,7 +253,7 @@
   padding: 0.75rem 0 0.75rem 2rem;
   position: relative;
   font-size: var(--text-base);
-  color: var(--text-primary);
+  color: rgba(0, 255, 136, 0.9);
   line-height: 1.6;
 }
 
@@ -193,29 +261,26 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--success);
+  color: var(--cockpit-green);
   font-weight: 700;
   font-size: var(--text-lg);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
 
-/* Animations */
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Footer */
+.ar-demo-footer {
+  padding: 2rem 0 3rem;
+  text-align: center;
 }
 
 /* Responsive */
 @media (max-width: 640px) {
   .ar-demo-hero {
-    padding: 2rem 0;
+    padding: 3rem 0 2rem;
   }
 
   .ar-demo-hero__title {
-    font-size: var(--text-2xl);
+    font-size: clamp(1.5rem, 5vw, 2rem);
   }
 
   .ar-demo-hero__icon {
@@ -223,10 +288,31 @@
   }
 
   .ar-demo-hero__subtitle {
-    font-size: var(--text-base);
+    font-size: 0.875rem;
   }
 
   .ar-demo-features {
     grid-template-columns: 1fr;
+  }
+
+  .ar-demo-info__list li {
+    padding-left: 3rem;
+  }
+
+  .ar-demo-info__list li::before {
+    width: 2rem;
+    height: 2rem;
+    font-size: var(--text-sm);
+  }
+}
+
+/* iPad Landscape */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .ar-demo-hero {
+    padding: 5rem 0 4rem;
+  }
+
+  .ar-demo-section {
+    padding: 3rem 0;
   }
 }

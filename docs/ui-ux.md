@@ -13,13 +13,90 @@ This document describes the user interface and user experience architecture for 
 ├── /players (Player Selection)
 ├── /play (Game Hub - Existing games)
 ├── /game/:gameId (Individual games)
-├── /ar-game (AR Target Drop - NEW)
-├── /ar-demo (AR Demo/Place Cube - NEW)
+├── /ar-game (AR Target Drop Landing)
+│   └── /ar-game/play (Active AR Game Session)
+├── /ar-demo (AR Demo Landing)
+│   └── /ar-demo/play (Active AR Demo Session)
 ├── /christmas-lab (Christmas Tools)
 └── /profile (Player Profile)
 ```
 
-### New AR Portal Routes
+### Route → Component → Engine Mapping
+
+#### AR Game Routes
+
+1. **AR Game Landing** (`/ar-game`)
+   - **Component**: `src/pages/ARGame.tsx`
+   - **Purpose**: Marketing/info page with game features and instructions
+   - **AR Engine**: None (no AR initialization)
+   - **Status**: ✅ Fully functional
+   - **Theme**: Uses base UI components (Button, Card, Container) - needs cockpit theme enhancement
+
+2. **AR Game Play** (`/ar-game/play`)
+   - **Component**: `src/pages/ARGamePlay.tsx`
+   - **AR Wrapper**: `src/components/ar/ARGameWrapper.tsx`
+   - **AR Engine**: `src/components/ar/MockARGame.ts` (current) OR `src/samples/ar-mini-game/ARTargetDrop.ts` (target)
+   - **Purpose**: Active AR game session with HUD and controls
+   - **Status**: ⚠️ Works with mock/simulation, full WebXR not integrated
+   - **Theme**: Cockpit theme applied to HUD
+   - **Key Features**:
+     - Mock game auto-places spawn pad after 3 seconds
+     - Auto-scores points every 2 seconds (simulates hitting targets)
+     - Game states: initializing → placing → playing → paused → game_over
+     - Pause/Resume/Restart controls
+     - Exit with confirmation
+
+3. **AR Demo Landing** (`/ar-demo`)
+   - **Component**: `src/pages/ARDemo.tsx`
+   - **Purpose**: Info page for simple cube placement demo
+   - **AR Engine**: None (no AR initialization)
+   - **Status**: ⚠️ Needs implementation
+   - **Theme**: Needs cockpit theme
+
+4. **AR Demo Play** (`/ar-demo/play`)
+   - **Component**: `src/pages/ARDemoPlay.tsx`
+   - **AR Engine**: `src/samples/ar-demo/PlaceCubeDemo.ts` (target)
+   - **Purpose**: Simple AR demo - tap to place cubes
+   - **Status**: ❌ Shows "coming soon" message, not functional
+   - **Theme**: Needs cockpit theme and full implementation
+
+### AR Integration Status
+
+#### Current Implementation (MockARGame)
+- ✅ Provides functional demo of game flow
+- ✅ Works in all browsers without AR hardware
+- ✅ Demonstrates UI/UX patterns
+- ❌ No real AR session (no camera, no plane detection)
+- ❌ No hit testing or spatial anchors
+- ❌ Auto-simulated gameplay (not user-driven)
+
+#### Target Implementation (ARTargetDrop + PlaceCubeDemo)
+- ✅ Full AR engine exists in `src/samples/`
+- ✅ WebXR/ARKit/ARCore abstractions implemented
+- ❌ Not integrated into React web app
+- ❌ TypeScript configuration issues prevent direct import
+- ❌ Module resolution conflicts between AR engine and web app
+
+#### Root Causes for Incomplete AR Integration
+
+1. **TypeScript Configuration Conflicts**
+   - AR engine uses different tsconfig (`tsconfig.ar.json`)
+   - Web app uses `tsconfig.app.json`
+   - Module resolution differs between configs
+   - WebXR types not available in web app context
+
+2. **Build System Separation**
+   - AR engine designed to build separately
+   - No unified build that includes both web app and AR engine
+   - Vite build doesn't include AR engine modules
+
+3. **Strategy: Mock Implementation**
+   - MockARGame created as workaround
+   - Provides functional demo without AR dependencies
+   - Allows UI/UX development to proceed
+   - Can be replaced with real AR later when config resolved
+
+### New AR Portal Routes (Detailed)
 
 1. **AR Game Landing** (`/ar-game`)
    - Main entry point for AR Target Drop game
@@ -29,7 +106,7 @@ This document describes the user interface and user experience architecture for 
    - How to play instructions
    - Does NOT initialize AR until user taps "Play"
 
-2. **AR Demo** (`/ar-demo`)
+2. **AR Demo Landing** (`/ar-demo`)
    - Simple AR cube placement demonstration
    - Educational/testing purposes
    - Basic AR interaction showcase

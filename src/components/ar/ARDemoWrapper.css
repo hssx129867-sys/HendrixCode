@@ -1,0 +1,319 @@
+/* AR Demo Wrapper - Frontier Cockpit Theme */
+
+.ar-demo-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* AR Viewport - where the camera feed and 3D rendering happens */
+.ar-demo-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  cursor: crosshair;
+}
+
+/* Mock Scene Display */
+.ar-demo-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
+  position: relative;
+}
+
+.ar-demo-message {
+  text-align: center;
+  color: #00ff88;
+  padding: 2rem;
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ar-demo-message h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+  font-family: 'Courier New', monospace;
+}
+
+.ar-demo-message p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+  opacity: 0.9;
+  font-family: 'Courier New', monospace;
+}
+
+.ar-demo-note {
+  margin-top: 1.5rem;
+  font-size: 0.875rem !important;
+  opacity: 0.7 !important;
+  font-style: italic;
+}
+
+/* Placed Cubes */
+.ar-demo-cube {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  box-shadow: 
+    0 0 20px currentColor,
+    inset 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%) rotateZ(45deg);
+  animation: cubePulse 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes cubePulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotateZ(45deg) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotateZ(45deg) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* HUD Overlay - Cockpit-style interface */
+.ar-demo-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  font-family: 'Courier New', monospace;
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  z-index: 10;
+}
+
+.ar-demo-hud * {
+  pointer-events: auto;
+}
+
+/* Top Bar */
+.ar-demo-hud-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  z-index: 10;
+}
+
+/* Demo Title */
+.ar-demo-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.8);
+}
+
+/* Buttons */
+.ar-demo-button {
+  background: rgba(0, 20, 40, 0.8);
+  border: 2px solid #00ff88;
+  border-radius: 8px;
+  color: #00ff88;
+  font-family: 'Courier New', monospace;
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  box-shadow: 
+    0 0 15px rgba(0, 255, 136, 0.2),
+    inset 0 0 10px rgba(0, 255, 136, 0.1);
+  backdrop-filter: blur(10px);
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ar-demo-button:hover {
+  background: rgba(0, 255, 136, 0.2);
+  box-shadow: 
+    0 0 25px rgba(0, 255, 136, 0.4),
+    inset 0 0 15px rgba(0, 255, 136, 0.2);
+  transform: translateY(-2px);
+}
+
+.ar-demo-button:active {
+  transform: translateY(0);
+}
+
+.ar-demo-button--exit {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+.ar-demo-button--clear {
+  font-size: 1.25rem;
+}
+
+/* Center Status Message */
+.ar-demo-hud-center {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  max-width: 90%;
+}
+
+.ar-demo-status {
+  background: rgba(0, 20, 40, 0.9);
+  border: 2px solid #00ff88;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 136, 0.4),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+  backdrop-filter: blur(15px);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 136, 0.4),
+      inset 0 0 20px rgba(0, 255, 136, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(0, 255, 136, 0.6),
+      inset 0 0 25px rgba(0, 255, 136, 0.15);
+  }
+}
+
+.ar-demo-status__icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.6));
+}
+
+.ar-demo-status__message {
+  font-size: 1.125rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.ar-demo-status__count {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  letter-spacing: 2px;
+  margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .ar-demo-hud-top {
+    padding: 1rem;
+  }
+
+  .ar-demo-title {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .ar-demo-button {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .ar-demo-cube {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ar-demo-status {
+    padding: 1rem 1.5rem;
+  }
+
+  .ar-demo-status__icon {
+    font-size: 2rem;
+  }
+
+  .ar-demo-status__message {
+    font-size: 1rem;
+  }
+
+  .ar-demo-message h3 {
+    font-size: 1.5rem;
+  }
+
+  .ar-demo-message p {
+    font-size: 1rem;
+  }
+}
+
+/* iPad Landscape Optimization */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .ar-demo-hud-top {
+    padding: 1.5rem 2rem;
+  }
+
+  .ar-demo-status {
+    max-width: 600px;
+  }
+
+  .ar-demo-cube {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Safe Area Support for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  .ar-demo-hud-top {
+    padding-top: max(1.5rem, env(safe-area-inset-top));
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .ar-demo-cube,
+  .ar-demo-status {
+    animation: none;
+  }
+  
+  .ar-demo-button {
+    transition: none;
+  }
+}
