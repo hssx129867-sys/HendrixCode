@@ -56,6 +56,13 @@ export const getDefaultPlayers = (): Player[] => {
       avatarType: 'star',
       progress: {},
     },
+    {
+      id: '4',
+      name: 'Presley',
+      favoriteColor: '#FFE66D',
+      avatarType: 'lightbulb',
+      progress: {},
+    },
   ];
 };
 
