@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { MockARDemo } from './MockARDemo';
+import { MockARDemo, type MockARDemoSession } from './MockARDemo';
+import { RealARDemoAdapter } from './RealARDemoAdapter';
 import type { CubeData } from './MockARDemo';
 import { getARMode, getARAvailabilityMessage, type ARCapabilityResult } from '../../utils/arCapability';
 import './ARDemoWrapper.css';
@@ -10,21 +11,13 @@ interface ARDemoWrapperProps {
 }
 
 export const ARDemoWrapper = ({ onExit, onError }: ARDemoWrapperProps) => {
-  const demoRef = useRef<MockARDemo | null>(null);
+  const demoRef = useRef<MockARDemoSession | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(0);
   const [cubes, setCubes] = useState<CubeData[]>([]);
   const [statusMessage, setStatusMessage] = useState('Initializing AR session...');
   const [isReady, setIsReady] = useState(false);
   const [arCapability, setArCapability] = useState<ARCapabilityResult | null>(null);
-
-  // Check AR capability on mount
-  useEffect(() => {
-    getARMode().then(capability => {
-      setArCapability(capability);
-      console.log('[ARDemoWrapper] AR Capability:', capability);
-    });
-  }, []);
 
   // Demo render loop
   const startRenderLoop = useCallback(() => {
@@ -52,9 +45,20 @@ export const ARDemoWrapper = ({ onExit, onError }: ARDemoWrapperProps) => {
 
     const initDemo = async () => {
       try {
-        console.log('Creating Mock AR Demo instance...');
+        // Check AR capability first
+        const capability = await getARMode();
+        if (mounted) {
+          setArCapability(capability);
+        }
+
+        console.log(`Creating ${capability.mode === 'real' ? 'Real' : 'Mock'} AR Demo instance...`);
         
-        const demo = new MockARDemo();
+        let demo: MockARDemoSession;
+        if (capability.mode === 'real') {
+          demo = new RealARDemoAdapter();
+        } else {
+          demo = new MockARDemo();
+        }
         demoRef.current = demo;
 
         console.log('Initializing AR session...');

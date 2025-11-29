@@ -1,40 +1,28 @@
-.christmas-lab-container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+.christmas-lab-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--cockpit-spacing-md);
 }
 
-.christmas-header {
+.christmas-lab-header .header-content {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  margin-bottom: 2rem;
+  gap: var(--cockpit-spacing-lg);
 }
 
-.christmas-info {
-  flex: 1;
-}
-
-.christmas-info h1 {
-  margin: 0 0 1rem 0;
-  color: #2d3748;
+.header-info h1 {
+  margin: 0 0 var(--cockpit-spacing-sm) 0;
+  color: var(--cockpit-text-primary);
   font-size: 2rem;
 }
 
 .countdown {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  padding: 1rem 2rem;
-  border-radius: 15px;
-  color: white;
+  gap: var(--cockpit-spacing-sm);
+  background: var(--cockpit-accent-gradient);
+  padding: var(--cockpit-spacing-md) var(--cockpit-spacing-lg);
+  border-radius: var(--cockpit-border-radius-md);
+  color: var(--cockpit-text-primary);
   font-weight: bold;
 }
 
@@ -50,96 +38,50 @@
 .christmas-tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: var(--cockpit-spacing-lg);
+  margin: var(--cockpit-spacing-xl) 0;
 }
 
-.christmas-tool-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.christmas-tool-panel {
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.christmas-tool-card:not(.coming-soon):hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.christmas-tool-card.highlight {
-  background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
-  border: 3px solid #f76707;
-  animation: glow 2s infinite;
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 4px 15px rgba(247, 103, 7, 0.5); }
-  50% { box-shadow: 0 8px 30px rgba(247, 103, 7, 0.8); }
-}
-
-.christmas-tool-card.highlight h3 {
-  color: #c92a2a;
-}
-
-.btn-highlight {
-  background: linear-gradient(135deg, #c92a2a 0%, #e03131 100%);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 15px rgba(201, 42, 42, 0.3);
-  font-weight: 700;
-}
-
-.btn-highlight:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(201, 42, 42, 0.5);
-}
-
-.btn-highlight:active {
-  transform: translateY(0);
-}
-
-.christmas-tool-card.coming-soon {
-  opacity: 0.6;
+.christmas-tool-panel.highlight {
+  border-color: var(--cockpit-accent-primary);
 }
 
 .tool-icon {
   font-size: 4rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--cockpit-spacing-md);
 }
 
-.christmas-tool-card h3 {
-  margin: 0 0 1rem 0;
-  color: #2d3748;
+.christmas-tool-panel h3 {
+  margin: 0 0 var(--cockpit-spacing-sm) 0;
+  color: var(--cockpit-text-primary);
   font-size: 1.5rem;
 }
 
-.christmas-tool-card p {
-  color: #718096;
-  margin-bottom: 1.5rem;
+.christmas-tool-panel p {
+  color: var(--cockpit-text-secondary);
+  margin-bottom: var(--cockpit-spacing-lg);
   font-size: 1.1rem;
 }
 
 .nav-buttons {
   display: flex;
-  gap: 1rem;
+  gap: var(--cockpit-spacing-md);
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: var(--cockpit-spacing-xl);
 }
 
 @media (max-width: 768px) {
-  .christmas-header {
+  .christmas-lab-header .header-content {
     flex-direction: column;
     text-align: center;
   }
 
-  .christmas-info h1 {
+  .header-info h1 {
     font-size: 1.5rem;
   }
 

@@ -23,6 +23,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@types/webxr": "^0.5.24",
     "@vitejs/plugin-react": "^5.1.1",
     "@vitest/ui": "^4.0.14",
     "eslint": "^9.39.1",
