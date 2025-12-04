@@ -106,6 +106,29 @@ export const Home = () => {
               </div>
             </CockpitPanelBody>
           </CockpitPanel>
+
+          {/* Coding Bank */}
+          <CockpitPanel variant="outlined" className="home-section">
+            <CockpitPanelBody>
+              <div className="section-header">
+                <span className="section-icon">💾</span>
+                <h2 className="section-title">CODING BANK</h2>
+              </div>
+              <p className="section-description">
+                Your personal code library. Snippets, tutorials, and templates for learning and development.
+              </p>
+              <div className="section-features">
+                <span className="feature">📝 CODE SNIPPETS</span>
+                <span className="feature">📚 TUTORIALS</span>
+                <span className="feature">🧩 COMPONENTS</span>
+              </div>
+              <div className="section-actions">
+                <CockpitButton size="large" onClick={() => navigate('/coding-bank')}>
+                  💾 OPEN BANK
+                </CockpitButton>
+              </div>
+            </CockpitPanelBody>
+          </CockpitPanel>
         </div>
 
         {/* Pilots Section */}
