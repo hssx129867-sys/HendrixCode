@@ -258,11 +258,9 @@
   font-family: 'Courier New', monospace;
   color: var(--cockpit-color-accent, #a0ffd0);
   line-height: 1.8;
-  margin: 1rem 0 2rem;
+  margin: 1rem auto 2rem;
   text-align: center;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .info-features {

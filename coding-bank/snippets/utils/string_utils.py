@@ -4,6 +4,9 @@ String Utility Functions
 Common string manipulation and validation utilities.
 """
 
+import re
+
+
 def capitalize_words(text):
     """
     Capitalize the first letter of each word
@@ -135,7 +138,6 @@ def camel_to_snake(text):
         >>> camel_to_snake("helloWorldExample")
         "hello_world_example"
     """
-    import re
     return re.sub(r'(?<!^)(?=[A-Z])', '_', text).lower()
 
 

@@ -195,11 +195,13 @@ def breadth_first_search(graph, start):
         >>> breadth_first_search(graph, 'A')
         ['A', 'B', 'C', 'D', 'E', 'F']
     """
+    from collections import deque
+    
     visited = []
-    queue = [start]
+    queue = deque([start])
     
     while queue:
-        node = queue.pop(0)
+        node = queue.popleft()  # O(1) with deque
         if node not in visited:
             visited.append(node)
             queue.extend([n for n in graph.get(node, []) if n not in visited])
