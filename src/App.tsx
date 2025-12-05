@@ -15,6 +15,7 @@ import { ARGame } from './pages/ARGame';
 import { ARGamePlay } from './pages/ARGamePlay';
 import { ARDemo } from './pages/ARDemo';
 import { ARDemoPlay } from './pages/ARDemoPlay';
+import { CodingBank } from './pages/CodingBank';
 import { CockpitNav } from './components/CockpitNav';
 import './App.css';
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/christmas-ideas" element={<ChristmasIdeas />} />
         <Route path="/find-elves" element={<FindElves />} />
         <Route path="/secret-santa" element={<SecretSanta />} />
+        <Route path="/coding-bank" element={<CodingBank />} />
       </Routes>
     </Router>
   );
