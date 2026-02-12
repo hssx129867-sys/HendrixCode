@@ -129,6 +129,29 @@ export const Home = () => {
               </div>
             </CockpitPanelBody>
           </CockpitPanel>
+
+          {/* YouTube Shop */}
+          <CockpitPanel variant="outlined" className="home-section">
+            <CockpitPanelBody>
+              <div className="section-header">
+                <span className="section-icon">📺</span>
+                <h2 className="section-title">YOUTUBE SHOP</h2>
+              </div>
+              <p className="section-description">
+                Create and sell your own merch and food items. Build your brand and let people buy your creations!
+              </p>
+              <div className="section-features">
+                <span className="feature">👕 CREATE MERCH</span>
+                <span className="feature">🍔 CUSTOM FOOD</span>
+                <span className="feature">🛍️ SELL ITEMS</span>
+              </div>
+              <div className="section-actions">
+                <CockpitButton size="large" onClick={() => navigate('/youtube-shop')}>
+                  🛍️ OPEN SHOP
+                </CockpitButton>
+              </div>
+            </CockpitPanelBody>
+          </CockpitPanel>
         </div>
 
         {/* Pilots Section */}

@@ -16,6 +16,7 @@ import { ARGamePlay } from './pages/ARGamePlay';
 import { ARDemo } from './pages/ARDemo';
 import { ARDemoPlay } from './pages/ARDemoPlay';
 import { CodingBank } from './pages/CodingBank';
+import { YouTubeShop } from './pages/YouTubeShop';
 import { CockpitNav } from './components/CockpitNav';
 import './App.css';
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/find-elves" element={<FindElves />} />
         <Route path="/secret-santa" element={<SecretSanta />} />
         <Route path="/coding-bank" element={<CodingBank />} />
+        <Route path="/youtube-shop" element={<YouTubeShop />} />
       </Routes>
     </Router>
   );

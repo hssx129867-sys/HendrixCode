@@ -1,4 +1,4 @@
-import type { Player, ChristmasList, ChristmasListItem, ChristmasProgress, ElfLocation, ChristmasJoke, SantaLocation, Pet, PetStats, PetPhoto, SecretSantaEvent, SecretSantaParticipant, SecretSantaPairing } from '../types';
+import type { Player, ChristmasList, ChristmasListItem, ChristmasProgress, ElfLocation, ChristmasJoke, SantaLocation, Pet, PetStats, PetPhoto, SecretSantaEvent, SecretSantaParticipant, SecretSantaPairing, ShopItem, ShopInventory, ItemCategory } from '../types';
 
 const STORAGE_KEY = 'bestBoysData';
 const ACTIVE_PLAYER_KEY = 'bestBoysActivePlayer';
@@ -6,6 +6,7 @@ const CHRISTMAS_LISTS_KEY = 'bestBoysChristmasLists';
 const CHRISTMAS_PROGRESS_KEY = 'bestBoysChristmasProgress';
 const PETS_KEY = 'bestBoysPets';
 const SECRET_SANTA_KEY = 'bestBoysSecretSanta';
+const YOUTUBE_SHOP_KEY = 'bestBoysYouTubeShop';
 
 export const getPlayers = (): Player[] => {
   try {
@@ -741,4 +742,121 @@ export const getSecretSantaAssignment = (playerId: string, participantName: stri
   
   const pairing = event.pairings.find((p) => p.giver === participantName);
   return pairing ? pairing.receiver : null;
+};
+
+// YouTube Shop functions
+export const getShopInventory = (playerId: string): ShopInventory => {
+  try {
+    const data = localStorage.getItem(YOUTUBE_SHOP_KEY);
+    const inventories: ShopInventory[] = data ? JSON.parse(data) : [];
+    const inventory = inventories.find((inv) => inv.playerId === playerId);
+    
+    if (inventory) {
+      return inventory;
+    }
+    
+    return {
+      playerId,
+      items: [],
+      lastUpdated: Date.now(),
+    };
+  } catch (error) {
+    console.error('Error reading shop inventory from localStorage:', error);
+    return {
+      playerId,
+      items: [],
+      lastUpdated: Date.now(),
+    };
+  }
+};
+
+export const getAllShopItems = (): ShopItem[] => {
+  try {
+    const data = localStorage.getItem(YOUTUBE_SHOP_KEY);
+    const inventories: ShopInventory[] = data ? JSON.parse(data) : [];
+    
+    // Combine all items from all inventories
+    const allItems: ShopItem[] = [];
+    inventories.forEach((inventory) => {
+      allItems.push(...inventory.items);
+    });
+    
+    return allItems;
+  } catch (error) {
+    console.error('Error reading all shop items from localStorage:', error);
+    return [];
+  }
+};
+
+export const saveShopInventory = (inventory: ShopInventory): void => {
+  try {
+    const data = localStorage.getItem(YOUTUBE_SHOP_KEY);
+    const inventories: ShopInventory[] = data ? JSON.parse(data) : [];
+    const index = inventories.findIndex((inv) => inv.playerId === inventory.playerId);
+    
+    inventory.lastUpdated = Date.now();
+    
+    if (index >= 0) {
+      inventories[index] = inventory;
+    } else {
+      inventories.push(inventory);
+    }
+    
+    localStorage.setItem(YOUTUBE_SHOP_KEY, JSON.stringify(inventories));
+  } catch (error) {
+    console.error('Error saving shop inventory to localStorage:', error);
+  }
+};
+
+export const addShopItem = (
+  playerId: string,
+  name: string,
+  category: ItemCategory,
+  price: number,
+  emoji: string,
+  description?: string
+): ShopItem => {
+  const inventory = getShopInventory(playerId);
+  
+  const newItem: ShopItem = {
+    id: `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+    name,
+    description,
+    category,
+    price,
+    emoji,
+    createdAt: Date.now(),
+    createdBy: playerId,
+    purchases: 0,
+  };
+  
+  inventory.items.push(newItem);
+  saveShopInventory(inventory);
+  
+  return newItem;
+};
+
+export const removeShopItem = (playerId: string, itemId: string): void => {
+  const inventory = getShopInventory(playerId);
+  inventory.items = inventory.items.filter((item) => item.id !== itemId);
+  saveShopInventory(inventory);
+};
+
+export const purchaseShopItem = (itemId: string): void => {
+  try {
+    const data = localStorage.getItem(YOUTUBE_SHOP_KEY);
+    const inventories: ShopInventory[] = data ? JSON.parse(data) : [];
+    
+    // Find the item across all inventories
+    for (const inventory of inventories) {
+      const item = inventory.items.find((i) => i.id === itemId);
+      if (item) {
+        item.purchases += 1;
+        saveShopInventory(inventory);
+        break;
+      }
+    }
+  } catch (error) {
+    console.error('Error purchasing shop item:', error);
+  }
 };

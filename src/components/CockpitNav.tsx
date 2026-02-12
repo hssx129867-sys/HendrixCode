@@ -60,6 +60,14 @@ export const CockpitNav = () => {
           >
             🎄 CHRISTMAS
           </CockpitButton>
+          
+          <CockpitButton
+            size="small"
+            variant={isActive('/youtube-shop') ? 'primary' : 'default'}
+            onClick={() => navigate('/youtube-shop')}
+          >
+            📺 SHOP
+          </CockpitButton>
         </div>
       </div>
     </nav>
