@@ -59,7 +59,12 @@ export const YouTubeShop = () => {
   const handleAddItem = () => {
     if (!player || !itemName.trim()) return;
 
-    const price = parseFloat(itemPrice) || 0;
+    const price = parseFloat(itemPrice);
+    if (isNaN(price) || price < 0) {
+      alert('Please enter a valid price (must be 0 or greater)');
+      return;
+    }
+    
     addShopItem(player.id, itemName.trim(), itemCategory, price, itemEmoji, itemDescription.trim());
 
     // Reset form
