@@ -40,8 +40,11 @@ export const YouTubeShop = () => {
     const players = getPlayers();
     const foundPlayer = players.find((p) => p.id === playerId);
     if (foundPlayer) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPlayer(foundPlayer);
-      loadItems(playerId);
+      const inventory = getShopInventory(playerId);
+      setMyItems(inventory.items);
+      setAllItems(getAllShopItems());
     } else {
       navigate('/players');
     }
