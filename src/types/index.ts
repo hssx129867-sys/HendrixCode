@@ -131,3 +131,24 @@ export interface SecretSantaEvent {
   createdAt: number;
   lastUpdated: number;
 }
+
+// YouTube Shop Types
+export type ItemCategory = 'merch' | 'food';
+
+export interface ShopItem {
+  id: string;
+  name: string;
+  description?: string;
+  category: ItemCategory;
+  price: number;
+  emoji: string;
+  createdAt: number;
+  createdBy: string; // playerId
+  purchases: number;
+}
+
+export interface ShopInventory {
+  playerId: string;
+  items: ShopItem[];
+  lastUpdated: number;
+}
