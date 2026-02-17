@@ -8,6 +8,7 @@ A curated collection of code snippets, reusable components, templates, and tutor
 Code snippets organized by topic and language. Quick reference implementations of common algorithms, patterns, and utilities.
 
 - **algorithm.py**: Common algorithms (sorting, searching, etc.)
+- **fnaf_ai_game.py**: Five Nights at Freddy's AI-powered interactive game
 - **utils/**: Utility functions and helpers
 
 ### `/components`
