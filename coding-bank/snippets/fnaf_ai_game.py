@@ -31,8 +31,18 @@ except ImportError:
 # On Linux/Mac: export OPENAI_API_KEY="your-key-here"
 # On Windows: set OPENAI_API_KEY=your-key-here
 # Or create a .env file and use python-dotenv
+
+# Initialize OpenAI client (for openai >= 1.0.0)
+# For older versions, this will fall back to the legacy API pattern
+openai_client = None
 if OPENAI_AVAILABLE:
-    openai.api_key = os.environ.get("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY")
+    api_key = os.environ.get("OPENAI_API_KEY", "YOUR_OPENAI_API_KEY")
+    try:
+        # Try new client-based API (openai >= 1.0.0)
+        openai_client = openai.OpenAI(api_key=api_key)
+    except (AttributeError, TypeError):
+        # Fall back to legacy API for older versions
+        openai.api_key = api_key
 
 # Animatronics
 animatronics = ["Freddy", "Bonnie", "Chica"]
@@ -57,27 +67,43 @@ def ai_response(animatronic, player_input):
         return f"[DEMO] I'm {animatronic}... watching you... 🐻👁️"
     
     try:
-        prompt = f"You are {animatronic} from Five Nights at Freddy's. Respond in a spooky way to the player: '{player_input}'"
-        
         # Using the newer ChatCompletion API (recommended)
         # Note: text-davinci-003 is deprecated. Use gpt-3.5-turbo or gpt-4 instead
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": f"You are {animatronic} from Five Nights at Freddy's. Be spooky and menacing but family-friendly."},
-                {"role": "user", "content": player_input}
-            ],
-            max_tokens=50,
-            temperature=0.8
-        )
-        return response.choices[0].message.content.strip()
+        
+        if openai_client:
+            # New client-based API (openai >= 1.0.0)
+            response = openai_client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": f"You are {animatronic} from Five Nights at Freddy's. Be spooky and menacing but family-friendly."},
+                    {"role": "user", "content": player_input}
+                ],
+                max_tokens=50,
+                temperature=0.8
+            )
+            return response.choices[0].message.content.strip()
+        else:
+            # Legacy API (openai < 1.0.0)
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": f"You are {animatronic} from Five Nights at Freddy's. Be spooky and menacing but family-friendly."},
+                    {"role": "user", "content": player_input}
+                ],
+                max_tokens=50,
+                temperature=0.8
+            )
+            return response.choices[0].message.content.strip()
     
-    except openai.error.AuthenticationError:
-        return f"[ERROR: Invalid API key. Please set your OPENAI_API_KEY environment variable]"
-    except openai.error.RateLimitError:
-        return f"[ERROR: Rate limit exceeded. Please try again later]"
     except Exception as e:
-        return f"[ERROR: {str(e)}]"
+        # Handle both old and new API error types
+        error_msg = str(e)
+        if "authentication" in error_msg.lower() or "api key" in error_msg.lower():
+            return f"[ERROR: Invalid API key. Please set your OPENAI_API_KEY environment variable]"
+        elif "rate limit" in error_msg.lower():
+            return f"[ERROR: Rate limit exceeded. Please try again later]"
+        else:
+            return f"[ERROR: {error_msg}]"
 
 
 def validate_api_key():
